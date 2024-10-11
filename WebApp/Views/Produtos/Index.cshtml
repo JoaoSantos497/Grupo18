@@ -1,0 +1,28 @@
+﻿@using System.Reflection
+@model IEnumerable<WebApp.Models.Produto>
+
+<h2>Lista de Produtos</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Preço</th>
+            <th>Stock</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var produto in Model)
+        {
+            <tr>
+                <td>@produto.Nome</td>
+                <td>@produto.Marca</td>
+                <td>@produto.Modelo</td>
+                <td>@produto.Preço</td>
+                <td>@produto.Stock</td>
+            </tr>
+        }
+    </tbody>
+</table>
