@@ -1,0 +1,70 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 300px;
+    height: 400px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-box {
+    width: 250px;
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #0469dc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none; /* Remove o sublinhado padrão */
+    color: #333; /* Cor do texto */
+    font-weight: normal; /* Deixa o texto em negrito */
+    font-size: 12px; /* Define o tamanho da fonte */
+    transition: color 0.3s ease; /* Suaviza a transição de cor */
+}
+
+    a:hover {
+        color: #0469dc; /* Muda a cor ao passar o mouse */
+        text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+    }
+
+    a:active {
+        color: #e60023; /* Muda a cor quando o link for clicado */
+    }
