@@ -12,73 +12,33 @@ namespace WebApp.Controllers
             return View();
         }
 
-        // GET: LoginController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: LoginController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: LoginController/Create
+        // GET: LoginController/Login
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Login(string username, string password)
         {
-            try
+            if (IsValidUser(username, password))
             {
-                return RedirectToAction(nameof(Index));
+                // Armazenar o nome do user
+                HttpContext.Session.SetString("Username", username);
+
+                // Manda para a página inicial após o login
+                return RedirectToAction("Index", "Home");
             }
-            catch
+            else
             {
-                return View();
+                // Adiciona uma mensagem de erro caso o login falhe
+                ViewBag.ErrorMessage = "Username ou password incorretos";
+                return View("Index");
             }
         }
 
-        // GET: LoginController/Edit/5
-        public ActionResult Edit(int id)
+        private bool IsValidUser(string username, string password)
         {
-            return View();
-        }
-
-        // POST: LoginController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: LoginController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: LoginController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            // Valida o user
+            // Implementa a verificação com base na base de dados
+            return username == "admin" && password == "password";
         }
     }
 }
+
