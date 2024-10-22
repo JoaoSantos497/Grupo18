@@ -20,7 +20,7 @@ namespace WebApp.Controllers
         }
 
         // Produtos Page
-        public IActionResult Produtos()
+        /*public IActionResult Produtos()
         {
             var produtos = new List<Produto>
             {
@@ -29,7 +29,7 @@ namespace WebApp.Controllers
             };
 
             return View(produtos);
-        }
+        }*/
 
         // Privacy Page
         public IActionResult Privacy()
