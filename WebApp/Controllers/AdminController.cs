@@ -12,10 +12,10 @@ namespace WebApp.Controllers
         }
 
         // GET: AdminController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+        //public ActionResult Details(int id)
+        //{
+           // return View();
+       // }
 
         // GET: AdminController/Create
         public ActionResult Create()
