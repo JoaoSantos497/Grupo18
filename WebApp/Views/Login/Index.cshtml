@@ -1,16 +1,22 @@
 ﻿@{
-
+    Layout = null;
 }
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/buttons.css" />
+    <link rel="stylesheet" href="~/css/forms.css" />
+    <link rel="stylesheet" href="~/css/layout.css" />
+    <link rel="stylesheet" href="~/css/links.css" />
+    <link rel="stylesheet" href="~/js/site.js" />
     <title>Login</title>
-    <link rel="stylesheet" href="Login.css">
+    
 </head>
 <body>
-    <div class="container">
-        <div class="form-box">
+    <div class="Login">
+        <div class="form-box-login">
             <h2>Login</h2>
             <form action="login.php" method="POST">
                 <input type="text" class="input-field" name="username" placeholder="Utilizador" required>
@@ -18,7 +24,8 @@
                 <button type="submit" class="submit-btn">Login</button>
             </form>
 
-            <a href="registo.html"> Ainda não tem uma conta? Crie-a aqui.</a>
+            <a asp-controller="Registo" asp-action="registo">Ainda não tem uma conta? Crie-a aqui.</a>
+
         </div>
     </div>
 
