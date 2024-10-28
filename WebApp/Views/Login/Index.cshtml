@@ -1,35 +1,93 @@
 ﻿@{
-    Layout = null;
+   
 }
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/buttons.css" />
-    <link rel="stylesheet" href="~/css/forms.css" />
-    <link rel="stylesheet" href="~/css/layout.css" />
-    <link rel="stylesheet" href="~/css/links.css" />
-    <link rel="stylesheet" href="~/js/site.js" />
     <title>Login</title>
+    <link rel="script" href="site.js">
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/bootstrap.min.css" />
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/slick.css" />
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/slick-theme.css" />
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/nouislider.min.css" />
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="/lib/bootstrap_electro/css/font-awesome.min.css">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/style.css" />
     
+    <style>
+        .login-form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffffff;
+        }
+        .login-form {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .login-form .form-group input {
+            height: 45px;
+            border-radius: 5px;
+        }
+        .login-form .btn-primary {
+            width: 100%;
+            height: 45px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #D10024;
+            border: none;
+            border-radius: 5px;
+        }
+        .login-form .btn-primary:hover {
+            background-color: #D10024;
+        }
+    </style>
 </head>
 <body>
-    <div class="Login">
-        <div class="form-box-login">
+    <div class="container login-form-container">
+        <div class="login-form">
             <h2>Login</h2>
-            <form action="login.php" method="POST">
-                <input type="text" class="input-field" name="username" placeholder="Utilizador" required>
-                <input type="password" class="input-field" name="password" placeholder="Password" required>
-                <button type="submit" class="submit-btn">Login</button>
+            <form action="/Account/Login" method="post">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Entrar</button>
             </form>
-
-            <a asp-controller="Registo" asp-action="registo">Ainda não tem uma conta? Crie-a aqui.</a>
-
         </div>
     </div>
 
-    <div class="footer">
-        <p>&copy; 2024 - Todos os direitos reservados.</p>
-    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/slick.min.js"></script>
+    <script src="js/nouislider.min.js"></script>
+    <script src="js/jquery.zoom.min.js"></script>
+    <script src="js/main.js"></script>
 </body>
