@@ -12,10 +12,10 @@ namespace WebApp.Controllers
             return View();
         }
 
-        //[Route("[controller]/{id?}")]
-        /*public IActionResult Produto(int id)
+        /*[Route("[controller]/{id?}")]
+        public IActionResult Produtos(int id)
         {
-            return View(new Produto { Id = id, Nome = "Teclado", Marca = "Razer", Modelo = "Blackwidow", Preço = 220, Stock = "5" });
+            return View();
         }*/
     }
 }

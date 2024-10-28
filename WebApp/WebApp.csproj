@@ -8,13 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\Produtos\**" />
-    <Content Remove="Views\Produtos\**" />
-    <EmbeddedResource Remove="Views\Produtos\**" />
-    <None Remove="Views\Produtos\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.6" />
   </ItemGroup>
 
