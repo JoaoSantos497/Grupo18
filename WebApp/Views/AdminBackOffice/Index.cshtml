@@ -1,0 +1,200 @@
+﻿@{
+    
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Administração</title>
+    <link rel="script" href="site.js">
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/bootstrap.min.css" />
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/slick.css" />
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/slick-theme.css" />
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/nouislider.min.css" />
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="/lib/bootstrap_electro/css/font-awesome.min.css">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/style.css" />
+
+    <style>
+    
+
+        /* Estilo para o corpo */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        /* Estilo para a barra lateral */
+        .sidebar {
+            background-color: #343a40;
+            color: white;
+            height: 100vh;
+            padding: 20px;
+        }
+
+            .sidebar h4 {
+                color: #ffffff;
+                margin-bottom: 20px;
+            }
+
+            /* Estilo dos itens de navegação */
+            .sidebar .nav-link {
+                color: #ffffff;
+                padding: 10px 15px;
+                text-decoration: none;
+                border-radius: 5px;
+            }
+
+                .sidebar .nav-link:hover {
+                    background-color: #495057;
+                }
+
+        /* Estilo para o título principal */
+        main h1 {
+            margin-top: 20px;
+            color: #343a40;
+        }
+
+        /* Estilo da tabela */
+        .table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+            .table th,
+            .table td {
+                padding: 12px;
+                text-align: left;
+                border-bottom: 1px solid #dee2e6;
+            }
+
+            .table th {
+                background-color: #007bff;
+                color: white;
+            }
+
+            .table tr:hover {
+                background-color: #f1f1f1;
+            }
+
+        /* Botões */
+        .btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+            }
+
+        .btn-danger {
+            background-color: #dc3545;
+        }
+
+            .btn-danger:hover {
+                background-color: #c82333;
+            }
+
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <h4>Menu Admin</h4>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="@Url.Action("Dashboard", "Admin")">
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("ManageUsers", "Admin")">
+                                Gerir Utilizadores
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("ManageProducts", "Admin")">
+                                Gerir Produtos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Orders", "Admin")">
+                                Gerir Encomendas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Settings", "Admin")">
+                                Definições
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Logout", "Account")">
+                                Sair
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <h1>@ViewBag.Title</h1>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Data de Registo</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Exemplo de dados, você pode usar um loop para renderizar os dados do banco de dados -->
+                            <!--  foreach (var user in Model.Users) -->
+                            {
+                                 <!-- <tr>
+                                           <!-- <td>user.Id</td>-->
+                                        <!-- <td>user.Name</td>-->
+                                        <!-- <td>user.Email</td>-->
+                                        <!-- <td>user.RegisteredDate.ToString("dd/MM/yyyy")</td>-->
+                                    <!--  <td>
+                             <!-- <a href="Url.Action("EditUser", "Admin", new { id = user.Id })" class="btn btn-primary">Editar</a>-->
+                                        <!-- <a href="Url.Action("DeleteUser", "Admin", new { id = user.Id })" class="btn btn-danger">Eliminar</a>-->
+                                        <!-- </td>-->
+                                        <!-- </tr>-->
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+</body>

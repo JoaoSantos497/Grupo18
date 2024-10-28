@@ -1,13 +1,172 @@
 ﻿@{
-
+    
 }
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="Login.css">
+    <title>Perfil </title>
+    <link rel="script" href="site.js">
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/bootstrap.min.css" />
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/slick.css" />
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/slick-theme.css" />
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/nouislider.min.css" />
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="/lib/bootstrap_electro/css/font-awesome.min.css">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/style.css" />
+
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 400px; /* Aumentado para acomodar mais espaço */
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .dashboard {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+            .dashboard button {
+                width: 100%;
+                padding: 10px;
+                background-color: #007bff;
+                border: none;
+                color: white;
+                cursor: pointer;
+                margin-bottom: 10px;
+                border-radius: 5px;
+                transition: background-color 0.3s;
+            }
+
+                .dashboard button:hover {
+                    background-color: #0056b3;
+                }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="email"],
+        input[type="password"],
+        input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s;
+        }
+
+            input[type="email"]:focus,
+            input[type="password"]:focus,
+            input[type="file"]:focus {
+                border-color: #007bff; /* Cor ao focar no campo */
+            }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+            button[type="submit"]:hover {
+                background-color: #218838;
+            }
+    </style>
 </head>
+
+
 <body>
-    
+    <div class="container">
+        <h1>Perfil do Utilizador</h1>
+        <div class="dashboard">
+            <button id="viewOrderHistoryButton">Ver Histórico de Encomendas</button>
+            <button id="changePasswordButton">Alterar Senha</button>
+            <button id="logoutButton">Sair da Conta</button>
+        </div>
+        <form id="profileForm" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required value="@Model.Email">
+            </div>
+            <div class="form-group">
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="profileImage">Imagem de Perfil:</label>
+                <input type="file" id="profileImage" name="profileImage" accept="image/*">
+                <img id="previewImage" src="@Model.ProfileImageUrl" alt="Pré-visualização da Imagem" style="display: @(Model.ProfileImageUrl == null ? "none" : "block")">
+            </div>
+            <button type="submit">Salvar Alterações</button>
+        </form>
+    </div>
+
+       @section Scripts {
+    <script>
+        document.getElementById('viewOrderHistoryButton').addEventListener('click', function () {
+            window.location.href = '@Url.Action("HistoricoEncomendas", "Cliente")'; // Substitua pelo seu controller e action
+        });
+
+        document.getElementById('changePasswordButton').addEventListener('click', function () {
+            window.location.href = '@Url.Action("AlterarSenha", "Cliente")'; // Substitua pelo seu controller e action
+        });
+
+        document.getElementById('logoutButton').addEventListener('click', function () {
+            window.location.href = '@Url.Action("Logout", "Account")'; // Substitua pelo seu controller e action
+        });
+
+        const profileImageInput = document.getElementById('profileImage');
+        const previewImage = document.getElementById('previewImage');
+
+        profileImageInput.addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+       }
 </body>
+
