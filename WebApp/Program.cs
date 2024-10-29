@@ -1,3 +1,5 @@
+using WebApp.Models;
+
 internal class Program
 {
     private static void Main(string[] args)
@@ -6,6 +8,9 @@ internal class Program
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();
+
+        builder.Services.AddScoped<IUserService, UserService>();
+
 
         var app = builder.Build();
 
@@ -33,6 +38,7 @@ internal class Program
             name: "default",
             pattern: "{controller=Wishlist}/{action=Index}/{id?}");
 
+        app.Services.
         app.Run();
     }
 }

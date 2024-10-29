@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebApp.Models
 {
-    public class Users
+    public class User
     {
         // ID do utilizador (chave primária)
         public int Id { get; set; }
