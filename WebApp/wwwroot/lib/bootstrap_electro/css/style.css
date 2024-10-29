@@ -462,33 +462,44 @@ textarea.input {
 	Search
 \*----------------------------*/
 
+/* Contêiner da barra de pesquisa */
 .header-search {
-  padding: 15px 0px;
+    padding: 15px 0;
 }
 
-.header-search form {
-  position: relative;
-}
+    .header-search form {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
 
-.header-search form .input-select {
-  margin-right: -4px;
-  border-radius: 40px 0px 0px 40px;
-}
+        /* Estilo do campo de entrada de texto */
+        .header-search form .input {
+            width: calc(100% - 100px); /* Tamanho adaptado para o campo de entrada */
+            height: 40px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 40px 0 0 40px;
+            font-size: 16px;
+            outline: none;
+        }
 
-.header-search form .input {
-  width: calc(100% - 260px);
-  margin-right: -4px;
-}
+        /* Estilo do botão de pesquisa */
+        .header-search form .search-btn {
+            height: 40px;
+            width: 100px;
+            background: #D10024;
+            color: #FFF;
+            font-weight: 700;
+            border: none;
+            border-radius: 0 40px 40px 0;
+            cursor: pointer;
+        }
 
-.header-search form .search-btn {
-  height: 40px;
-  width: 100px;
-  background: #D10024;
-  color: #FFF;
-  font-weight: 700;
-  border: none;
-  border-radius: 0px 40px 40px 0px;
-}
+            /* Estilo do botão de pesquisa ao passar o mouse */
+            .header-search form .search-btn:hover {
+                background-color: #b3001d;
+            }
 
 /*----------------------------*\
 	Cart
