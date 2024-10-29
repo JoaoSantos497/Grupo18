@@ -28,6 +28,10 @@ internal class Program
         app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");
+        
+        app.MapControllerRoute(
+            name: "default",
+            pattern: "{controller=Wishlist}/{action=Index}/{id?}");
 
         app.Run();
     }
