@@ -2270,7 +2270,9 @@ textarea.input {
 /* AdminBackOffice/index.cshtml*/
 /* Carrinho/index.cshtml*/
 /* Categorias/index.cshtml*/
+
 /* Login/index.cshtml*/
+
 .login-form-container {
     display: flex;
     justify-content: center;
@@ -2329,9 +2331,12 @@ textarea.input {
     .a:active {
         color: #e60023;
     }
+
 /* Perfil/index.cshtml*/
 /* Produto/index.cshtml*/
+
 /* Registo/index.cshtml*/
+
 .registration-form-container {
     display: flex;
     justify-content: center;
@@ -2373,8 +2378,11 @@ textarea.input {
         .registration-form .btn-primary:hover {
             background-color: #D10024;
         }
+
 /* SobreNos/index.cshtml*/
+
 /* Suporte/index.cshtml*/
+
 .support-page {
     max-width: 600px;
     margin: 0 auto;
@@ -2412,5 +2420,10 @@ label {
     .btn-primary:hover {
         background-color: #D10024;
     }
+
 /* TermosCondicoes/index.cshtml*/
+
+
 /* Wishlist/index.cshtml*/
+
+
