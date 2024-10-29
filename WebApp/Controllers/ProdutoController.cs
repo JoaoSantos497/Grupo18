@@ -4,7 +4,7 @@
 
 namespace WebApp.Controllers
 {
-    public class ProdutosController : Controller
+    public class ProdutoController : Controller
     {
         public IActionResult Index()
         {
