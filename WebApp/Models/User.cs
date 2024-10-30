@@ -6,7 +6,7 @@ namespace WebApp.Models
     public class User
     {
         // ID do utilizador (chave primária)
-        public int Id { get; set; }
+        public int UserID { get; set; }
 
         // Nome do utilizador
         [Required(ErrorMessage = "O nome é obrigatório.")]
@@ -26,8 +26,8 @@ namespace WebApp.Models
         // Data de registo
         public DateTime RegisteredDate { get; set; }
 
-        // Outros campos que você pode querer adicionar
+        // Outros campos opcionais para adicionar
         public bool IsActive { get; set; }  // Para ativar/desativar utilizadores
-        public required string Role { get; set; }     // Para definir papéis de utilizador (Admin, Usuário, etc.)
+        public required string Role { get; set; }     // Para definir papéis de utilizador (Admin, user, etc.)
     }
 }

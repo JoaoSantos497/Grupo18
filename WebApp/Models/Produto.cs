@@ -8,7 +8,7 @@ namespace WebApp.Models
     public class Product
     {
         // ID do produto (chave primária)
-        public int Id { get; set; }
+        public int ProdutoID { get; set; }
 
         // Nome do produto
         [Required(ErrorMessage = "O nome do produto é obrigatório.")]
