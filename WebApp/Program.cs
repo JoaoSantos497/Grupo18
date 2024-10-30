@@ -38,7 +38,7 @@ internal class Program
             name: "default",
             pattern: "{controller=Wishlist}/{action=Index}/{id?}");
 
-        app.Services.
+
         app.Run();
     }
 }
