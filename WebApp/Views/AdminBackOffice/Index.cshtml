@@ -27,171 +27,92 @@
     <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/style.css" />
 
     <style>
-    
-
-        /* Estilo para o corpo */
-        body {
+        /* Estrutura do painel */
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
         }
 
-        /* Estilo para a barra lateral */
+        /* Sidebar */
         .sidebar {
+            width: 250px;
             background-color: #343a40;
-            color: white;
-            height: 100vh;
+            color: #fff;
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-            .sidebar h4 {
-                color: #ffffff;
+            .sidebar h2 {
+                font-size: 1.5rem;
                 margin-bottom: 20px;
             }
 
-            /* Estilo dos itens de navegação */
-            .sidebar .nav-link {
-                color: #ffffff;
-                padding: 10px 15px;
-                text-decoration: none;
-                border-radius: 5px;
+            .sidebar nav ul {
+                list-style: none;
+                padding: 0;
+                width: 100%;
             }
 
-                .sidebar .nav-link:hover {
-                    background-color: #495057;
+                .sidebar nav ul li {
+                    margin: 10px 0;
                 }
 
-        /* Estilo para o título principal */
-        main h1 {
-            margin-top: 20px;
-            color: #343a40;
+                    .sidebar nav ul li a {
+                        color: #fff;
+                        text-decoration: none;
+                        font-size: 1.1rem;
+                        display: block;
+                        padding: 10px;
+                        border-radius: 5px;
+                        transition: background-color 0.3s;
+                    }
+
+                        .sidebar nav ul li a:hover {
+                            background-color: #495057;
+                        }
+
+        /* Main Content */
+        .main-content {
+            flex-grow: 1;
+            padding: 40px;
+            background-color: #f8f9fa;
         }
 
-        /* Estilo da tabela */
-        .table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-        }
-
-            .table th,
-            .table td {
-                padding: 12px;
-                text-align: left;
-                border-bottom: 1px solid #dee2e6;
+            .main-content h2 {
+                font-size: 1.8rem;
+                color: #343a40;
+                margin-bottom: 15px;
             }
 
-            .table th {
-                background-color: #007bff;
-                color: white;
-            }
-
-            .table tr:hover {
-                background-color: #f1f1f1;
-            }
-
-        /* Botões */
-        .btn {
-            padding: 8px 12px;
-            border: none;
-            border-radius: 4px;
-            color: white;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-        }
-
-            .btn-primary:hover {
-                background-color: #0056b3;
-            }
-
-        .btn-danger {
-            background-color: #dc3545;
-        }
-
-            .btn-danger:hover {
-                background-color: #c82333;
+            .main-content p {
+                font-size: 1.1rem;
+                color: #555;
             }
 
     </style>
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-                <div class="sidebar-sticky">
-                    <h4>Menu Admin</h4>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="@Url.Action("Dashboard", "Admin")">
-                                Dashboard
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("ManageUsers", "Admin")">
-                                Gerir Utilizadores
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("ManageProducts", "Admin")">
-                                Gerir Produtos
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Orders", "Admin")">
-                                Gerir Encomendas
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Settings", "Admin")">
-                                Definições
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Logout", "Account")">
-                                Sair
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <h2>Painel de Administração</h2>
+            <nav>
+                <ul>
+                    <li><a asp-action="GerirProdutos">Gerir Produtos</a></li>
+                    <li><a asp-action="GerirUsers">Gerir Utilizadores</a></li>
+                    <li><a asp-action="Settings">Settings</a></li>
+                    <li><a asp-action="Logout">Logout</a></li>
+                </ul>
             </nav>
+        </aside>
 
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                <h1>@ViewBag.Title</h1>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nome</th>
-                                <th>Email</th>
-                                <th>Data de Registo</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Exemplo de dados, você pode usar um loop para renderizar os dados do banco de dados -->
-                            <!--  foreach (var user in Model.Users) -->
-                            {
-                                 <!-- <tr>
-                                           <!-- <td>user.Id</td>-->
-                                        <!-- <td>user.Name</td>-->
-                                        <!-- <td>user.Email</td>-->
-                                        <!-- <td>user.RegisteredDate.ToString("dd/MM/yyyy")</td>-->
-                                    <!--  <td>
-                             <!-- <a href="Url.Action("EditUser", "Admin", new { id = user.Id })" class="btn btn-primary">Editar</a>-->
-                                        <!-- <a href="Url.Action("DeleteUser", "Admin", new { id = user.Id })" class="btn btn-danger">Eliminar</a>-->
-                                        <!-- </td>-->
-                                        <!-- </tr>-->
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </main>
-        </div>
+        <main class="main-content">
+            <h2>Bem-vindo ao Painel Administrativo</h2>
+            <p>Escolha uma das opções à esquerda para gerenciar o sistema.</p>
+        </main>
     </div>
 
     <script src="~/Scripts/jquery.min.js"></script>

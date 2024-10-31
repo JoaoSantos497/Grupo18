@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using System;
 using WebApp.Models;
 
 internal class Program
@@ -38,7 +41,7 @@ internal class Program
             name: "default",
             pattern: "{controller=Wishlist}/{action=Index}/{id?}");
 
-
+        
         app.Run();
     }
 }

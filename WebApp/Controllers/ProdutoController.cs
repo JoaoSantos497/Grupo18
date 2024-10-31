@@ -12,10 +12,10 @@ namespace WebApp.Controllers
             return View();
         }
 
-        /*[Route("[controller]/{id?}")]
+        [Route("[controller]/{id?}")]
         public IActionResult Produtos(int id)
         {
             return View();
-        }*/
+        }
     }
 }
