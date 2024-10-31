@@ -1,6 +1,6 @@
 ﻿namespace WebApp.Models
 {
-    public class Categoria
+    public class Search
     {
         public int CategoriaID { get; set; }
 

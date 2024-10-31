@@ -8,7 +8,7 @@ namespace WebApp.Controllers
     {   
 
         // GET: AdminBackOffice
-        public ActionResult index()
+        public ActionResult Index()
         {
             return View();
         }

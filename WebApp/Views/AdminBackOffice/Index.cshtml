@@ -1,10 +1,11 @@
 ﻿@{
-    ViewData["Title"] = "Administração | ";
+    ViewData["Title"] = "Dashboard | ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Administração</title>
+    <title>Dashboard</title><link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/style.css" />
     <link rel="script" href="site.js">
 
     <!-- Google font -->
@@ -28,77 +29,65 @@
 
     <style>
         /* Estrutura do painel */
-        .dashboard-container {
-            display: flex;
-            min-height: 100vh;
-            font-family: Arial, sans-serif;
-        }
+    .dashboard-container {
+        display: flex;
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
 
-        /* Sidebar */
-        .sidebar {
-            width: 250px;
-            background-color: #343a40;
-            color: #fff;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+    /* Sidebar */
+    .sidebar {
+        width: 250px;
+        background-color: #1E1F29;
+        color: #fff;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        left: 0px;
+        top: 0;
+        bottom: 0;
+    }
 
-            .sidebar h2 {
-                font-size: 1.5rem;
-                margin-bottom: 20px;
-            }
+    .sidebar h2 {
+        font-size: 2.5rem;
+        text-align: left;
+        color: white;
+    }
 
-            .sidebar nav ul {
-                list-style: none;
-                padding: 0;
-                width: 100%;
-            }
+    .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+    }
 
-                .sidebar nav ul li {
-                    margin: 10px 0;
-                }
+    .sidebar ul li {
+        margin: 10px 0;
+    }
 
-                    .sidebar nav ul li a {
-                        color: #fff;
-                        text-decoration: none;
-                        font-size: 1.1rem;
-                        display: block;
-                        padding: 10px;
-                        border-radius: 5px;
-                        transition: background-color 0.3s;
-                    }
+    .sidebar ul li a {
+        color: #fff;
+        text-decoration: none;
+    }
 
-                        .sidebar nav ul li a:hover {
-                            background-color: #495057;
-                        }
+    .sidebar ul li a:hover {
+        text-decoration: underline;
+    }
 
-        /* Main Content */
-        .main-content {
-            flex-grow: 1;
-            padding: 40px;
-            background-color: #f8f9fa;
-        }
-
-            .main-content h2 {
-                font-size: 1.8rem;
-                color: #343a40;
-                margin-bottom: 15px;
-            }
-
-            .main-content p {
-                font-size: 1.1rem;
-                color: #555;
-            }
-
+    /* Conteúdo principal */
+    .main-content {
+        margin-left: 270px;
+        flex: 1;
+        padding: 20px;
+    }
     </style>
 </head>
 
 <body>
     <div class="dashboard-container">
         <aside class="sidebar">
-            <h2>Painel de Administração</h2>
+            <h2>Dashboard</h2>
             <nav>
                 <ul>
                     <li><a asp-action="GerirProdutos">Gerir Produtos</a></li>

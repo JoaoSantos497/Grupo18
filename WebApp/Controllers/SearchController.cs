@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers
 {
-    public class CategoriasController : Controller
+    public class SearchController : Controller
     {
         // GET: CategoriasController
         public ActionResult Index()
