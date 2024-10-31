@@ -13,35 +13,35 @@ namespace WebApp.Controllers
             return View();
         }
 
-        // GET: Admin/GerirProdutos
+        // GET: AdminBackOffice/GerirProdutos
         public IActionResult GerirProdutos()
         {
             // Lógica para exibir os produtos
             return View();
         }
 
-        // GET: Admin/GerirUsers
+        // GET: AdminBackOffice/GerirUsers
         public IActionResult GerirUsers()
         {
             // Lógica para exibir e gerir utilizadores
             return View();
         }
 
-        // GET: Admin/Settings
+        // GET: AdminBackOffice/Settings
         public IActionResult Settings()
         {
             // Lógica para exibir e gerir configurações
             return View();
         }
 
-        // POST: Admin/Logout
+        // POST: AdminBackOffice/Logout
         public IActionResult Logout()
         {
             // Lógica de logout
-            return RedirectToAction("Login", "Account"); // Redireciona para a página de login
+            return RedirectToAction("Login", "Registo"); // Redireciona para a página de login
         }
 
-        // POST: Admin/CreateProduct - Processa o formulário para criar um novo produto
+        /*// POST: Admin/CreateProduct - Processa o formulário para criar um novo produto
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult CreateProduto(Produto product)
@@ -52,11 +52,7 @@ namespace WebApp.Controllers
                 //return RedirectToAction(nameof(GerirProdutos));
             //}
             return View(product);
-        }
+        }*/
 
-        private static void SaveChanges()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

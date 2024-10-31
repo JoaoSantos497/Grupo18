@@ -29,35 +29,13 @@
     <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/style.css" />
 
    <style>
-        /* Estilo para a página de gestão de produtos */
-        .table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-            background-color: #f9f9f9;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-            .table thead {
-                background-color: #007bff;
-                color: #fff;
-            }
-
-            .table th, .table td {
-                padding: 12px 15px;
-                border: 1px solid #ddd;
-            }
-
-        .btn-primary {
-            margin-top: 15px;
-            color: #fff;
-            background-color: #007bff;
-        }
+ 
 
    </style>
 </head>
 
 <body>
+
     <h2>Gerir Produtos</h2>
 
     <a asp-action="CreateProduct" class="btn btn-primary mb-3">Adicionar Produto</a>
@@ -65,34 +43,31 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Nome</th>
-                <th>Marca</th>
-                <th>Modelo</th>
-                <th>Descrição</th>
-                <th>Preço</th>
-                <th>Stock</th>
-                <th>Ações</th>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var produto in Model)
-            {
-                <tr>
-                    <td>@produto.Nome</td>
-                    <td>@produto.Marca</td>
-                    <td>@produto.Modelo</td>
-                    <td>@produto.Descricao</td>
-                    <td>@produto.Preco.ToString("C")</td>
-                    <td>@produto.StockQuantity</td>
-                    <td>
-                        <!-- Aqui você pode adicionar links para editar ou excluir cada produto -->
-                        <a asp-action="EditProduct" asp-route-id="@produto.ProdutoID" class="btn btn-warning btn-sm">Editar</a>
-                        <form asp-action="DeleteProduct" asp-route-id="@produto.ProdutoID" method="post" style="display:inline;">
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir este produto?');">Excluir</button>
-                        </form>
-                    </td>
-                </tr>
-            }
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@User</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@User</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@User</td>
+            </tr>
         </tbody>
     </table>
 </body>
