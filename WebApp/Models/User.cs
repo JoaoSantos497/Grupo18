@@ -23,11 +23,16 @@ namespace WebApp.Models
         [StringLength(100, ErrorMessage = "A senha deve ter pelo menos {2} caracteres.", MinimumLength = 6)]
         public required string Password { get; set; }
 
+        // Role do utilizador
+        [Required(ErrorMessage = "Role é obrigatória.")]
+        [StringLength(100, ErrorMessage = "A Role não foi definida")]
+        public required string Role { get; set; }   // Para definir papéis de utilizador (Admin, user, etc.)
+
+
         // Data de registo
         public DateTime RegisteredDate { get; set; }
 
         // Outros campos opcionais para adicionar
         public bool IsActive { get; set; }  // Para ativar/desativar utilizadores
-        public required string Role { get; set; }     // Para definir papéis de utilizador (Admin, user, etc.)
     }
 }
