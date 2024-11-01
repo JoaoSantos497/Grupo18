@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
+using WebApp.Data;
 using WebApp.Models;
 
 internal class Program
@@ -14,6 +16,10 @@ internal class Program
 
         builder.Services.AddScoped<IUserService, UserService>();
 
+        // Adicione o ApplicationDbContext
+        builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
         var app = builder.Build();
 
@@ -24,8 +30,6 @@ internal class Program
             // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
         }
-
-        app.UseHttpsRedirection();
 
         app.UseStaticFiles();
 
