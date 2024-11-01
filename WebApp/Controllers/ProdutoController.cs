@@ -8,15 +8,17 @@ namespace WebApp.Controllers
 {
 	public class ProdutoController : Controller
     {
-		private readonly ApplicationDbContext gettech;
+		private readonly ApplicationDbContext _context;
 		public ProdutoController(ApplicationDbContext context)
 		{
-			gettech = context;
+			_context = context;
 		}
+
+		// GET: Produto/Index
 		public IActionResult Index()
         {
-
-            return View();
+            var produtos = _context.Produtos.ToList(); // Retorna a lista de produtos para a visualização
+            return View(produtos);
         }
 
 		// GET: Produto/Create
@@ -44,7 +46,8 @@ namespace WebApp.Controllers
 			return View(produto);
 		}
 
-		[Route("[controller]/{id?}")]
+
+        [Route("[controller]/{id?}")]
         public IActionResult Produtos(int id)
         {
             return View();

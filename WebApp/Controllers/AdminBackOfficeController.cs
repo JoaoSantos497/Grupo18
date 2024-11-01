@@ -8,7 +8,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WebApp.Controllers
 {
-    [Route("AdminBackOffice/[action]")]
+    //[Route("AdminBackOffice[action]")]
+    [Route("AdminBackOffice")]
     public class AdminBackOfficeController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -18,6 +19,7 @@ namespace WebApp.Controllers
             _context = context;
         }
         // GET: AdminBackOffice
+        [HttpGet("")]
         public ActionResult Index()
         {
             return View();
@@ -39,22 +41,23 @@ namespace WebApp.Controllers
             return View();
         }
 
+
         // POST: AdminBackOffice/GerirProdutos/CreateProduto
-        [Route("AdminBackOffice/GerirProdutos/[action]")]
         [HttpPost("GerirProdutos/CreateProduto")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateProduto(Produto product)
+        public async Task<IActionResult> CreateProduto(Produto Produto)
         {
             if (ModelState.IsValid)
             {
-                _context.Produtos.Add(product);
+                _context.Produtos.Add(Produto);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("GerirProdutos");
             }
-            return View(product);
+            return View(Produto);
         }
 
         // GET: AdminBackOffice/GerirUsers
+        [HttpGet("GerirUsers")]
         public IActionResult GerirUsers()
         {
             // Lógica para exibir e gerir utilizadores
@@ -62,6 +65,7 @@ namespace WebApp.Controllers
         }
 
         // GET: AdminBackOffice/Settings
+        [HttpGet("Settings")]
         public IActionResult Settings()
         {
             // Lógica para exibir e gerir configurações
@@ -69,6 +73,7 @@ namespace WebApp.Controllers
         }
 
         // POST: AdminBackOffice/Logout
+        [HttpPost("Logout")]
         public IActionResult Logout()
         {
             // Lógica de logout
