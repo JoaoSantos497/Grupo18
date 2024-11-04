@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "Suporte | ";
+}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suporte</title>
+    <link rel="script" href="script.js">
+   
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/bootstrap.min.css" />
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/slick.css" />
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/slick-theme.css" />
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/nouislider.min.css" />
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="/lib/bootstrap_electro/css/font-awesome.min.css">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/style.css" />
+
+ 
+</head>
+<body>
+    <div class="support-page">
+        <h2>Suporte ao Cliente</h2>
+        <p>Estamos aqui para ajudar! Por favor, preencha o formulário abaixo e entraremos em contacto consigo o mais breve possível.</p>
+
+        <form method="post" action="/Suporte/Enviar">
+            <div class="form-group">
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" name="nome" required class="form-control" placeholder="Digite o seu nome">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required class="form-control" placeholder="Digite o seu email">
+            </div>
+
+            <div class="form-group">
+                <label for="assunto">Assunto</label>
+                <input type="text" id="assunto" name="assunto" required class="form-control" placeholder="Digite o assunto">
+            </div>
+
+            <div class="form-group">
+                <label for="mensagem">Descrição</label>
+                <textarea id="mensagem" name="mensagem" rows="5" required class="form-control" placeholder="Descreva o seu problema"></textarea>
+            </div>
+
+            <div class="terms-conditions">
+                <input type="checkbox" id="agree" name="agree" required>
+                <label for="agree">
+                    Ao enviar o formulário de contacto, concordo com os
+                    <a href="TermosCondicoes" target="_blank" style="color: #D10024;">Termos e Condições</a> e
+                    <a href="PoliticaPrivacidade" target="_blank" style="color: #D10024;">Política de Privacidade</a>.
+                </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+        
+
+    </div>
+</body>

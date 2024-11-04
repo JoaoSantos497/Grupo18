@@ -1,28 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers
 {
-    public class AdminController : Controller
+    public class SobreNosController : Controller
     {
-        // GET: AdminController
+        // GET: SobreNosController
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: AdminController/Details/5
-        //public ActionResult Details(int id)
-        //{
-           // return View();
-       // }
+        // GET: SobreNosController/Details/5
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
 
-        // GET: AdminController/Create
+        // GET: SobreNosController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: AdminController/Create
+        // POST: SobreNosController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -37,13 +38,13 @@ namespace WebApp.Controllers
             }
         }
 
-        // GET: AdminController/Edit/5
+        // GET: SobreNosController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: AdminController/Edit/5
+        // POST: SobreNosController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -58,13 +59,13 @@ namespace WebApp.Controllers
             }
         }
 
-        // GET: AdminController/Delete/5
+        // GET: SobreNosController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: AdminController/Delete/5
+        // POST: SobreNosController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

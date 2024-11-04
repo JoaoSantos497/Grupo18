@@ -1,10 +1,7 @@
 {
   "dependencies": {
-    "secrets1": {
-      "type": "secrets"
-    },
-    "sqlite1": {
-      "type": "sqlite",
+    "mssql1": {
+      "type": "mssql",
       "connectionId": "ConnectionStrings:gettech"
     }
   }

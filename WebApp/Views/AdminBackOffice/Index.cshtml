@@ -1,0 +1,104 @@
+﻿@{
+    ViewData["Title"] = "Dashboard | ";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title><link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/style.css" />
+    <link rel="script" href="site.js">
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/bootstrap.min.css" />
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/slick.css" />
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/slick-theme.css" />
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/nouislider.min.css" />
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="/lib/bootstrap_electro/css/font-awesome.min.css">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/style.css" />
+
+    <style>
+        /* Estrutura do painel */
+    .dashboard-container {
+        display: flex;
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        width: 250px;
+        background-color: #1E1F29;
+        color: #fff;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        left: 0px;
+        top: 0;
+        bottom: 0;
+    }
+
+    .sidebar h2 {
+        font-size: 2.5rem;
+        text-align: left;
+        color: white;
+    }
+
+    .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .sidebar ul li {
+        margin: 10px 0;
+    }
+
+    .sidebar ul li a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .sidebar ul li a:hover {
+        text-decoration: underline;
+    }
+
+    /* Conteúdo principal */
+    .main-content {
+        margin-left: 270px;
+        flex: 1;
+        padding: 20px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <h2>Dashboard</h2>
+            <nav>
+                <ul>
+                    <li><a asp-action="GerirProdutos">Gerir Produtos</a></li>
+                    <li><a asp-action="GerirUsers">Gerir Utilizadores</a></li>
+                    <li><a asp-action="Settings">Settings</a></li>
+                    <li><a asp-action="Logout">Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+    </div>
+
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+</body>
