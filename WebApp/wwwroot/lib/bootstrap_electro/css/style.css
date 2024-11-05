@@ -2268,8 +2268,161 @@ textarea.input {
     }
 
 /* AdminBackOffice/index.cshtml*/
+
+   --> /* Estrutura do painel */
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #1E1F29;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0px;
+    top: 0;
+    bottom: 0;
+}
+
+    .sidebar h2 {
+        font-size: 2.5rem;
+        text-align: left;
+        color: white;
+    }
+
+    .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+        .sidebar ul li {
+            margin: 10px 0;
+        }
+
+            .sidebar ul li a {
+                color: #fff;
+                text-decoration: none;
+            }
+
+                .sidebar ul li a:hover {
+                    text-decoration: underline;
+                }
+
+/* Conteúdo principal */
+.main-content {
+    margin-left: 270px;
+    flex: 1;
+    padding: 20px;
+}
+
+--> /* AdminBackOffice/CreateProduto.cshtml */
+/* Estilização geral para o formulário */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+    /* Estilização para os rótulos */
+    form .form-group label {
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    /* Estilização para os campos de entrada e área de texto */
+    form .form-group input,
+    form .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        transition: border-color 0.3s ease;
+    }
+
+        form .form-group input:focus,
+        form .form-group textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+    /* Estilização para o botão de submissão */
+    form button[type="submit"] {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        form button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+    /* Estilização para o botão de cancelar */
+    form a.btn-secondary {
+        color: #555;
+        background-color: #e0e0e0;
+        padding: 10px 15px;
+        border-radius: 4px;
+        font-size: 1rem;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+        form a.btn-secondary:hover {
+            background-color: #bdbdbd;
+        }
+
+/* Estilização para mensagens de erro */
+.text-danger {
+    font-size: 0.875rem;
+    color: #dc3545;
+}
+
+--> /* AdminBackOffice/GerirProdutos.cshtml */
+
+--> /* AdminBackOffice/GerirUsers.cshtml */
+
+--> /* AdminBackOffice/Settings.cshtml */
+
+
 /* Carrinho/index.cshtml*/
-/* Categorias/index.cshtml*/
+
+/* Contactos/index.cshtml*/
+
+.contact-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.contact-info {
+    margin-bottom: 20px;
+}
+
+.map-section {
+    text-align: center;
+}
+
+/* Search/index.cshtml*/
 
 /* Login/index.cshtml*/
 
@@ -2333,6 +2486,7 @@ textarea.input {
     }
 
 /* Perfil/index.cshtml*/
+
 /* Produto/index.cshtml*/
 
 /* Registo/index.cshtml*/
