@@ -10,9 +10,10 @@ namespace WebApp.Data // Substitua "SeuProjetoNamespace" pelo namespace do seu p
         {
         }
         public DbSet<Produto> Produtos { get; set; }// Exemplo de uma entidade Produto
+        public DbSet<User> Users { get; set; }
 
         // Defina as tabelas (DbSets) que você quer incluir no banco de dados
-        
+
 
         // Outras tabelas podem ser adicionadas aqui
         // public DbSet<OutraEntidade> OutraEntidades { get; set; }
