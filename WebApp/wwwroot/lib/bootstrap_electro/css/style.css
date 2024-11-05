@@ -454,9 +454,11 @@ textarea.input {
   float: left;
 }
 
-.header-logo .logo img {
-  display: block;
-}
+    .header-logo .logo img {
+        display: block;
+        width: 170px;
+        height: 70px;
+    }
 
 /*----------------------------*\
 	Search
@@ -471,6 +473,8 @@ textarea.input {
         position: relative;
         display: flex;
         align-items: center;
+        background-color: #15161D;
+        border: 0px;
     }
 
         /* Estilo do campo de entrada de texto */
@@ -2270,58 +2274,7 @@ textarea.input {
 /* AdminBackOffice/index.cshtml*/
 
    --> /* Estrutura do painel */
-.dashboard-container {
-    display: flex;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
 
-/* Sidebar */
-.sidebar {
-    width: 250px;
-    background-color: #1E1F29;
-    color: #fff;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    left: 0px;
-    top: 0;
-    bottom: 0;
-}
-
-    .sidebar h2 {
-        font-size: 2.5rem;
-        text-align: left;
-        color: white;
-    }
-
-    .sidebar ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-        .sidebar ul li {
-            margin: 10px 0;
-        }
-
-            .sidebar ul li a {
-                color: #fff;
-                text-decoration: none;
-            }
-
-                .sidebar ul li a:hover {
-                    text-decoration: underline;
-                }
-
-/* Conteúdo principal */
-.main-content {
-    margin-left: 270px;
-    flex: 1;
-    padding: 20px;
-}
 
 --> /* AdminBackOffice/CreateProduto.cshtml */
 /* Estilização geral para o formulário */
