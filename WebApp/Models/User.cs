@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebApp.Models
 {
-    public class Users
+    public class User
     {
         // ID do utilizador (chave primária)
-        public int Id { get; set; }
+        public int UserID { get; set; }
 
         // Nome do utilizador
         [Required(ErrorMessage = "O nome é obrigatório.")]
@@ -23,11 +23,16 @@ namespace WebApp.Models
         [StringLength(100, ErrorMessage = "A senha deve ter pelo menos {2} caracteres.", MinimumLength = 6)]
         public required string Password { get; set; }
 
+        // Role do utilizador
+        [Required(ErrorMessage = "Role é obrigatória.")]
+        [StringLength(100, ErrorMessage = "A Role não foi definida")]
+        public required string Role { get; set; }   // Para definir papéis de utilizador (Admin, user, etc.)
+
+
         // Data de registo
         public DateTime RegisteredDate { get; set; }
 
-        // Outros campos que você pode querer adicionar
+        // Outros campos opcionais para adicionar
         public bool IsActive { get; set; }  // Para ativar/desativar utilizadores
-        public required string Role { get; set; }     // Para definir papéis de utilizador (Admin, Usuário, etc.)
     }
 }

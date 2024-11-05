@@ -5,15 +5,24 @@ using WebApp.Models;
 
 namespace WebApp.Models
 {
-    public class Product
-    {
+    public class Produto { 
         // ID do produto (chave primária)
-        public int Id { get; set; }
+        public int ProdutoID { get; set; }
 
         // Nome do produto
         [Required(ErrorMessage = "O nome do produto é obrigatório.")]
         [StringLength(100, ErrorMessage = "O nome do produto não pode ter mais que 100 caracteres.")]
         public required string Nome { get; set; }
+
+        // Marca do produto
+        [Required(ErrorMessage = "A marca do produto é obrigatória.")]
+        [StringLength(500, ErrorMessage = "A marca do produto não pode ter mais que 500 caracteres.")]
+        public required string Marca { get; set; }
+
+        // Modelo do produto
+        [Required(ErrorMessage = "O modelo do produto é obrigatória.")]
+        [StringLength(500, ErrorMessage = "O modelo do produto não pode ter mais que 500 caracteres.")]
+        public required string Modelo { get; set; }
 
         // Descrição do produto
         [Required(ErrorMessage = "A descrição do produto é obrigatória.")]
@@ -26,7 +35,7 @@ namespace WebApp.Models
         public decimal Preco { get; set; }
 
         // Quantidade em estoque
-        [Required(ErrorMessage = "A quantidade em estoque é obrigatória.")]
+        [Required(ErrorMessage = "A quantidade em stock é obrigatória.")]
         [Range(0, int.MaxValue, ErrorMessage = "A quantidade não pode ser negativa.")]
         public int StockQuantity { get; set; }
 
@@ -38,6 +47,6 @@ namespace WebApp.Models
         public DateTime CreatedDate { get; set; }
 
         // Campo para verificar se o produto está ativo
-        public bool IsActive { get; set; } // Para ativar/desativar produtos
+        //public bool IsActive { get; set; } // Para ativar/desativar produtos
     }
 }

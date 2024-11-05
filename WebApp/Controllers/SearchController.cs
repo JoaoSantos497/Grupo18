@@ -3,27 +3,27 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers
 {
-    public class AdminBackOffice : Controller
+    public class SearchController : Controller
     {
-        // GET: AdminBackOffice
+        // GET: CategoriasController
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: AdminBackOffice/Details/5
+        // GET: CategoriasController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: AdminBackOffice/Create
+        // GET: CategoriasController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: AdminBackOffice/Create
+        // POST: CategoriasController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -38,13 +38,13 @@ namespace WebApp.Controllers
             }
         }
 
-        // GET: AdminBackOffice/Edit/5
+        // GET: CategoriasController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: AdminBackOffice/Edit/5
+        // POST: CategoriasController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -59,13 +59,13 @@ namespace WebApp.Controllers
             }
         }
 
-        // GET: AdminBackOffice/Delete/5
+        // GET: CategoriasController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: AdminBackOffice/Delete/5
+        // POST: CategoriasController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

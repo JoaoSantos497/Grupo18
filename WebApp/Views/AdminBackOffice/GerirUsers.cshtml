@@ -1,7 +1,7 @@
 ﻿@{
-    ViewData["Title"] = "Wishlist | ";
+    ViewData["Title"] = "Gerir Utilizadores";
 }
-
+@model List<User>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,10 +28,41 @@
     <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/style.css" />
 
    <style>
-        
+    
+
    </style>
 </head>
 
 <body>
-    
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@User</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@User</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@User</td>
+            </tr>
+        </tbody>
+    </table>
 </body>

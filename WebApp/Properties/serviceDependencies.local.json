@@ -1,11 +1,10 @@
 {
   "dependencies": {
-    "secrets1": {
-      "type": "secrets.user"
-    },
-    "sqlite1": {
+    "mssql1": {
+      "serviceConnectorResourceId": "",
       "secretStore": "LocalSecretsFile",
-      "type": "sqlite.local",
+      "resourceId": null,
+      "type": "mssql.onprem",
       "connectionId": "ConnectionStrings:gettech"
     }
   }
