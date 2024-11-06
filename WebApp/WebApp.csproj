@@ -8,7 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\lib\Dashboard\.github\workflows\nextjs.yml" />
+    <Compile Remove="wwwroot\lib\Dashboard\**" />
+    <Content Remove="wwwroot\lib\Dashboard\**" />
+    <EmbeddedResource Remove="wwwroot\lib\Dashboard\**" />
+    <None Remove="wwwroot\lib\Dashboard\**" />
   </ItemGroup>
 
   <ItemGroup>
