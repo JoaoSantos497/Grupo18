@@ -40,8 +40,8 @@ namespace WebApp.Models
         public int Stock { get; set; }
 
         // URL da imagem do produto
-        [Url(ErrorMessage = "A URL da imagem do produto não é válida.")]
-        public required string ImagemProduto { get; set; }
+        //[Url(ErrorMessage = "A URL da imagem do produto não é válida.")]
+        //public required string ImagemProduto { get; set; }
 
         // Data de criação do produto
         //public DateTime CreatedDate { get; set; }

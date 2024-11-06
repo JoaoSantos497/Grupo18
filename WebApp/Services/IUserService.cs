@@ -1,4 +1,6 @@
-﻿namespace WebApp.Models
+﻿using WebApp.Models;
+
+namespace WebApp.Services
 {
     public interface IUserService
     {

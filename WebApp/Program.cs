@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using WebApp.Data;
-using WebApp.Models;
+using WebApp.Services;
 
 internal class Program
 {
@@ -19,6 +19,7 @@ internal class Program
         // Adicione o ApplicationDbContext
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
         var app = builder.Build();
 
