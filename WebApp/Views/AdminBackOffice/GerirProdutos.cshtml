@@ -27,10 +27,6 @@
 
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/style.css" />
-
-   <style>
-    
-   </style>
 </head>
 
 <body>
@@ -42,31 +38,28 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Email</th>
-                <th scope="col">Role</th>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Descricao</th>
+                <th>Preco</th>
+                <th>Stock</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@User</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@User</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@User</td>
-            </tr>
+            @foreach (var produto in Model)
+            {
+                <tr>
+                    <td>@produto.ProdutoID</td>
+                    <td>@produto.Nome</td>
+                    <td>@produto.Marca</td>
+                    <td>@produto.Modelo</td>
+                    <td>@produto.Descricao</td>
+                    <td>@produto.Preco</td>
+                    <td>@produto.Stock</td>
+                </tr>
+            }
         </tbody>
     </table>
 </body>
