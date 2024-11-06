@@ -445,9 +445,10 @@ textarea.input {
 \*----------------------------*/
 
 #header {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  background-color: #15161D;
+    padding-top: 25px;
+    padding-bottom: 15px;
+    background-color: #15161D;
+    justify-content: center;
 }
 
 .header-logo {
@@ -456,8 +457,8 @@ textarea.input {
 
     .header-logo .logo img {
         display: block;
-        width: 170px;
-        height: 70px;
+        width: 140px;
+        height: 80px;
     }
 
 /*----------------------------*\

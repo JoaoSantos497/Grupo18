@@ -1,0 +1,65 @@
+﻿@model WebApp.Models.User
+@{
+    ViewData["Title"] = "Adicionar Utilizador";
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Utilizador</title>
+    <link rel="script" href="site.js">
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/bootstrap.min.css" />
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/slick.css" />
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/slick-theme.css" />
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/nouislider.min.css" />
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="/lib/bootstrap_electro/css/font-awesome.min.css">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/style.css" />
+
+</head>
+
+<body>
+    
+
+    <h2>Adicionar Novo Utilizador</h2>
+
+    <form asp-action="Create" method="post">
+        <div class="form-group">
+            <label asp-for="NomeCompleto" class="control-label">Nome Completo</label>
+            <input asp-for="NomeCompleto" class="form-control" />
+            <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Email" class="control-label">Email</label>
+            <textarea asp-for="Email" class="form-control"></textarea>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="PasswordHash" class="control-label">Password</label>
+            <textarea asp-for="PasswordHash" class="form-control"></textarea>
+            <span asp-validation-for="PasswordHash" class="text-danger"></span>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Adicinar Utilizador</button>
+        <a asp-action="GerirUsers" class="btn btn-secondary">Cancelar</a>
+    </form>
+
+    @section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    }
+</body>

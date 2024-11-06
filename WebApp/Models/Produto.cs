@@ -34,17 +34,17 @@ namespace WebApp.Models
         [Range(0.01, double.MaxValue, ErrorMessage = "O preço deve ser maior que zero.")]
         public decimal Preco { get; set; }
 
-        // Quantidade em estoque
+        // Quantidade em stock
         [Required(ErrorMessage = "A quantidade em stock é obrigatória.")]
         [Range(0, int.MaxValue, ErrorMessage = "A quantidade não pode ser negativa.")]
-        public int StockQuantity { get; set; }
+        public int Stock { get; set; }
 
         // URL da imagem do produto
         [Url(ErrorMessage = "A URL da imagem do produto não é válida.")]
-        public required string ImageUrl { get; set; }
+        public required string ImagemProduto { get; set; }
 
         // Data de criação do produto
-        public DateTime CreatedDate { get; set; }
+        //public DateTime CreatedDate { get; set; }
 
         // Campo para verificar se o produto está ativo
         //public bool IsActive { get; set; } // Para ativar/desativar produtos
