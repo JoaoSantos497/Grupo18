@@ -62,7 +62,7 @@ namespace WebApp.Controllers
         {
             // Lógica para exibir e gerir utilizadores
             var users = await _context.Users.ToListAsync();
-            return View();
+            return View(users);
         }
 
 
