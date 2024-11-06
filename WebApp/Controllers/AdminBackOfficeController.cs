@@ -58,10 +58,34 @@ namespace WebApp.Controllers
 
         // GET: AdminBackOffice/GerirUsers
         [HttpGet("GerirUsers")]
-        public IActionResult GerirUsers()
+        public async Task<IActionResult> GerirUsers()
         {
             // Lógica para exibir e gerir utilizadores
+            var users = await _context.Users.ToListAsync();
             return View();
+        }
+
+
+        // GET: AdminBackOffice/GerirUsers/CreateUser
+        [HttpGet("GerirUsers/CreateUser")]
+        public IActionResult CreateUser()
+        {
+            return View();
+        }
+
+
+        // POST: AdminBackOffice/GerirUsers/CreateUser
+        [HttpPost("GerirUsers/CreateUser")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateUser(User User)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Users.Add(User);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("GerirProdutos");
+            }
+            return View(User);
         }
 
         // GET: AdminBackOffice/Settings

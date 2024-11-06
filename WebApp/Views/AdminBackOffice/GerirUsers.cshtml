@@ -1,11 +1,12 @@
-﻿@{
+﻿@model List<User>
+@{
     ViewData["Title"] = "Gerir Utilizadores";
 }
-@model List<User>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wishlist</title>
+    <title>Gerir Utilizadores</title>
     <link rel="script" href="site.js">
 
     <!-- Google font -->
@@ -27,42 +28,40 @@
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/style.css" />
 
-   <style>
-    
+    <!-- Script -->
+    <script src="site.js"></script>
 
-   </style>
 </head>
 
 <body>
 
+    <h2>Gerir Utilzadores</h2>
+
+    <a asp-action="CreateUser" class="btn btn-primary mb-3">Adicionar Utilzador</a>
+
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Email</th>
-                <th scope="col">Role</th>
+                <th>ID</th>
+                <th>Nome Completo</th>
+                <th>Username</th>
+                <th>Email</th>
+                <!--<th>Role ID</th>-->
+                
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@User</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@User</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@User</td>
-            </tr>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.UserID</td>
+                    <td>@user.NomeCompleto</td>
+                    <td>@user.Username</td>
+                    <td>@user.Email</td>
+                    <!--<td>user.RoleID</td> -->
+                    
+                </tr>
+            }
         </tbody>
     </table>
 </body>
