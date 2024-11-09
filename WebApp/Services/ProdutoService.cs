@@ -5,11 +5,11 @@ using WebApp.Data;
 
 namespace WebApp.Services
 {
-    public class CreateProdutoService
+    public class ProdutoService
     {
         private readonly ApplicationDbContext _context;
 
-        public CreateProdutoService(ApplicationDbContext context)
+        public ProdutoService(ApplicationDbContext context)
         {
             _context = context;
         }

@@ -9,6 +9,8 @@
        
 
         // Método de logout
+
+        //Método de Admin
        
     }
 
