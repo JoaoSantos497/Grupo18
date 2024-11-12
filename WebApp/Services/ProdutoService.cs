@@ -17,8 +17,7 @@ namespace WebApp.Services
         // Método para criar um novo produto
         public async Task<Produto> CriarProdutoAsync(Produto produto)
         {
-            if (produto == null)
-                throw new ArgumentNullException(nameof(produto));
+            ArgumentNullException.ThrowIfNull(produto);
 
             _context.Produtos.Add(produto);
             await _context.SaveChangesAsync();
