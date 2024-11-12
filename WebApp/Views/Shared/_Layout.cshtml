@@ -33,6 +33,25 @@
 				<div class="row">
 					<!-- LOGO -->
 					<div class="col-md-3">
+						<div id="mysidemenu" class="side-menu">
+							<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+							<a href="#">About</a>
+							<a href="#">Services</a>
+							<a href="#">Clients</a>
+							<a href="#">Contact</a>
+						</div>
+
+						<span class="header-links pull-left" style="font-size:40px;cursor:pointer" onclick="openNav()">&#9776;</span>
+
+						<script>
+							function openNav() {
+								document.getElementById("mysidemenu").style.width = "400px";
+							}
+
+							function closeNav() {
+								document.getElementById("mysidemenu").style.width = "0";
+							}
+						</script>
 						<div class="header-logo">
 							<a href="Home" class="logo">
 								<img src="~/lib/bootstrap_electro/img/logo_nb.png" alt="">
