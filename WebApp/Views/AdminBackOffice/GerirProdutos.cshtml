@@ -1,7 +1,9 @@
-﻿@{
+﻿@model List<Produto>
+@{
     ViewData["Title"] = "Gerir Produtos";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-@model List<Produto>
+
 
 <head>
     <meta charset="UTF-8">
@@ -56,7 +58,7 @@
                     <td>@produto.Marca</td>
                     <td>@produto.Modelo</td>
                     <td>@produto.Descricao</td>
-                    <td>@produto.Preco</td>
+                    <td>@produto.Preco€ </td>
                     <td>@produto.Stock</td>
                 </tr>
             }

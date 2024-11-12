@@ -2331,7 +2331,7 @@ Side Menu
 /* Estilização geral para o formulário */
 form {
     max-width: 600px;
-    margin: 0 auto;
+    margin: 0 0;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -2351,7 +2351,7 @@ form {
     form .form-group textarea {
         width: 100%;
         padding: 10px;
-        font-size: 1rem;
+        font-size: 14px;
         border: 1px solid #ddd;
         border-radius: 4px;
         transition: border-color 0.3s ease;
@@ -2370,7 +2370,7 @@ form {
         padding: 10px 15px;
         border: none;
         border-radius: 4px;
-        font-size: 1rem;
+        font-size: 14px;
         cursor: pointer;
         transition: background-color 0.3s ease;
     }
@@ -2385,7 +2385,7 @@ form {
         background-color: #e0e0e0;
         padding: 10px 15px;
         border-radius: 4px;
-        font-size: 1rem;
+        font-size: 14px;
         text-decoration: none;
         transition: background-color 0.3s ease;
     }
@@ -2396,7 +2396,7 @@ form {
 
 /* Estilização para mensagens de erro */
 .text-danger {
-    font-size: 0.875rem;
+    font-size: 11px;
     color: #dc3545;
 }
 
