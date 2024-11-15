@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WebApp.Controllers
 {
-    //[Route("AdminBackOffice[action]")]/
+    //[Route("AdminBackOffice[action]")]
     [Route("AdminBackOffice")]
     public class AdminBackOfficeController : Controller
     {
