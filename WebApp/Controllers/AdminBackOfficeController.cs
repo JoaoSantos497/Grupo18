@@ -10,14 +10,10 @@ namespace WebApp.Controllers
 {
     //[Route("AdminBackOffice[action]")]
     [Route("AdminBackOffice")]
-    public class AdminBackOfficeController : Controller
+    public class AdminBackOfficeController(ApplicationDbContext context) : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context = context;
 
-        public AdminBackOfficeController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
         // GET: AdminBackOffice
         [HttpGet("")]
         public ActionResult Index()
@@ -30,8 +26,8 @@ namespace WebApp.Controllers
         [HttpGet("GerirProdutos")]
         public async Task<IActionResult> GerirProdutos()
         {
-            var produtos = await _context.Produtos.ToListAsync();
-            return View(produtos);
+            var Produtos = await _context.Produtos.ToListAsync();
+            return View(Produtos);
         }
 
         // GET: AdminBackOffice/GerirProdutos/CreateProduto

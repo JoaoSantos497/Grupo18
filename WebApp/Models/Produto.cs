@@ -6,44 +6,44 @@ using WebApp.Models;
 
 namespace WebApp.Models
 {
-    [Table("produtos")]
+    //[Table("Produtos")]
     public class Produto {
-        [Column("produtoid")]
+        //[Column("produtoid")]
         // ID do produto (chave primária)
         public int ProdutoID { get; set; }
 
         // Nome do produto
-        [Column("nome")]
+        //[Column("nome")]
         [Required(ErrorMessage = "O nome do produto é obrigatório.")]
         [StringLength(100, ErrorMessage = "O nome do produto não pode ter mais que 100 caracteres.")]
         public required string Nome { get; set; }
 
         // Marca do produto
-        [Column("marca")]
+        //[Column("marca")]
         [Required(ErrorMessage = "A marca do produto é obrigatória.")]
         [StringLength(500, ErrorMessage = "A marca do produto não pode ter mais que 500 caracteres.")]
         public required string Marca { get; set; }
 
         // Modelo do produto
-        [Column("modelo")]
+        //[Column("modelo")]
         [Required(ErrorMessage = "O modelo do produto é obrigatória.")]
         [StringLength(500, ErrorMessage = "O modelo do produto não pode ter mais que 500 caracteres.")]
         public required string Modelo { get; set; }
 
         // Descrição do produto
-        [Column("descricao")]
+        //[Column("descricao")]
         [Required(ErrorMessage = "A descrição do produto é obrigatória.")]
         [StringLength(500, ErrorMessage = "A descrição do produto não pode ter mais que 500 caracteres.")]
         public required string Descricao { get; set; }
 
         // Preço do produto
-        [Column("preco")]
+        //[Column("preco")]
         [Required(ErrorMessage = "O preço do produto é obrigatório.")]
         [Range(0.01, double.MaxValue, ErrorMessage = "O preço deve ser maior que zero.")]
         public decimal Preco { get; set; }
 
         // Quantidade em stock
-        [Column("stock")]
+        //[Column("stock")]
         [Required(ErrorMessage = "A quantidade em stock é obrigatória.")]
         [Range(0, int.MaxValue, ErrorMessage = "A quantidade não pode ser negativa.")]
         public int Stock { get; set; }
