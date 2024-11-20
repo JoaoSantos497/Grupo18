@@ -4,6 +4,6 @@ namespace WebApp.Services
 {
     public interface IUserService
     {
-        User create(User user);
+        User Create(User user);
     }
 }

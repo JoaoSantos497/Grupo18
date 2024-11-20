@@ -5,17 +5,16 @@ using WebApp.Models;
 
 namespace WebApp.Models
 {
-    public class User
-    {
+    public class User {
         //[Column("userid")]
         // ID do utilizador (chave primária)
         public int UserID { get; set; }
 
         // Nome do utilizador
-        //[Column("nomecompleto")]
+        //[Column("nome")]
         [Required(ErrorMessage = "O nome é obrigatório.")]
         [StringLength(100, ErrorMessage = "O nome não pode ter mais que 100 caracteres.")]
-        public required string NomeCompleto { get; set; }
+        public required string Nome { get; set; }
 
         // Username do utilizador
         //[Column("username")]
@@ -38,11 +37,11 @@ namespace WebApp.Models
         // Role do utilizador
         //[Required(ErrorMessage = "Role é obrigatória.")]
         //[StringLength(100, ErrorMessage = "A Role não foi definida")]
-        //public required string Role { get; set; }   // Para definir papéis de utilizador (Admin, user, etc.)
+        //public required string Roles { get; set; }   // Para definir papéis de utilizador (Admin, user, etc.)
 
 
         // Data de registo
-        public DateTime DataRegistro { get; set; }
+        public DateTime DataRegisto { get; set; }
 
         // Outros campos opcionais para adicionar
         //public bool IsActive { get; set; }  // Para ativar/desativar utilizadores
