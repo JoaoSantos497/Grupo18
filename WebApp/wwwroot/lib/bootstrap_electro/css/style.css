@@ -2495,47 +2495,91 @@ form {
 
 /* Registo/index.cshtml*/
 
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f8f9fa; /* Cor de fundo suave */
+    margin: 0;
+    padding: 0;
+}
+
+/* Container do formulário */
 .registration-form-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #ffffff;
+    min-height: 100vh;
+    padding: 20px;
 }
 
 .registration-form {
-    background-color: #ffffff;
+    background: #fff;
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 100%;
+    max-width: 400px;
 }
 
+    /* Título */
     .registration-form h2 {
-        text-align: center;
         margin-bottom: 20px;
-        font-weight: bold;
+        font-weight: 700;
+        color: #333;
+        text-align: center;
     }
 
-    .registration-form .form-group input {
-        height: 45px;
+    /* Inputs e rótulos */
+    .registration-form .form-group label {
+        font-weight: 500;
+        color: #555;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .registration-form .form-control {
         border-radius: 5px;
-    }
-
-    .registration-form .btn-primary {
+        border: 1px solid #ddd;
+        padding: 10px;
+        font-size: 14px;
         width: 100%;
-        height: 45px;
-        font-size: 16px;
-        font-weight: bold;
-        background-color: #D10024;
-        border: none;
-        border-radius: 5px;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease-in-out;
     }
 
-        .registration-form .btn-primary:hover {
-            background-color: #D10024;
+        .registration-form .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+            outline: none;
         }
+
+    /* Botão */
+    .registration-form .btn {
+        background: #007bff;
+        border: none;
+        padding: 10px 15px;
+        font-size: 16px;
+        color: #fff;
+        border-radius: 5px;
+        width: 100%;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+        .registration-form .btn:hover {
+            background: #0056b3;
+        }
+
+    /* Select */
+    .registration-form .form-control select {
+        appearance: none; /* Remove estilo padrão */
+        background: #fff;
+    }
+
+    /* Placeholder da data de nascimento */
+    .registration-form .form-control::placeholder {
+        color: #999;
+        font-style: italic;
+    }
 
 /* SobreNos/index.cshtml*/
 

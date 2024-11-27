@@ -1,18 +1,32 @@
-﻿namespace WebApp.Services
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using WebApp.Models;
+
+namespace WebApp.Services 
 {
-    public class AuthService
+    public class AuthService : IAuthService
     {
-        // Método de registo
-        
 
-        // Método de login
-       
+        public object Authenticate(object email, object passwordhash)
+        {
+            throw new NotImplementedException();
+        }
 
-        // Método de logout
+        public User Authenticate(string email, string passwordhash)
+        {
+            throw new NotImplementedException();
+        }
 
-        //Método de Admin
-       
+        public bool Register(User newUser, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Registo(User newUser, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
-
-
 }
