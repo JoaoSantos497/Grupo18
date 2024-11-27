@@ -10,9 +10,15 @@ namespace WebApp.Controllers
 {
     //[Route("AdminBackOffice[action]")]
     [Route("AdminBackOffice")]
-    public class AdminBackOfficeController(ApplicationDbContext context) : Controller
+    public class AdminBackOfficeController : Controller
     {
-        private readonly ApplicationDbContext _context = context;
+        private readonly ApplicationDbContext _context;
+
+        public AdminBackOfficeController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
 
         // GET: AdminBackOffice
         [HttpGet("")]
@@ -44,23 +50,14 @@ namespace WebApp.Controllers
         public async Task<IActionResult> CreateProduto(Produto Produto)
         {
             if (ModelState.IsValid)
-            {
+            {   
+                //using ( var context )
                 _context.Produtos.Add(Produto);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("GerirProdutos");
             }
             return View(Produto);
         }
-
-        // GET: AdminBackOffice/GerirUsers
-        [HttpGet("GerirUsers")]
-        public async Task<IActionResult> GerirUsers()
-        {
-            // Lógica para exibir e gerir utilizadores
-            var users = await _context.Users.ToListAsync();
-            return View(users);
-        }
-
 
         // GET: AdminBackOffice/GerirUsers/CreateUser
         [HttpGet("GerirUsers/CreateUser")]

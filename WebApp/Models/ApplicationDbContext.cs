@@ -1,17 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebApp.Models;
-using Microsoft.Extensions.Configuration;
-using WebApp.Data;
+
 
 namespace WebApp.Data
 {
-    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
+    public class ApplicationDbContext : DbContext
     {
-        public required DbSet<Produto> Produtos { get; set; } // Exemplo de uma entidade Produto
-        public required DbSet<User> Users { get; set; } // Exemplo de uma entidade User
 
-        // Defina as tabelas (DbSets) que você quer incluir no banco de dados
+        // Construtor corrigido para aceitar opções
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {
+        }
 
+        // DbSets que representam tabelas na base de dados
+        public required DbSet<Produto> Produtos { get; set; } // Entidade Produto
+        public required DbSet<User> Users { get; set; } // Entidade User 
 
         // Outras tabelas podem ser adicionadas aqui
         // public DbSet<OutraEntidade> OutraEntidades { get; set; }

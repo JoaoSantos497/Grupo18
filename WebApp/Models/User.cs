@@ -34,6 +34,16 @@ namespace WebApp.Models
         [StringLength(100, ErrorMessage = "A senha deve ter pelo menos {2} caracteres.", MinimumLength = 6)]
         public required string PasswordHash { get; set; }
 
+        // Data de Nascimento
+        //[Column("datanascimento")]
+        [Required(ErrorMessage = "A data de nascimento é obrigatória.")]
+        //[StringLength(100, ErrorMessage = "A senha deve ter pelo menos {2} caracteres.", MinimumLength = 6)]
+        public required string DataNascimento { get; set; }
+
+        // Genero
+        //[Column("genero")]
+        public required string Genero { get; set; }
+
         // Role do utilizador
         //[Required(ErrorMessage = "Role é obrigatória.")]
         //[StringLength(100, ErrorMessage = "A Role não foi definida")]
