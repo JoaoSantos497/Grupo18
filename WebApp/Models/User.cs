@@ -6,6 +6,7 @@ using WebApp.Models;
 namespace WebApp.Models
 {
     public class User {
+
         //[Column("userid")]
         // ID do utilizador (chave primária)
         public int UserID { get; set; }
@@ -38,7 +39,7 @@ namespace WebApp.Models
         //[Column("datanascimento")]
         [Required(ErrorMessage = "A data de nascimento é obrigatória.")]
         //[StringLength(100, ErrorMessage = "A senha deve ter pelo menos {2} caracteres.", MinimumLength = 6)]
-        public required string DataNascimento { get; set; }
+        public required DateTime DataNascimento { get; set; }
 
         // Genero
         //[Column("genero")]
@@ -55,5 +56,7 @@ namespace WebApp.Models
 
         // Outros campos opcionais para adicionar
         //public bool IsActive { get; set; }  // Para ativar/desativar utilizadores
+
+
     }
 }

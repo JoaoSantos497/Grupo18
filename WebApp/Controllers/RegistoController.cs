@@ -8,10 +8,10 @@ namespace WebApp.Controllers
 {
     public class RegistoController : Controller
     {
-        private readonly UserService _userService;
+        private readonly IUserService _userService;
 
         // Construtor com injeção de dependência
-        public RegistoController(UserService userService)
+        public RegistoController(IUserService userService)
         {
             _userService = userService ?? throw new ArgumentNullException(nameof(userService));
         }
@@ -26,18 +26,30 @@ namespace WebApp.Controllers
         // Processa o formulário de registro
         [HttpPost("Registo")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(User Registo)
+        
+        public async Task<IActionResult> Index(RegistoForm registo)
         {
             // Verifica se o modelo é válido
             if (!ModelState.IsValid)
             {
-                return View(Registo);
+                return View(registo);
             }
 
             try
             {
                 // Chama o serviço para criar o utilizador
-                await _userService.CreateUserAsync(Registo);
+                var user = new User
+                { 
+                    Nome = registo.Nome, 
+                    Username =  registo.Username,
+                    Email = registo.Email,
+                    PasswordHash = registo.Password,
+                    DataNascimento = registo.DataNascimento,
+                    Genero = registo.Genero,
+                    DataRegisto = new DateTime()
+                };
+
+                await _userService.CreateUserAsync(user);
 
                 // Redireciona para a página de login após sucesso
                 return RedirectToAction("Index", "Login");
@@ -49,7 +61,7 @@ namespace WebApp.Controllers
 
                 // Adiciona erro ao ModelState e retorna a view
                 ModelState.AddModelError("", "Ocorreu um erro ao registar o utilizador. Tente novamente.");
-                return View(Registo);
+                return View(registo);
             }
         }
     }

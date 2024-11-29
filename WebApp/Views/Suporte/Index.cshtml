@@ -37,6 +37,7 @@
         <p>Estamos aqui para ajudar! Por favor, preencha o formulário abaixo e entraremos em contacto consigo o mais breve possível.</p>
 
         <form method="post" action="/Suporte/Enviar">
+            @Html.AntiForgeryToken()
             <div class="form-group">
                 <label for="nome">Nome Completo</label>
                 <input type="text" id="nome" name="nome" required class="form-control" placeholder="Digite o seu nome">

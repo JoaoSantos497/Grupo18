@@ -11,3 +11,6 @@
 	[DataRegisto] datetime DEFAULT getdate(),
 	[RoleID] int DEFAULT 2
 )
+
+
+
