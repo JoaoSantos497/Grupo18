@@ -26,23 +26,23 @@ namespace WebApp.Controllers
             return Ok(new { Message = "Login bem-sucedido!", User = user });
         }
 
-        [HttpPost("Registo")]
-        public IActionResult Register([FromBody] User request)
-        {
-            var newUser = new User
-            {
-                Username = request.Username,
-                Nome = request.Nome,
-                Email = request.Email
-            };
+        //[HttpPost("Registo")]
+        //public IActionResult Register([FromBody] User request)
+        //{
+            //var newUser = new User
+            //{
+                //Username = request.Username,
+                //Nome = request.Nome,
+                //Email = request.Email
+            //};
 
-            var success = _authService.Registo(newUser, request.PasswordHash);
-            if (!success)
-            {
-                return BadRequest("Utilizador ou email já existe.");
-            }
-            return Ok(new { Message = "Registo bem-sucedido!" });
-        }
+            //var success = _authService.Registo(newUser, request.PasswordHash);
+            //if (!success)
+            //{
+                //return BadRequest("Utilizador ou email já existe.");
+            //}
+            //return Ok(new { Message = "Registo bem-sucedido!" });
+       // }
     }
 }
 

@@ -20,7 +20,7 @@ namespace WebApp.Models
         // Username do utilizador
         //[Column("username")]
         [Required(ErrorMessage = "O nome é obrigatório.")]
-        [StringLength(100, ErrorMessage = "O nome não pode ter mais que 100 caracteres.")]
+        [StringLength(25, ErrorMessage = "O nome não pode ter mais que 25 caracteres.")]
         public string Username { get; set; } = string.Empty;
 
         // Email do utilizador
@@ -32,13 +32,12 @@ namespace WebApp.Models
         // Password do utilizador
         //[Column("passwordhash")]
         [Required(ErrorMessage = "A senha é obrigatória.")]
-        [StringLength(100, ErrorMessage = "A senha deve ter pelo menos {2} caracteres.", MinimumLength = 6)]
+        [StringLength(16, ErrorMessage = "A senha deve ter pelo menos {2} caracteres.", MinimumLength = 6)]
         public  string PasswordHash { get; set; } = string.Empty;
 
         // Data de Nascimento
         //[Column("datanascimento")]
         [Required(ErrorMessage = "A data de nascimento é obrigatória.")]
-        //[StringLength(100, ErrorMessage = "A senha deve ter pelo menos {2} caracteres.", MinimumLength = 6)]
         public required DateTime DataNascimento { get; set; }
 
         // Genero
@@ -47,7 +46,7 @@ namespace WebApp.Models
 
         // Role do utilizador
         //[Required(ErrorMessage = "Role é obrigatória.")]
-        [StringLength(100, ErrorMessage = "A Role não foi definida")]
+        [StringLength(50, ErrorMessage = "A Role não foi definida")]
         public string? Roles { get; set; }   // Para definir cargos de utilizador (Admin, user, etc.)
 
 

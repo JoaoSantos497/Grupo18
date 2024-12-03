@@ -56,7 +56,7 @@ namespace WebApp.Controllers
             }
             catch (Exception ex)
             {
-                // Log do erro (pode usar um serviço de log no lugar do Console)
+                // Log do erro (pode usar um serviço de log no lugar da Console)
                 Console.WriteLine($"Erro ao registar utilizador: {ex.Message}");
 
                 // Adiciona erro ao ModelState e retorna a view

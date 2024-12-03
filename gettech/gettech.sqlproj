@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{a0d9ae36-393f-463e-b252-a71df1019b4e}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -59,19 +59,6 @@
     <Folder Include="Properties" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Users.sql" />
-    <Build Include="Produtos.sql" />
-    <Build Include="Roles.sql" />
-    <Build Include="RolePermissoes.sql" />
-    <Build Include="PermissoesEspecificas.sql" />
-    <Build Include="Pagamentos.sql" />
-    <Build Include="Orders.sql" />
-    <Build Include="OrderItems.sql" />
-    <Build Include="Favoritos.sql" />
-    <Build Include="Enderecos.sql" />
-    <Build Include="Cupons.sql" />
-    <Build Include="Categorias.sql" />
-    <Build Include="Carrinho.sql" />
-    <Build Include="Avaliacoes.sql" />
+    <None Include="Script1.sql" />
   </ItemGroup>
 </Project>
