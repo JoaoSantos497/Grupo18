@@ -10,3 +10,4 @@ CREATE TABLE Avaliacoes (
     Classificacao INT NULL CHECK (Classificacao BETWEEN 1 AND 5),
     DataAvaliacao DATETIME DEFAULT GETDATE()
 );
+GO
