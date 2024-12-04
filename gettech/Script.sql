@@ -1,4 +1,4 @@
-﻿
+﻿Use gettech
 
 -- Criação das Tabelas
 
