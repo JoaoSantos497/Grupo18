@@ -28,5 +28,10 @@ namespace WebApp.Services
         {
             throw new NotImplementedException();
         }
+
+        string IAuthService.Authenticate(string email, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
