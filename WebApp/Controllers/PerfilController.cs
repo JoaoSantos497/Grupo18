@@ -1,83 +1,53 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using WebApp.Models;
+using WebApp.Data;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApp.Controllers
 {
+    [Route("Perfil")]
     public class PerfilController : Controller
     {
-        // GET: PerfilController
+        private readonly ApplicationDbContext _context;
+
+        public PerfilController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+        // GET: Perfil
+        [HttpGet("")]
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: PerfilController/Details/5
-        public ActionResult Details(int id)
+        // GET: Perfil/Dados Pessoais
+        [HttpGet("Perfil/DadosPessoais")]
+        public IActionResult DadosPessoais()
         {
             return View();
         }
 
-        // GET: PerfilController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: PerfilController/Create
-        [HttpPost]
+        //POST: A tua Conta/Dados Pessoais
+        [HttpPost("Perfil/DadosPessoais")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult AtualizarDadosPessoais(string Nome, string Email)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            // Lógica para salvar os dados recebidos no banco de dados
+            // Por exemplo:
+            //_context.Users.Update(new User { Nome = Nome, Email = Email });
+
+            TempData["Mensagem"] = "Dados atualizados com sucesso!";
+            return RedirectToAction("DadosPessoais");
         }
 
-        // GET: PerfilController/Edit/5
-        public ActionResult Edit(int id)
+        // GET: A tua Conta/Moradas
+        [HttpGet("Perfil/Moradas")]
+        public IActionResult Moradas()
         {
             return View();
         }
 
-        // POST: PerfilController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: PerfilController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: PerfilController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

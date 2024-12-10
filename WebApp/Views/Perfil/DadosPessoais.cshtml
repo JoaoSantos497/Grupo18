@@ -1,0 +1,182 @@
+﻿@{
+    ViewData["Title"] = "Dados Pessoais | ";
+}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados Pessoais</title>
+    <link rel="script" href="site.js">
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/bootstrap.min.css" />
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/slick.css" />
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/slick-theme.css" />
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/nouislider.min.css" />
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="/lib/bootstrap_electro/css/font-awesome.min.css">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/style.css" />
+
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .breadcrumb {
+            color: #6c757d;
+            font-size: 14px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+            input[type="text"]:focus,
+            input[type="email"]:focus,
+            input[type="password"]:focus {
+                border-color: #50bfa0;
+                outline: none;
+            }
+
+        .form-group.optional label:after {
+            content: " (Opcional)";
+            font-weight: normal;
+            color: #999;
+            font-size: 12px;
+        }
+
+        .password-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+            .password-toggle button {
+                padding: 8px 15px;
+                font-size: 14px;
+                color: white;
+                background-color: #2db283;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+        .checkbox-group {
+            margin-bottom: 20px;
+        }
+
+            .checkbox-group label {
+                font-size: 14px;
+                color: #333;
+            }
+
+        button[type="submit"] {
+            background-color: #50bfa0;
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            button[type="submit"]:hover {
+                background-color: #43a68b;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">As tuas informações pessoais</div>
+        <div class="breadcrumb">Home / A tua conta / Dados Pessoais</div>
+        <form>
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome" value="">
+            </div>
+           
+            <div class="form-group optional">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" value="">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" value="jpsantosrm@gmail.com">
+            </div>
+            <div class="form-group">
+                <label for="password">Palavra-passe</label>
+                <div class="password-toggle">
+                    <input type="password" id="password" name="password" value="********">
+                    <button type="button" onclick="togglePassword('password')">MOSTRAR</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="new-password">Nova password</label>
+                <div class="password-toggle">
+                    <input type="password" id="new-password" name="new-password">
+                    <button type="button" onclick="togglePassword('new-password')">MOSTRAR</button>
+                </div>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="terms" name="terms">
+                <label for="terms">Aceito as <a href="#">condições gerais</a> e a <a href="#">política de confidencialidade</a></label>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="newsletter" name="newsletter">
+                <label for="newsletter">Subscrevo a newsletter GetTech para receber campanhas e descontos exclusivos</label>
+            </div>
+            <button type="submit">Guardar</button>
+        </form>
+    </div>
+
+    <script>
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            if (field.type === "password") {
+                field.type = "text";
+            } else {
+                field.type = "password";
+            }
+        }
+    </script>
+</body>

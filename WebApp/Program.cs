@@ -1,10 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using WebApp.Data;
 using WebApp.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 
 internal class Program
 {
+
     private static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
@@ -12,12 +16,30 @@ internal class Program
         // Add services to the container.
         builder.Services.AddControllersWithViews(); // Adiciona suporte para controladores e views
         builder.Services.AddScoped<IUserService, UserService>(); // Injeção do serviço IUserService
-        builder.Services.AddSingleton<IAuthService, AuthService>(); // Injeção do serviço AuthService
+        builder.Services.AddScoped<IAuthenticationService, AuthenticationService>(); // Injeção do serviço AuthService
         builder.Services.AddEndpointsApiExplorer();
 
         // Adicione o ApplicationDbContext
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+        builder.Services.AddAuthentication(options =>
+        {
+            // Define o esquema padrão como Bearer
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+        .AddJwtBearer(options =>
+         {
+             // Configurações para o JWT Bearer Token
+             options.TokenValidationParameters = new TokenValidationParameters
+             {
+                 ValidateIssuerSigningKey = true,
+                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("TI2024/2025")),
+                 ValidateIssuer = false,
+                 ValidateAudience = false
+             };
+         });
 
 
         var app = builder.Build();

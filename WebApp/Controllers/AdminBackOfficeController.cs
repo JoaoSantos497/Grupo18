@@ -36,6 +36,14 @@ namespace WebApp.Controllers
             return View(Produtos);
         }
 
+        // GET: AdminBackOffice/GerirUsers
+        [HttpGet("GerirUsers")]
+        public async Task<IActionResult> GerirUsers()
+        {
+            var Users = await _context.Users.ToListAsync();
+            return View(Users);
+        }
+
         // GET: AdminBackOffice/GerirProdutos/CreateProduto
         [HttpGet("GerirProdutos/CreateProduto")]
         public IActionResult CreateProduto()
