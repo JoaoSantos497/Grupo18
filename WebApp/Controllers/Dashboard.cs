@@ -8,19 +8,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WebApp.Controllers
 {
-    //[Route("AdminBackOffice[action]")]
-    [Route("AdminBackOffice")]
-    public class AdminBackOfficeController : Controller
+    //[Route("Dashboard[action]")]
+    [Route("Dashboard")]
+    public class Dashboard : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public AdminBackOfficeController(ApplicationDbContext context)
+        public Dashboard(ApplicationDbContext context)
         {
             _context = context;
         }
 
 
-        // GET: AdminBackOffice
+        // GET: Dashboard
         [HttpGet("")]
         public ActionResult Index()
         {
@@ -28,7 +28,7 @@ namespace WebApp.Controllers
         }
 
 
-        // GET: AdminBackOffice/GerirProdutos
+        // GET: Dashboard/GerirProdutos
         [HttpGet("GerirProdutos")]
         public async Task<IActionResult> GerirProdutos()
         {
@@ -36,7 +36,7 @@ namespace WebApp.Controllers
             return View(Produtos);
         }
 
-        // GET: AdminBackOffice/GerirUsers
+        // GET: Dashboard/GerirUsers
         [HttpGet("GerirUsers")]
         public async Task<IActionResult> GerirUsers()
         {
@@ -44,7 +44,7 @@ namespace WebApp.Controllers
             return View(Users);
         }
 
-        // GET: AdminBackOffice/GerirProdutos/CreateProduto
+        // GET: Dashboard/GerirProdutos/CreateProduto
         [HttpGet("GerirProdutos/CreateProduto")]
         public IActionResult CreateProduto()
         {
@@ -52,7 +52,7 @@ namespace WebApp.Controllers
         }
 
 
-        // POST: AdminBackOffice/GerirProdutos/CreateProduto
+        // POST: Dashboard/GerirProdutos/CreateProduto
         [HttpPost("GerirProdutos/CreateProduto")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateProduto(Produto Produto)
@@ -67,7 +67,7 @@ namespace WebApp.Controllers
             return View(Produto);
         }
 
-        // GET: AdminBackOffice/GerirUsers/CreateUser
+        // GET: Dashboard/GerirUsers/CreateUser
         [HttpGet("GerirUsers/CreateUser")]
         public IActionResult CreateUser()
         {
@@ -75,7 +75,7 @@ namespace WebApp.Controllers
         }
 
 
-        // POST: AdminBackOffice/GerirUsers/CreateUser
+        // POST: Dashboard/GerirUsers/CreateUser
         [HttpPost("GerirUsers/CreateUser")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateUser(User User)
@@ -89,7 +89,7 @@ namespace WebApp.Controllers
             return View(User);
         }
 
-        // GET: AdminBackOffice/Settings
+        // GET: Dashboard/Settings
         [HttpGet("Settings")]
         public IActionResult Settings()
         {
@@ -97,7 +97,7 @@ namespace WebApp.Controllers
             return View();
         }
 
-        // POST: AdminBackOffice/Logout
+        // POST: Dashboard/Logout
         [HttpPost("Logout")]
         public IActionResult Logout()
         {

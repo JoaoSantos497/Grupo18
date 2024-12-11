@@ -15,6 +15,7 @@ namespace WebApp.Data
         // DbSets que representam tabelas na base de dados
         public required DbSet<Produto> Produtos { get; set; } // Entidade Produto
         public required DbSet<User> Users { get; set; } // Entidade User 
+        public object User { get; internal set; }
 
         // Outras tabelas podem ser adicionadas aqui
         // public DbSet<OutraEntidade> OutraEntidades { get; set; }

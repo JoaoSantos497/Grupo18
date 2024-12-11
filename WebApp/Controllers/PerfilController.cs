@@ -24,9 +24,11 @@ namespace WebApp.Controllers
 
         // GET: Perfil/Dados Pessoais
         [HttpGet("DadosPessoais")]
-        public IActionResult DadosPessoais()
+        public ActionResult DadosPessoais()
         {
+            //var users = await _context.Users.ToListAsync();
             return View();
+            
         }
 
         //POST: A tua Conta/Dados Pessoais
@@ -34,11 +36,22 @@ namespace WebApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult UpdateDadosPessoais(string Nome, string Email, string Password)
         {
-            // Lógica para salvar os dados recebidos no banco de dados
-            // Por exemplo:
-            //_context.Users.Update(new User { Nome = Nome, Email = Email, Password = Password });
+            // Lógica para salvar os dados no banco de dados
+            var user = _context.Users.FirstOrDefault(u => u.Email == Email);
+            if (user != null)
+            {
+                user.Nome = Nome;
+                user.Email = Email;
+                user.PasswordHash = Password; // Considere hashear a senha antes de salvar
+                _context.SaveChanges();
 
-            TempData["Mensagem"] = "Dados atualizados com sucesso!";
+                TempData["Mensagem"] = "Dados atualizados com sucesso!";
+            }
+            else
+            {
+                TempData["Erro"] = "Utilizador não foi encontrado!";
+            }
+
             return RedirectToAction("DadosPessoais");
         }
 

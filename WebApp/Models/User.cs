@@ -54,6 +54,5 @@ namespace WebApp.Models
         public DateTime DataRegisto { get; set; } = DateTime.UtcNow;
 
         // Outros campos opcionais para adicionar
-        //public bool IsActive { get; set; }  // Para ativar/desativar utilizadores
     }
 }

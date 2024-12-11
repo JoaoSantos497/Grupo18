@@ -22,26 +22,27 @@ internal class Program
 
         // Adicione o ApplicationDbContext
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
         // Authentication
-        builder.Services.AddAuthentication(options =>
-        {
+        //builder.Services.AddAuthentication(options =>
+        //{
             // Define o esquema padrão como Bearer
-            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        })
-        .AddJwtBearer(options =>
-         {
+            //options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        //})
+
+        //.AddJwtBearer(options =>
+         //{
              // Configurações para o JWT Bearer Token
-             options.TokenValidationParameters = new TokenValidationParameters
-             {
-                 ValidateIssuerSigningKey = true,
-                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("TI2024/2025")),
-                 ValidateIssuer = false,
-                 ValidateAudience = false
-             };
-         });
+             //options.TokenValidationParameters = new TokenValidationParameters
+             //{
+                 //ValidateIssuerSigningKey = true,
+                 //IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("TI2024/2025")),
+                 //ValidateIssuer = false,
+                 //ValidateAudience = false
+             //};
+         //});
 
 
         var app = builder.Build();
