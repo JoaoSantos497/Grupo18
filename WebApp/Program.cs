@@ -16,6 +16,7 @@ internal class Program
         // Add services to the container.
         builder.Services.AddControllersWithViews(); // Adiciona suporte para controladores e views
         builder.Services.AddScoped<IUserService, UserService>(); // Injeção do serviço IUserService
+        builder.Services.AddScoped<IAuthenticationService, AuthenticationService>(); // Injeção do serviço AuthService
         builder.Services.AddEndpointsApiExplorer();
 
         // Adicione o ApplicationDbContext
