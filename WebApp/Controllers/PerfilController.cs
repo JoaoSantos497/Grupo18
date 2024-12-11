@@ -23,27 +23,27 @@ namespace WebApp.Controllers
         }
 
         // GET: Perfil/Dados Pessoais
-        [HttpGet("Perfil/DadosPessoais")]
+        [HttpGet("DadosPessoais")]
         public IActionResult DadosPessoais()
         {
             return View();
         }
 
         //POST: A tua Conta/Dados Pessoais
-        [HttpPost("Perfil/DadosPessoais")]
+        [HttpPost("DadosPessoais")]
         [ValidateAntiForgeryToken]
-        public IActionResult AtualizarDadosPessoais(string Nome, string Email)
+        public IActionResult UpdateDadosPessoais(string Nome, string Email, string Password)
         {
             // Lógica para salvar os dados recebidos no banco de dados
             // Por exemplo:
-            //_context.Users.Update(new User { Nome = Nome, Email = Email });
+            //_context.Users.Update(new User { Nome = Nome, Email = Email, Password = Password });
 
             TempData["Mensagem"] = "Dados atualizados com sucesso!";
             return RedirectToAction("DadosPessoais");
         }
 
-        // GET: A tua Conta/Moradas
-        [HttpGet("Perfil/Moradas")]
+        // GET: Perfil/Moradas
+        [HttpGet("Moradas")]
         public IActionResult Moradas()
         {
             return View();

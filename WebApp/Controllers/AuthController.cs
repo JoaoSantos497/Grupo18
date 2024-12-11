@@ -7,9 +7,9 @@ namespace WebApp.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        private readonly IAuthenticationService _authenticationService;
+        private readonly IAuthService _authenticationService;
 
-        public AuthController(IAuthenticationService authenticationService)
+        public AuthController(IAuthService authenticationService)
         {
             _authenticationService = authenticationService;
         }

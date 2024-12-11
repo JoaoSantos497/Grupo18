@@ -16,13 +16,13 @@ internal class Program
         // Add services to the container.
         builder.Services.AddControllersWithViews(); // Adiciona suporte para controladores e views
         builder.Services.AddScoped<IUserService, UserService>(); // Injeção do serviço IUserService
-        builder.Services.AddScoped<IAuthenticationService, AuthenticationService>(); // Injeção do serviço AuthService
         builder.Services.AddEndpointsApiExplorer();
 
         // Adicione o ApplicationDbContext
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
         options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+        // Authentication
         builder.Services.AddAuthentication(options =>
         {
             // Define o esquema padrão como Bearer
@@ -67,7 +67,7 @@ internal class Program
 
         // Outra rota adicional, se necessário, com nome diferente
         app.MapControllerRoute(
-            name: "wishlist",
+            name: "Wishlist",
             pattern: "{controller=Wishlist}/{action=Index}/{id?}");
 
         app.Run(); // Executa o aplicativo
