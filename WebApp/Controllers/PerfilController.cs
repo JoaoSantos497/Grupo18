@@ -17,7 +17,7 @@ namespace WebApp.Controllers
         }
         // GET: Perfil
         [HttpGet("")]
-        public ActionResult Index()
+        public IActionResult Index()
         {
             return View();
         }

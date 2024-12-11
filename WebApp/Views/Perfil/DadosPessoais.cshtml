@@ -28,27 +28,44 @@
     <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/style.css" />
 
     <style>
-        .container {
-            max-width: 800px;
-            margin: 30px auto;
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
         }
 
         .title {
             font-size: 24px;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin: 20px 0;
             text-align: center;
+            color: #333;
         }
 
         .breadcrumb {
-            color: #6c757d;
-            font-size: 14px;
-            margin-bottom: 30px;
             text-align: center;
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 30px;
+        }
+
+            .breadcrumb a {
+                color: #007bff; /* Cor do link */
+                text-decoration: none; /* Remove o sublinhado */
+            }
+
+                .breadcrumb a:hover {
+                    text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+                }
+
+        form {
+            background: #ffffff;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .form-group {
@@ -57,9 +74,9 @@
 
         label {
             display: block;
-            font-size: 14px;
             font-weight: bold;
             margin-bottom: 5px;
+            color: #555;
         }
 
         input[type="text"],
@@ -67,70 +84,82 @@
         input[type="password"] {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            background-color: #f9f9f9;
+            font-size: 14px;
+            color: #333;
+            box-sizing: border-box;
         }
 
-            input[type="text"]:focus,
-            input[type="email"]:focus,
-            input[type="password"]:focus {
-                border-color: #50bfa0;
-                outline: none;
-            }
-
-        .form-group.optional label:after {
-            content: " (Opcional)";
-            font-weight: normal;
-            color: #999;
-            font-size: 12px;
+        input[type="checkbox"] {
+            margin-right: 10px;
         }
 
         .password-toggle {
             display: flex;
             align-items: center;
-            gap: 10px;
         }
 
+            .password-toggle input {
+                flex: 1;
+            }
+
             .password-toggle button {
+                margin-left: 10px;
                 padding: 8px 15px;
-                font-size: 14px;
-                color: white;
-                background-color: #2db283;
+                background: #007bff;
+                color: #fff;
                 border: none;
                 border-radius: 5px;
+                font-size: 12px;
                 cursor: pointer;
             }
 
+                .password-toggle button:hover {
+                    background: #0056b3;
+                }
+
         .checkbox-group {
-            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #555;
         }
 
-            .checkbox-group label {
-                font-size: 14px;
-                color: #333;
+            .checkbox-group a {
+                color: #007bff;
+                text-decoration: none;
             }
 
+                .checkbox-group a:hover {
+                    text-decoration: underline;
+                }
+
         button[type="submit"] {
-            background-color: #50bfa0;
-            color: white;
+            display: block;
+            width: 100%;
+            padding: 10px;
             font-size: 16px;
-            padding: 10px 20px;
+            background: #28a745;
+            color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-weight: bold;
         }
 
             button[type="submit"]:hover {
-                background-color: #43a68b;
+                background: #218838;
             }
     </style>
 </head>
 
 <body>
-    <div class="container">
+        <br />
         <div class="title">As tuas informações pessoais</div>
-        <div class="breadcrumb">Home / A tua conta / Dados Pessoais</div>
+        <div class="breadcrumb"> <a href="/Perfil">A tua conta</a> / Dados Pessoais</div>
+        
         <form>
             <div class="form-group">
                 <label for="nome">Nome</label>
@@ -169,7 +198,7 @@
             </div>
             <button type="submit">Guardar</button>
         </form>
-    </div>
+        <br />
 
     <script>
         function togglePassword(fieldId) {

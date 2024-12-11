@@ -4,9 +4,12 @@ using WebApp.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Authentication.Cookies;
+
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 
-internal class Program
+class Program
 {
 
     private static void Main(string[] args)
@@ -25,24 +28,15 @@ internal class Program
         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
         // Authentication
-        //builder.Services.AddAuthentication(options =>
-        //{
-            // Define o esquema padrão como Bearer
-            //options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        //})
+        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,
+        options => builder.Configuration.Bind("JwtSettings", options))
+        .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
+        options => builder.Configuration.Bind("CookieSettings", options));
 
-        //.AddJwtBearer(options =>
-         //{
-             // Configurações para o JWT Bearer Token
-             //options.TokenValidationParameters = new TokenValidationParameters
-             //{
-                 //ValidateIssuerSigningKey = true,
-                 //IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("TI2024/2025")),
-                 //ValidateIssuer = false,
-                 //ValidateAudience = false
-             //};
-         //});
+
+        builder.Services.AddTransient<IEmailSender, EmailSender>();
+        builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
 
 
         var app = builder.Build();
