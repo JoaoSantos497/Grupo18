@@ -48,9 +48,13 @@ namespace WebApp.Models
         [Range(0, int.MaxValue, ErrorMessage = "A quantidade não pode ser negativa.")]
         public int Stock { get; set; }
 
+        public required string CategoriaID { get; set; }
+
         // URL da imagem do produto
         [Url(ErrorMessage = "A URL da imagem do produto não é válida.")]
         public required string ImagemProduto { get; set; }
+
+
 
         // Data de criação do produto
         //public DateTime CreatedDate { get; set; }

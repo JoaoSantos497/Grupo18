@@ -20,8 +20,9 @@ class Program
         builder.Services.AddControllersWithViews(); // Adiciona suporte para controladores e views
         builder.Services.AddScoped<IUserService, UserService>(); // Injeção do serviço IUserService
         builder.Services.AddScoped<IAuthService, AuthService>(); // Injeção do serviço IAuthService
-        //builder.Services.AddScoped<AuthService, AuthService>(); // Injeção do serviço AuthService
         builder.Services.AddEndpointsApiExplorer();
+        
+
 
         // Adicione o ApplicationDbContext
         builder.Services.AddDbContext<ApplicationDbContext>(options =>

@@ -2,29 +2,27 @@
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using WebApp.Data;
 using WebApp.Models;
 
 namespace WebApp.Services 
 {
     public class AuthService : IAuthService
     {
+        private readonly ApplicationDbContext _context;
 
-        public object Authenticate(object email, object passwordhash)
+        public AuthService(ApplicationDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public User Authenticate(string email, string passwordhash)
+        public User Authenticate(string email, string password)
         {
-            throw new NotImplementedException();
+            // Procura o utilizador no banco de dados
+            return _context.Users.FirstOrDefault(u => u.Email == email && u.PasswordHash == password);
         }
 
-        public bool Register(User newUser, string password)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Registo(User newUser, string password)
+        internal bool Registo(User newUser, string passwordHash)
         {
             throw new NotImplementedException();
         }

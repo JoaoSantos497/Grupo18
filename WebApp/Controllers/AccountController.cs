@@ -21,7 +21,7 @@ namespace WebApp.Controllers
             // Validações básicas para os campos obrigatórios
             if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.PasswordHash))
             {
-                return BadRequest("Email e senha são obrigatórios.");
+                return BadRequest("Email e password são obrigatórios.");
             }
 
             // Autentica o usuário
@@ -36,6 +36,12 @@ namespace WebApp.Controllers
                 Message = "Login bem-sucedido!",
                 User = user
             });
+        }
+
+        public class LoginRequest
+        {
+            public required string Email { get; set; }
+            public required string Password { get; set; }
         }
 
         [HttpPost("Registo")]

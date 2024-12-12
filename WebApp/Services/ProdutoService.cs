@@ -37,5 +37,10 @@ namespace WebApp.Services
                 throw new Exception("Ocorreu um erro ao adicionar o produto.", ex);
             }
         }
+
+        internal object SearchProduto(string query, string category)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

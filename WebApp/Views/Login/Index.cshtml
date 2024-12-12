@@ -33,6 +33,11 @@
 
 </head>
 <body>
+        @if (TempData["Erro"] != null)
+            {
+                <div style="color: red;">@TempData["Erro"]</div>
+            }
+
     <div class="container login-form-container">
         <div class="login-form">
             <h2>Login</h2>

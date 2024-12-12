@@ -13,9 +13,8 @@ namespace WebApp.Controllers
 		{
 			_context = context;
 		}
-
-		// GET: Produto/Index
-		public IActionResult Index()
+        // GET: Produto/Index
+        public IActionResult Index()
         {
             var produtos = _context.Produtos.ToList(); // Retorna a lista de produtos para a visualização
             return View(produtos);

@@ -1,7 +1,9 @@
-﻿@{
-    ViewData["Title"] = "Loja de Informática | ";
-}
+﻿@using Azure.Core
 
+@{
+    ViewData["Title"] = "Search | ";
+}
+@model List<Produto>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,6 +32,37 @@
 </head>
 
 
-<body>
-    <a>ti</a>
-</body>
+    <h1>Pesquisar Produtos</h1>
+
+    <!-- Formulário de pesquisa -->
+    <form method="get" action="/Produto/Search">
+        <input type="text" name="query" placeholder="Procurar..." value="Produto" />
+        <button type="submit">Pesquisar</button>
+    </form>
+
+    @if (Model.Any()) 
+    {
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var produto in Model)
+                {
+                    <tr>
+                        <td>@produto.Nome</td>
+                        <td>@produto.Marca</td>
+                        <td>@produto.Modelo</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Nenhum produto encontrado.</p>
+    }

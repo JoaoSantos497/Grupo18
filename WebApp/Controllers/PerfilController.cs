@@ -62,5 +62,12 @@ namespace WebApp.Controllers
             return View();
         }
 
+        // GET: Perfil/Tracking
+        [HttpGet("Tracking")]
+        public IActionResult Tracking()
+        {
+            return View();
+        }
+
     }
 }
