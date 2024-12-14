@@ -2,6 +2,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using WebApp.Models;
+using Xunit;
+using Xunit.Sdk;
 
 
 namespace WebApp.Models
@@ -14,25 +16,44 @@ namespace WebApp.Models
         //[StringLength(100, ErrorMessage = "O nome não pode ter mais que 100 caracteres.")]
         public string EnderecoID { get; set; } = string.Empty;
 
-        // Username do utilizador
-        //[Column("username")]
+        // Endereço 1
         [StringLength(100, ErrorMessage = "O endereçco não pode ter mais do que 100 caracteres.")]
         public string EnderecoLinha1 { get; set; } = string.Empty;
 
-        // Email do utilizador
-        //[Column("email")]
+        // Endereço 2
         [StringLength(100,ErrorMessage = "O endereçco não pode ter mais do que 100 caracteres.")]
         public string EnderecoLinha2 { get; set; } = string.Empty;
 
-        // Password do utilizador
-        //[Column("passwordhash")]
-        //[StringLength(50, ErrorMessage = "A cidade.")]
+        // Numero
+        public string Numero { get; set; } = string.Empty;
+        // Codigo Postal
+        [StringLength(7, ErrorMessage = "Campo tem de ser preenchido.")]
+        public string CodigoPostal { get; set; } = string.Empty;
+
+        // Nome de empresa (opcional)
+        [StringLength(50, ErrorMessage = "Campo tem de ser preenchido.")]
+        public string Empresa { get; set; } = string.Empty;
+
+        // Cidade
+        [StringLength(25, ErrorMessage = "Campo tem de ser preenchido.")]
         public string Cidade { get; set; } = string.Empty;
-        [StringLength(7,ErrorMessage = "O campo é obrigatório" )]
-        public string CodigoPostal {  get; set; } = string.Empty;
 
-        public string Pais { get; set; } = string.Empty;
+        // Distrito
+        [StringLength(25, ErrorMessage = "Campo tem de ser preenchido.")]
+        public string Distrito { get; set; } = string.Empty;
 
+        // Pais
+        [StringLength(50, ErrorMessage = "Campo tem de ser preenchido.")]
+        public string Pais {  get; set; } = string.Empty;
+
+        // NIF
+        [StringLength(9, ErrorMessage = "Campo tem de ser preenchido.")]
+        public string NIF { get; set; } = string.Empty;
+
+        //Telemovel
+        public string Telemovel { get; set; } = string.Empty;
+
+        // Tipo (Morada de entrega ou Faturação
         public string Tipo { get; set; } = string.Empty;
 
     }

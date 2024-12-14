@@ -1,11 +1,12 @@
 ﻿@{
-    ViewData["Title"] = "Moradas | ";
+    ViewData["Title"] = "Enderecos | ";
 }
-@model Enderecos
+@model List<Enderecos>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moradas</title>
+    <title>Enderecos</title>
     <link rel="script" href="site.js">
 
     <!-- Google font -->
@@ -24,14 +25,144 @@
     <!-- Font Awesome Icon -->
     <link rel="stylesheet" href="/lib/bootstrap_electro/css/font-awesome.min.css">
 
-    <!-- Custom stlylesheet -->
+    <!-- Custom stylesheet -->
     <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/style.css" />
 
     <style>
-        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+            .header h1 {
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
+
+            .header nav {
+                font-size: 14px;
+            }
+
+        .address-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+            .address-card h3 {
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
+
+            .address-card p {
+                margin: 5px 0;
+            }
+
+            .address-card .actions {
+                margin-top: 15px;
+            }
+
+        .actions button {
+            background: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+            .actions button.delete {
+                background: #dc3545;
+            }
+
+        .add-new {
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #007bff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+            .footer button {
+                background: #007bff;
+                color: #fff;
+                border: none;
+                padding: 10px 15px;
+                border-radius: 4px;
+                cursor: pointer;
+                margin-right: 10px;
+            }
     </style>
 </head>
 
 <body>
-   
+    <div class="container">
+        <div class="header">
+            <h1>As tuas moradas</h1>
+            <nav>
+                <a href="/Perfil">A tua conta</a> / Endereços
+            </nav>
+        </div>
+
+        @if (Model != null && Model.Any())
+        {
+            foreach (var enderecos in Model)
+            {
+                <div class="address-card">
+                    <h3>O meu endereço</h3>
+                    <p>@enderecos.Empresa</p>
+                    <p>@enderecos.NIF</p>
+                    <p>@enderecos.CodigoPostal</p>
+                    <p>@enderecos.EnderecoLinha1</p>
+                    <p>@enderecos.EnderecoLinha2</p>
+                    <p>@enderecos.Numero</p>
+                    <p>@enderecos.Cidade</p>
+                    <p>@enderecos.Distrito</p>
+                    <p>@enderecos.Pais</p>
+                    <p>@enderecos.Telemovel</p>
+                    <p>@enderecos.Tipo</p>
+
+                    <div class="actions">
+                        <button onclick="location.href='/Endereco/Editar/@enderecos.EnderecoID'">Atualizar</button>
+                        <button class="delete" onclick="location.href='/Endereco/Apagar/@enderecos.EnderecoID'">Apagar</button>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>Você ainda não tem nenhuma morada criada.</p>
+        }
+
+        <a href="/Endereco/CriarMorada" class="add-new">+ Criar nova morada</a>
+
+        <div class="footer">
+            <button onclick="location.href='/Perfil'">Voltar para a tua conta</button>
+            <button onclick="location.href='/'">Voltar ao site</button>
+        </div>
+    </div>
 </body>
