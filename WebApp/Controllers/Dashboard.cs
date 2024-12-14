@@ -3,11 +3,13 @@ using WebApp.Models;
 using WebApp.Data;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 
 
 namespace WebApp.Controllers
 {
+    [Authorize(Roles = "Admin")]
     //[Route("Dashboard[action]")]
     [Route("Dashboard")]
     public class Dashboard : Controller

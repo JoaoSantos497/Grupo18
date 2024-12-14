@@ -6,11 +6,11 @@ using WebApp.Models;
 
 namespace WebApp.Services
 {
-    public class EnderecosService
+    public class EnderecoService
     {
         private readonly DbContext _context;
 
-        public EnderecosService(DbContext context)
+        public EnderecoService(DbContext context)
         {
             _context = context;
         }

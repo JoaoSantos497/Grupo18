@@ -6,9 +6,9 @@ namespace WebApp.Controllers
 {
     public class EnderecosController : Controller
     {
-        private readonly EnderecosService _service;
+        private readonly EnderecoService _service;
 
-        public EnderecosController(EnderecosService service)
+        public EnderecosController(EnderecoService service)
         {
             _service = service;
         }
@@ -38,16 +38,17 @@ namespace WebApp.Controllers
 
         // GET: /Perfil/Create
         // Formulário para o cliente adicionar um novo endereço
-        public IActionResult NovaMorada()
+        [HttpGet("CriarMorada")]
+        public IActionResult CriarMorada()
         {
             return View();
         }
 
         // POST: /Perfil/Create
         // Cria um novo endereço
-        [HttpPost]
+        [HttpPost("CriarMorada")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> NovaMorada(Enderecos endereco)
+        public async Task<IActionResult> CriarMorada(Enderecos endereco)
         {
             if (!ValidarNIF(endereco.NIF))
                 ModelState.AddModelError("NIF", "O NIF fornecido não é válido.");
