@@ -16,6 +16,10 @@ namespace WebApp.Models
         //[StringLength(100, ErrorMessage = "O nome não pode ter mais que 100 caracteres.")]
         public string EnderecoID { get; set; } = string.Empty;
 
+        // Nome
+        [StringLength(50, ErrorMessage = "O Nome não pode ter mais do que 50 caracteres.")]
+        public string Nome { get; set; } = string.Empty;
+
         // Endereço 1
         [StringLength(100, ErrorMessage = "O endereçco não pode ter mais do que 100 caracteres.")]
         public string EnderecoLinha1 { get; set; } = string.Empty;

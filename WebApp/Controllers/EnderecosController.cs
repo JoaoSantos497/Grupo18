@@ -36,30 +36,42 @@ namespace WebApp.Controllers
             return View(endereco);
         }
 
-        // GET: /Enderecos/Create
-        // Formulário para criar um novo endereço
-        public IActionResult Create()
+        // GET: /Perfil/Create
+        // Formulário para o cliente adicionar um novo endereço
+        public IActionResult NovaMorada()
         {
             return View();
         }
 
-        // POST: /Enderecos/Create
+        // POST: /Perfil/Create
         // Cria um novo endereço
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Enderecos endereco)
+        public async Task<IActionResult> NovaMorada(Enderecos endereco)
         {
-            if (ModelState.IsValid)
-            {
-                var result = await _service.AddEnderecoAsync(endereco);
-                if (result)
-                    return RedirectToAction(nameof(Index));
-            }
+            if (!ValidarNIF(endereco.NIF))
+                ModelState.AddModelError("NIF", "O NIF fornecido não é válido.");
 
-            return View(endereco);
+            if (!ValidarCodigoPostal(endereco.CodigoPostal))
+                ModelState.AddModelError("CodigoPostal", "O código postal fornecido não é válido.");
+
+            if (!ModelState.IsValid)
+                return View(endereco);
+
+            try
+            {
+                await _service.AddEnderecoAsync(endereco);
+                TempData["SuccessMessage"] = "Endereço adicionado com sucesso!";
+                return RedirectToAction("Perfil", "Clientes"); // Redireciona para a página do perfil do cliente
+            }
+            catch (Exception)
+            {
+                TempData["ErrorMessage"] = "Ocorreu um erro ao guardar o endereço.";
+                return View(endereco);
+            }
         }
 
-        // GET: /Enderecos/Edit/{id}
+        // GET: /Perfil/Edit/{id}
         // Carrega o formulário para editar um endereço existente
         public async Task<IActionResult> Edit(string id)
         {
@@ -73,7 +85,7 @@ namespace WebApp.Controllers
             return View(endereco);
         }
 
-        // POST: /Enderecos/Edit/{id}
+        // POST: /Perfil/Edit/{id}
         // Salva as alterações de um endereço editado
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -92,7 +104,7 @@ namespace WebApp.Controllers
             return View(endereco);
         }
 
-        // GET: /Enderecos/Delete/{id}
+        // GET: /Perfil/Delete/{id}
         // Mostra a página de confirmação para deletar um endereço
         public async Task<IActionResult> Delete(string id)
         {
@@ -106,7 +118,7 @@ namespace WebApp.Controllers
             return View(endereco);
         }
 
-        // POST: /Enderecos/Delete/{id}
+        // POST: /Perfil/Delete/{id}
         // Confirma a exclusão do endereço
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -117,6 +129,18 @@ namespace WebApp.Controllers
                 return RedirectToAction(nameof(Index));
 
             return RedirectToAction(nameof(Delete), new { id });
+        }
+
+        // Validação do NIF (simplificada)
+        private bool ValidarNIF(string nif)
+        {
+            return string.IsNullOrEmpty(nif) || (nif.Length == 9 && int.TryParse(nif, out _));
+        }
+
+        // Validação do Código Postal (formato 0000-000)
+        private bool ValidarCodigoPostal(string codigoPostal)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(codigoPostal, @"^\d{4}-\d{3}$");
         }
     }
 }
