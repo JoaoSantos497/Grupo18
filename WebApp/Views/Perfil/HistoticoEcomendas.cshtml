@@ -1,0 +1,22 @@
+﻿@model List<WebApp.Models.Encomenda>
+
+<div class="container">
+    <h1>Histórico de Encomendas</h1>
+
+    @if (Model != null && Model.Any())
+    {
+        foreach (var encomenda in Model)
+        {
+            <div class="order-card">
+                <h3>Encomenda #@encomenda.EncomendaID</h3>
+                <p><strong>Data da Encomenda:</strong> @encomenda.DataEncomenda.ToString("dd/MM/yyyy")</p>
+                <p><strong>Total:</strong> €@encomenda.Total.ToString("F2")</p>
+                <p><strong>Estado:</strong> @encomenda.Estado</p>
+            </div>
+        }
+    }
+    else
+    {
+        <p>Não há encomendas disponíveis no momento.</p>
+    }
+</div>
