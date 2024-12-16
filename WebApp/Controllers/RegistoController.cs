@@ -1,68 +1,44 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using WebApp.Models;
-using WebApp.Data;
 using WebApp.Services;
 
 namespace WebApp.Controllers
 {
     public class RegistoController : Controller
     {
-        private readonly IUserService _userService;
+        private readonly IRegistoService _registoService;
 
-        // Construtor com injeção de dependência
-        public RegistoController(IUserService userService)
+        public RegistoController(IRegistoService registoService)
         {
-            _userService = userService ?? throw new ArgumentNullException(nameof(userService));
+            _registoService = registoService;
         }
 
-        // Exibe a página de registo
-        [HttpGet("Registo")]
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
-        // Processa o formulário de registro
-        [HttpPost("Registo")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         
-        public async Task<IActionResult> Index(RegistoForm registo)
+        public async Task<IActionResult> Index(RegistoForm model)
         {
-            // Verifica se o modelo é válido
             if (!ModelState.IsValid)
             {
-                return View(registo);
+                return View(model); // Retornar para o formulário em caso de erro
             }
 
-            try
-            {
-                // Chama o serviço para criar o utilizador
-                var user = new User
-                { 
-                    Nome = registo.Nome, 
-                    Username =  registo.Username,
-                    Email = registo.Email,
-                    PasswordHash = registo.Password,
-                    DataNascimento = registo.DataNascimento,
-                    Genero = registo.Genero,
-                    DataRegisto = new DateTime()
-                };
+            // Salvar o registro no banco de dados
+            await _registoService.SalvarRegistoAsync(model);
 
-                await _userService.CreateUserAsync(user);
+            // Redirecionar após sucesso
+            return RedirectToAction("", "Login");
+        }
 
-                // Redireciona para a página de login após sucesso
-                return RedirectToAction("Index", "Login");
-            }
-            catch (Exception ex)
-            {
-                // Log do erro (pode usar um serviço de log no lugar da Console)
-                Console.WriteLine($"Erro ao registar utilizador: {ex.Message}");
-
-                // Adiciona erro ao ModelState e retorna a view
-                ModelState.AddModelError("", "Ocorreu um erro ao registar o utilizador. Tente novamente.");
-                return View(registo);
-            }
+        public IActionResult Sucesso()
+        {
+            return View(); // Exibe uma página de sucesso após registro
         }
     }
 }

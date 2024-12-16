@@ -22,7 +22,8 @@ class Program
         builder.Services.AddScoped<IAuthService, AuthService>(); // Injeção do serviço IAuthService
         //builder.Services.AddScoped<IEnderecoService, EnderecoService>(); // Injeta o serviço
         builder.Services.AddEndpointsApiExplorer();
-        
+        builder.Services.AddScoped<RegistoService>();
+        builder.Services.AddScoped<IRegistoService, RegistoService>();
 
 
         // Adicione o ApplicationDbContext
@@ -64,10 +65,9 @@ class Program
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}"); // Rota padrão
 
-        // Outra rota adicional, se necessário, com nome diferente
         app.MapControllerRoute(
-            name: "Wishlist",
-            pattern: "{controller=Wishlist}/{action=Index}/{id?}");
+        name: "default",
+        pattern: "{controller=Registo}/{action=Index}/{id?}");
 
         app.Run(); // Executa o aplicativo
     }
