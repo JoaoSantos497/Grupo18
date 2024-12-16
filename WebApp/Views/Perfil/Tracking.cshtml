@@ -1,61 +1,14 @@
-﻿@{
-    ViewData["Title"] = "Tracking | ";
-}
-@model Encomenda
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tracking</title>
-    <link rel="script" href="site.js">
-
-    <!-- Google font -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
-
-    <!-- Bootstrap -->
-    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/bootstrap.min.css" />
-
-    <!-- Slick -->
-    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/slick.css" />
-    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/slick-theme.css" />
-
-    <!-- nouislider -->
-    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/nouislider.min.css" />
-
-    <!-- Font Awesome Icon -->
-    <link rel="stylesheet" href="/lib/bootstrap_electro/css/font-awesome.min.css">
-
-    <!-- Custom stlylesheet -->
-    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/style.css" />
-
-    <style>
-        
-    </style>
-</head>
-
-<body>
-        <h1>Tracking de Encomenda</h1>
-
-        <form method="get">
-            <label for="numeroRastreamento">Número de Rastreamento:</label>
-            <input type="text" id="numeroRastreamento" name="numeroRastreamento" value="@Model.NumeroRastreamento" />
-            <button type="submit">Track</button>
-        </form>
-
-        <!--if (string.IsNullOrEmpty(Model.NumeroRastreamento))-->
+﻿<h3>Histórico</h3>
+@if (Model.Historico != null && Model.Historico.Any())
+{
+    <ul>
+        @foreach (var item in Model.Historico)
         {
-            <h2>Detalhes da Encomenda</h2>
-            <p><strong>Número de Rastreamento:</strong> @Model.NumeroRastreamento</p>
-            <p><strong>Status:</strong> @Model.Status</p>
-            <p><strong>Localização Atual:</strong> @Model.LocalizacaoAtual</p>
-            <p><strong>Última Atualização:</strong> @Model.DataUltimaAtualizacao</p>
-
-            <h3>Histórico</h3>
-            <ul>
-                @foreach (var item in Model.Historico)
-                {
-                    <li>@item</li>
-                }
-            </ul>
+            <li>@item</li>
         }
-</body>
+    </ul>
+}
+else
+{
+    <p>Sem histórico disponível.</p>
+}

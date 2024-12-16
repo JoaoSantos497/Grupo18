@@ -1,19 +1,11 @@
-﻿using System.Globalization;
-
-namespace WebApp.Models
+﻿namespace WebApp.Models
 {
-    public class Orders
+    public class Order
     {
-        public int OrderID { get; set; }
-
-        public int UserID { get; set; }
-
-        public DateTime DataPedido { get; set; }
-
-        //public string Status { get; set; }
-        public decimal Total { get; set; }
-
-        public int EnderecoEntregaID { get; set; }
-        public int CupomID {get; set; }
+        public int OrderID { get; set; } // Chave primária
+        public int UserID { get; set; } // FK para a tabela Users
+        public DateTime DataPedido { get; set; } // Data do pedido
+        public decimal Total { get; set; } // Valor total da encomenda
+        public string Status { get; set; } // Estado: Pendente, Enviado, Entregue, etc.
     }
 }
