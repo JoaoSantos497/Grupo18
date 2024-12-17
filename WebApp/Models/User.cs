@@ -21,7 +21,7 @@ namespace WebApp.Models
         public string Email { get; set; } = string.Empty;
 
         [Required]
-        public string PasswordHash { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
 
         [Required]
         public DateTime DataNascimento { get; set; }
@@ -30,6 +30,8 @@ namespace WebApp.Models
         public string Genero { get; set; } = string.Empty;
 
         public DateTime DataRegisto { get; set; } = DateTime.UtcNow;
+        public int RoleID { get; internal set; }
+        public string PasswordHash { get; internal set; }
 
         // Construtor padrão (sem parâmetros) para o Entity Framework
         public User()
@@ -43,7 +45,7 @@ namespace WebApp.Models
             Nome = nome;
             Username = username;
             Email = email;
-            PasswordHash = passwordHash;
+            Password = passwordHash;
             DataNascimento = dataNascimento;
             Genero = genero;
             DataRegisto = DateTime.UtcNow;

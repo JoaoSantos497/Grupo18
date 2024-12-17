@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebApp.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 
 namespace WebApp.Data
@@ -15,6 +17,8 @@ namespace WebApp.Data
         // DbSets que representam tabelas na base de dados
         public required DbSet<Produto> Produtos { get; set; } // Entidade Produto
         public required DbSet<User> Users { get; set; } // Entidade User 
+
+        //public required DbSet<Encomenda> Encomenda { get; set; }
 
         public required DbSet<Order> Orders { get; set; } // Adicionar a entidade Order
 

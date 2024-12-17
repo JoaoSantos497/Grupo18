@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using WebApp.Data;
 using WebApp.Models;
 
+
+
 namespace WebApp.Controllers
 {
     [Route("Perfil")]
@@ -17,57 +19,56 @@ namespace WebApp.Controllers
         {
             _context = context;
         }
-     
-        [HttpGet("HistoricoEncomendas")]
-        public async Task<IActionResult> HistoricoEncomendas()
+
+        //GET: Perfil
+        [HttpGet("")]
+        public ActionResult Index()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            if (string.IsNullOrEmpty(userId))
-            {
-                return RedirectToAction("Login", "Account");
-            }
-
-            var encomendas = await _context.Orders
-                .Where(o => o.UserID == int.Parse(userId))
-                .Select(o => new Encomenda
-                {
-                    EncomendaID = o.OrderID,
-                    DataEncomenda = o.DataPedido, // Certifique-se de mapear corretamente
-                    Total = o.Total,
-                    Estado = o.Status
-                })
-                .ToListAsync();
-
-            return View(encomendas);
+            return View();
         }
 
 
+        // GET: Perfil/Dados Pessoais
+        [HttpGet("DadosPessoais")]
+        public ActionResult DadosPessoais()
+        {
+            //var users = await _context.Users.ToListAsync();
+            return View();
+        }
+
+
+        //POST: A tua Conta/Dados Pessoais
+        [HttpPost("DadosPessoais")]
+        [ValidateAntiForgeryToken]
+        public IActionResult UpdateDadosPessoais(string Nome, string Email, string Password)
+        {
+            // Lógica para salvar os dados no banco de dados
+            var user = _context.Users.FirstOrDefault(u => u.Email == Email);
+            if (user != null)
+            {
+                user.Nome = Nome;
+                user.Email = Email;
+                user.PasswordHash = Password; // Considere hashear a senha antes de salvar
+                _context.SaveChanges();
+
+                TempData["Mensagem"] = "Dados atualizados com sucesso!";
+            }
+            else
+                return RedirectToAction("DadosPessoais");
+        }
+
+        // GET: Perfil/Moradas
+        [HttpGet("Moradas")]
+        public IActionResult Moradas()
+        {
+            return View();
+        }
+
+        // GET: Perfil/Tracking
         [HttpGet("Tracking")]
-        public IActionResult Tracking(string numeroRastreamento)
+        public IActionResult Tracking()
         {
-            if (string.IsNullOrEmpty(numeroRastreamento))
-            {
-                return View(new Encomenda());
-            }
-
-            // Simulação de dados: substitua por busca real na base de dados
-            var encomenda = new Encomenda
-            {
-                EncomendaID = 1,
-                NumeroRastreamento = numeroRastreamento,
-                Status = "Em trânsito",
-                LocalizacaoAtual = "Centro de Distribuição - Lisboa",
-                DataUltimaAtualizacao = DateTime.Now.AddHours(-2),
-                Historico = new List<string>
-        {
-            "Encomenda recebida no centro de distribuição",
-            "Encomenda saiu para entrega"
+            return View();
         }
-            };
-
-            return View(encomenda);
-        }
-
     }
 }

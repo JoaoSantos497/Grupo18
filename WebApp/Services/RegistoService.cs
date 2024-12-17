@@ -23,7 +23,7 @@ namespace WebApp.Services
                 Username = registo.Username,
                 Nome = registo.Nome,
                 Email = registo.Email,
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword(registo.Password), // Criptografar a senha
+                Password = BCrypt.Net.BCrypt.HashPassword(registo.Password), // Criptografar a senha
                 DataNascimento = registo.DataNascimento,
                 Genero = registo.Genero,
                 DataRegisto = DateTime.UtcNow

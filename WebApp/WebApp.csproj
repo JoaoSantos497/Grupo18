@@ -15,10 +15,14 @@
   </ItemGroup>
 
   <ItemGroup>
+	<PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+	<PackageReference Include="Microsoft.Extensions.Identity.Core" Verson="8.0.0" Version="9.0.0" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="GitHubJwt" Version="0.0.6" />
+    <PackageReference Include="Identity.EntityFrameworkCore" Version="1.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.CookiePolicy" Version="2.2.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">

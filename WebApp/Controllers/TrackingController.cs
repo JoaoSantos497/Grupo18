@@ -8,7 +8,7 @@ namespace WebApp.Controllers
 {
     public class TrackingController : Controller
     {
-        [HttpGet]
+        /*[HttpGet]
         public ActionResult Index(string numeroRastreamento)
         {
             // Simular dados de rastreamento (substitua por consulta ao banco de dados ou API)
@@ -29,7 +29,7 @@ namespace WebApp.Controllers
             };
 
             return View(encomenda);
-        }
+        }*/
     }
 }
 

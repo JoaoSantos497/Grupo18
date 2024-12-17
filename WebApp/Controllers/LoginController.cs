@@ -1,53 +1,44 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using SendGrid.Helpers.Mail;
+﻿using Microsoft.AspNetCore.Mvc;
+using WebApp.Models;
+using WebApp.Services;
 
-
-namespace WebApp.Controllers
+namespace WebAppp.Controllers
 {
     public class LoginController : Controller
     {
+        private readonly LoginService _LoginService;
 
-        private readonly IAuthService _authService;
-
-        public LoginController(IAuthService authService)
+        // Injeção de dependência para o service
+        public LoginController()
         {
-            _authService = authService;
+            _LoginService = new LoginService();
         }
 
-        // GET: LoginController
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: LoginController/Login
+   
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(string email, string password)
+        public IActionResult Index(User user)
         {
-            if (IsValidUser(email, password))
+            if (!ModelState.IsValid)
             {
-                // Armazenar o email do user
-                HttpContext.Session.SetString("Email", email);
+                return View(user); // Retorna com mensagens de erro de validação
+            }
 
-                // Manda para a página inicial após o login
-                return RedirectToAction("Index", "Home");
+            if (_LoginService.ValidarCredenciais(user.Email, user.Password))
+            {
+                return RedirectToAction("Perfil");
             }
             else
             {
-                // Adiciona uma mensagem de erro caso o login falhe
-                ViewBag.ErrorMessage = "Email ou password incorretos";
-                return View("Index");
+                TempData["Erro"] = "Email ou password inválidos.";
+                return RedirectToAction("Index");
             }
         }
 
-        private bool IsValidUser(string email, string password)
+        [HttpGet]
+        public IActionResult Perfil()
         {
-            // Valida o user
-            // Implementa a verificação com base na base de dados
-            return email == "admin" && password == "password";
+            return View();
         }
     }
 }
-

@@ -6,96 +6,75 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
-using Microsoft.AspNetCore.Identity.UI.Services;
-
-
 class Program
 {
-
     private static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Add services to the container.
-        builder.Services.AddControllersWithViews(); // Adiciona suporte para controladores e views
-        builder.Services.AddScoped<IUserService, UserService>(); // Injeção do serviço IUserService
-        builder.Services.AddScoped<IAuthService, AuthService>(); // Injeção do serviço IAuthService
-        //builder.Services.AddScoped<IEnderecoService, EnderecoService>(); // Injeta o serviço
-        builder.Services.AddEndpointsApiExplorer();
+        // Adiciona serviços ao contêiner
+        builder.Services.AddControllersWithViews(); // Suporte para controladores e views
+        builder.Services.AddScoped<IUserService, UserService>();
+        builder.Services.AddScoped<IAuthService, AuthService>();
         builder.Services.AddScoped<RegistoService>();
         builder.Services.AddScoped<IRegistoService, RegistoService>();
 
+        // Configuração de Autenticação
+        builder.Services.AddAuthentication(options =>
+        {
+            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+        .AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = "SeuServidor",
+                ValidAudience = "SeuCliente",
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("gettech"))
+            };
+        })
+        .AddCookie("CookieAuth", options =>
+        {
+            options.Cookie.Name = "UserAuthCookie";
+            options.LoginPath = "/Account/Login";
+        });
 
-        // Adicione o ApplicationDbContext
+        // Adiciona o ApplicationDbContext
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-        // Authentication
-        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,
-        options => builder.Configuration.Bind("JwtSettings", options))
-        .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
-        options => builder.Configuration.Bind("CookieSettings", options));
-
-
-        builder.Services.AddTransient<IEmailSender, EmailSender>();
-        builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
-
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
         var app = builder.Build();
 
         // Configuração do pipeline de middleware
         if (app.Environment.IsDevelopment())
         {
-            app.UseDeveloperExceptionPage(); // Página detalhada de erros no modo de desenvolvimento
+            app.UseDeveloperExceptionPage();
         }
         else
         {
-            app.UseExceptionHandler("/Home/Error"); // Página de erro personalizada
-            app.UseHsts(); // Habilita HSTS para produção
+            app.UseExceptionHandler("/Home/Error");
+            app.UseHsts();
         }
 
-        app.UseHttpsRedirection(); // Redireciona para HTTPS
-        app.UseStaticFiles(); // Habilita o uso de arquivos estáticos (CSS, JS, etc.)
-        app.UseRouting(); // Configura o roteamento
-        app.UseAuthorization(); // Adiciona middleware de autorização
+        app.UseHttpsRedirection();
+        app.UseStaticFiles();
 
-        // Configurar rotas
+        app.UseRouting();
+
+        // Configura a autenticação e autorização
+        app.UseAuthentication();
+        app.UseAuthorization();
+
+        // Configuração de rotas
         app.MapControllerRoute(
             name: "default",
-            pattern: "{controller=Home}/{action=Index}/{id?}"); // Rota padrão
+            pattern: "{controller=Home}/{action=Index}/{id?}");
 
-        app.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Registo}/{action=Index}/{id?}");
-
-        app.Run(); // Executa o aplicativo
+        app.Run();
     }
-
-        // Configure the HTTP request pipeline.
-        //if (app.Environment.IsDevelopment())
-        //{
-           // app.UseDeveloperExceptionPage();
-       // }
-        //else
-        //{
-            //app.UseExceptionHandler("/Home/Error");
-            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-            //app.UseHsts();
-        //}
-
-        
-        //app.UseStaticFiles();
-
-        //app.UseRouting();
-
-        //app.UseAuthorization();
-
-        //app.MapControllerRoute(
-            //name: "default",
-            //pattern: "{controller=Home}/{action=Index}/{id?}");
-        
-        //app.MapControllerRoute(
-            //name: "default",
-            //pattern: "{controller=Wishlist}/{action=Index}/{id?}");
-}   
+}
