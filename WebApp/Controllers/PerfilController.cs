@@ -52,9 +52,12 @@ namespace WebApp.Controllers
                 _context.SaveChanges();
 
                 TempData["Mensagem"] = "Dados atualizados com sucesso!";
+                return RedirectToAction("DadosPessoais"); // Adicione um retorno explícito aqui
             }
             else
+            {
                 return RedirectToAction("DadosPessoais");
+            }
         }
 
         // GET: Perfil/Moradas

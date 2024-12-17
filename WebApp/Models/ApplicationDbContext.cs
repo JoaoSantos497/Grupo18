@@ -20,7 +20,7 @@ namespace WebApp.Data
 
         //public required DbSet<Encomenda> Encomenda { get; set; }
 
-        public required DbSet<Order> Orders { get; set; } // Adicionar a entidade Order
+        public required DbSet<Orders> Orders { get; set; } // Adicionar a entidade Order
 
 
         //public required DbSet<Search> Produtos { get; set; }
