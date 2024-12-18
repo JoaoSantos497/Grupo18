@@ -67,6 +67,13 @@ namespace WebApp.Controllers
             return View();
         }
 
+        // GET: Perfil/Moradas/CriarMorada
+        [HttpGet("Moradas/CriarMorada")]
+        public IActionResult CriarMorada()
+        {
+            return View();
+        }
+
         // GET: Perfil/Tracking
         [HttpGet("Tracking")]
         public IActionResult Tracking()

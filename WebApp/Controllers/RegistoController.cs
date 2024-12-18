@@ -13,15 +13,16 @@ namespace WebApp.Controllers
             _registoService = registoService;
         }
 
+        //GET: Registo
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
+        //POST: Registo
         [HttpPost]
         [ValidateAntiForgeryToken]
-        
         public async Task<IActionResult> Index(RegistoForm model)
         {
             if (!ModelState.IsValid)
@@ -34,11 +35,6 @@ namespace WebApp.Controllers
 
             // Redirecionar após sucesso
             return RedirectToAction("", "Login");
-        }
-
-        public IActionResult Sucesso()
-        {
-            return View(); // Exibe uma página de sucesso após registro
         }
     }
 }

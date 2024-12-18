@@ -24,7 +24,7 @@ namespace WebAppp.Controllers
                 return View(user); // Retorna com mensagens de erro de validação
             }
 
-            if (_LoginService.ValidarCredenciais(user.Email, user.Password))
+            if (_LoginService.ValidarCredenciais(user.Email, user.PasswordHash))
             {
                 return RedirectToAction("Perfil");
             }

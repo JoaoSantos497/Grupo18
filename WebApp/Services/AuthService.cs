@@ -24,7 +24,7 @@ namespace WebApp.Services
 
             // Verifica se o hash da senha fornecida corresponde ao armazenado
             var hashedPassword = HashPassword(password);
-            if (user.Password != hashedPassword) return null;
+            if (user.PasswordHash != hashedPassword) return null;
 
             return user;
         }
@@ -37,7 +37,7 @@ namespace WebApp.Services
                 return false;
 
             // Hash da senha antes de armazenar
-            newUser.Password = HashPassword(newUser.Password);
+            newUser.PasswordHash = HashPassword(newUser.PasswordHash);
 
             // Adiciona o novo usuário no banco de dados
             _context.Users.Add(newUser);

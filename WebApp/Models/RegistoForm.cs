@@ -14,6 +14,8 @@ namespace WebApp.Models
             public required DateTime DataNascimento { get; set; }
             public required string Genero { get; set; }
 
+            //public required string Role {  get; set; }
+
         }
     
 }
