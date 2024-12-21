@@ -1,5 +1,4 @@
-﻿using System;
-using WebApp.Data;
+﻿using WebApp.Data;
 using WebApp.Models;
 
 namespace WebApp.Services

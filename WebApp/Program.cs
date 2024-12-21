@@ -17,6 +17,7 @@ class Program
         builder.Services.AddScoped<IUserService, UserService>();
         builder.Services.AddScoped<IAuthService, AuthService>();
         builder.Services.AddScoped<RegistoService>();
+        builder.Services.AddScoped<LoginService>();
         builder.Services.AddScoped<IRegistoService, RegistoService>();
 
         // Configuração de Autenticação
@@ -25,6 +26,7 @@ class Program
             options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         })
+
         .AddJwtBearer(options =>
         {
             options.TokenValidationParameters = new TokenValidationParameters
@@ -33,15 +35,15 @@ class Program
                 ValidateAudience = true,
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
-                ValidIssuer = "SeuServidor",
-                ValidAudience = "SeuCliente",
+                ValidIssuer = "localhost",
+                ValidAudience = "localhost",
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("gettech"))
             };
         })
         .AddCookie("CookieAuth", options =>
         {
             options.Cookie.Name = "UserAuthCookie";
-            options.LoginPath = "/Account/Login";
+            options.LoginPath = "/Login";
         });
 
         // Adiciona o ApplicationDbContext
@@ -75,6 +77,7 @@ class Program
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");
 
+        
         app.Run();
     }
 }

@@ -1,26 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using WebApp.Data;
 
-namespace WebApp.Services
+public class LoginService
 {
-    public class LoginService
-    {
-        // Simulação de utilizadores em memória. Substituir por lógica de acesso à base de dados.
-        private readonly List<(string Email, string Password)> users = new List<(string, string)>
-        {
-            ("teste@exemplo.com", "1234"),
-            ("admin@exemplo.com", "admin123")
-        };
+    private readonly ApplicationDbContext _dbContext;
 
-        /// <summary>
-        /// Verifica se as credenciais do usuário são válidas.
-        /// </summary>
-        /// <param name="email">Email do utilzidor.</param>
-        /// <param name="password">Senha do utilizador.</param>
-        /// <returns>True se as credenciais forem válidas; caso contrário, False.</returns>
-        public bool ValidarCredenciais(string email, string password)
+    // Construtor com injeção de dependência do DbContext
+    public LoginService(ApplicationDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
+
+    // Valida credenciais do utilizador
+    public bool ValidarCredenciais(string email, string password)
+    {
+        // Get apenas o Email e PasswordHash do utilizador
+        var user = _dbContext.Users
+            .Where(u => u.Email == email)
+            .Select(u => new { u.Email, u.PasswordHash }) // Faz get apenas do email e password
+            .SingleOrDefault();
+
+        if (user == null)
         {
-            // Busca o utilizador na "base de dados" (lista simulada)
-            return users.Exists(u => u.Email == email && u.Password == password);
+            return false; // Utilizador não encontrado
         }
+
+        // Verifica a PasswordHash (usar BCrypt ou outra biblioteca segura)
+        return BCrypt.Net.BCrypt.Verify(password, user.PasswordHash);
     }
 }
+

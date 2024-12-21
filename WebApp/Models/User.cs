@@ -38,11 +38,11 @@ namespace WebApp.Models
         // Data de Nascimento
         //[Column("datanascimento")]
         [Required(ErrorMessage = "A data de nascimento é obrigatória.")]
-        public required DateTime DataNascimento { get; set; }
+        public DateTime DataNascimento { get; set; }
 
         // Genero
         //[Column("genero")]
-        public required string Genero { get; set; } = string.Empty;
+        public string Genero { get; set; } = string.Empty;
 
         // Role do utilizador
         //[Required(ErrorMessage = "Role é obrigatória.")]
@@ -50,7 +50,7 @@ namespace WebApp.Models
         //public required string Role { get; set; } = string.Empty;  // Para definir cargos de utilizador (Admin, user, etc.)
 
         // Data de registo
-        public required DateTime DataRegisto { get; set; } = DateTime.UtcNow;
+        public DateTime DataRegisto { get; set; } = DateTime.UtcNow;
 
         // Outros campos opcionais para adicionar
 

@@ -14,7 +14,6 @@ namespace WebApp.Controllers
         }
 
         //GET: Registo
-        [HttpGet]
         public IActionResult Index()
         {
             return View();
@@ -34,7 +33,7 @@ namespace WebApp.Controllers
             await _registoService.SalvarRegistoAsync(model);
 
             // Redirecionar após sucesso
-            return RedirectToAction("", "Login");
+            return RedirectToAction("Login", "Login");
         }
     }
 }
