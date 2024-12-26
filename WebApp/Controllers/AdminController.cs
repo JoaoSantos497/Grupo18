@@ -1,84 +1,75 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using WebApp.Services;
+
 
 namespace WebApp.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Route("Admin")]
     public class AdminController : Controller
     {
-        // GET: AdminController
-        public ActionResult Index()
+        private readonly IUserService _userService;
+
+        public AdminController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
+        // GET: Admin Login Page
+        [HttpGet("")]
+        public IActionResult Admin()
         {
             return View();
         }
 
-        // GET: AdminController/Details/5
-        //public ActionResult Details(int id)
-        //{
-           // return View();
-       // }
-
-        // GET: AdminController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: AdminController/Create
-        [HttpPost]
+        // POST: Authenticate Admin
+        [HttpPost("")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Admin(string username, string password)
         {
-            try
+            // Chama o serviço para autenticar o administrador
+            var user = await _userService.AuthenticateAdminAsync(username, password);
+
+            // Se o método retornar null, o login falhou
+            if (user == null)
             {
-                return RedirectToAction(nameof(Index));
+                ModelState.AddModelError(string.Empty, "Usuário ou senha inválidos.");
+                return View(); // Retorna à página de login com mensagem de erro
             }
-            catch
+
+            // Verifica explicitamente a Role do usuário
+            if (user.Role != 1)
             {
+                ModelState.AddModelError(string.Empty, "Acesso restrito a administradores.");
                 return View();
             }
+
+            // Autenticação bem-sucedida, cria a sessão do administrador
+            HttpContext.Session.SetString("UserID", user.ToString());
+            return RedirectToAction("Dashboard", "Admin");
         }
 
-        // GET: AdminController/Edit/5
-        public ActionResult Edit(int id)
+
+        // GET: Admin Dashboard (área protegida)
+        public IActionResult Dashboard()
         {
-            return View();
+            var UserID = HttpContext.Session.GetString("AdminUserId");
+
+            // Verifica se o administrador está logado
+            if (string.IsNullOrEmpty(UserID))
+            {
+                return RedirectToAction("Admin", "Admin"); // Redireciona para login
+            }
+
+            return View(); // Retorna a página do dashboard
         }
 
-        // POST: AdminController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        // GET: Logout
+        public IActionResult Logout()
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: AdminController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: AdminController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            // Limpa a sessão
+            HttpContext.Session.Clear();
+            return RedirectToAction("Admin", "Admin"); // Redireciona para o login
         }
     }
+
 }

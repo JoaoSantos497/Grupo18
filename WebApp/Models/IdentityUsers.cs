@@ -1,4 +1,4 @@
-﻿namespace WebApp.Data
+﻿namespace WebApp.Models
 {
     public class IdentityUsers
     {

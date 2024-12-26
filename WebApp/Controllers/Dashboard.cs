@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace WebApp.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "1")]
     //[Route("Dashboard[action]")]
     [Route("Dashboard")]
     public class Dashboard : Controller

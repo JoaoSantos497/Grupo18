@@ -80,4 +80,17 @@ class Program
         
         app.Run();
     }
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddControllersWithViews();
+        services.AddSession(); // Ativa sessões
+    }
+
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        app.UseSession(); // Middleware de sessão
+        app.UseRouting();
+        app.UseEndpoints(endpoints => { endpoints.MapDefaultControllerRoute(); });
+    }
 }

@@ -44,10 +44,10 @@ namespace WebApp.Models
         //[Column("genero")]
         public string Genero { get; set; } = string.Empty;
 
-        // Role do utilizador
+        //Role do utilizador
         //[Required(ErrorMessage = "Role é obrigatória.")]
         //[StringLength(50, ErrorMessage = "A Role não foi definida")]
-        //public required string Role { get; set; } = string.Empty;  // Para definir cargos de utilizador (Admin, user, etc.)
+        public int Role { get; set; }  // Para definir cargos de utilizador (Admin, user, etc.)
 
         // Data de registo
         public DateTime DataRegisto { get; set; } = DateTime.UtcNow;
