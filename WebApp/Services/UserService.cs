@@ -14,16 +14,14 @@ namespace WebApp.Services
         }
 
         // Método síncrono para autenticação
-        public User AuthenticateAdmin(string username, string password)
+        public async Task<User?> AuthenticateAdmin(string username, string password)
         {
-            // Busca o utilizador com role de administrador de forma síncrona
-            var user = _context.Users
-                .FirstOrDefault(u =>
+            // Busca um usuário com username e senha correspondentes e Role = 1
+            return await _context.Users
+                .FirstOrDefaultAsync(u =>
                     u.Username == username &&
                     u.PasswordHash == password &&
-                    u.Role == 1);
-
-            return user;
+                    u.Role == 1); // Filtra apenas administradores
         }
 
         // Método assíncrono para autenticação
@@ -37,7 +35,7 @@ namespace WebApp.Services
 
             if (user == null)
             {
-                throw new InvalidOperationException("Usuário não encontrado ou não é administrador.");
+                throw new InvalidOperationException("Utilizador não encontrado ou não é administrador.");
             }
 
             return user;
@@ -56,6 +54,11 @@ namespace WebApp.Services
         {
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
+        }
+
+        User IUserService.AuthenticateAdmin(string username, string password)
+        {
+            throw new NotImplementedException();
         }
     }
 }

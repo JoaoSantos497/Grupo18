@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using WebApp.Services;
-
+using System.Threading.Tasks;
 
 namespace WebApp.Controllers
 {
@@ -14,62 +15,59 @@ namespace WebApp.Controllers
             _userService = userService;
         }
 
-        // GET: Admin Login Page
+        // GET: Exibe a página de login para administradores
         [HttpGet("")]
         public IActionResult Admin()
         {
-            return View();
+            return View("Index"); // Renderiza a view Index.cshtml
         }
 
-        // POST: Authenticate Admin
+        // POST: Processa o login do administrador
         [HttpPost("")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Admin(string username, string password)
         {
-            // Chama o serviço para autenticar o administrador
-            var user = await _userService.AuthenticateAdminAsync(username, password);
+            // Autentica o administrador usando o serviço
+            var admin = await _userService.AuthenticateAdminAsync(username, password);
 
-            // Se o método retornar null, o login falhou
-            if (user == null)
+            // Caso a autenticação falhe
+            if (admin == null)
             {
-                ModelState.AddModelError(string.Empty, "Usuário ou senha inválidos.");
-                return View(); // Retorna à página de login com mensagem de erro
+                ModelState.AddModelError(string.Empty, "Utilizador ou senha inválidos.");
+                return View("Index"); // Retorna para a página de login com mensagem de erro
             }
 
-            // Verifica explicitamente a Role do usuário
-            if (user.Role != 1)
-            {
-                ModelState.AddModelError(string.Empty, "Acesso restrito a administradores.");
-                return View();
-            }
+            // Adiciona o UserId do administrador na sessão
+            HttpContext.Session.SetString("UserId", admin.UserID.ToString());
 
-            // Autenticação bem-sucedida, cria a sessão do administrador
-            HttpContext.Session.SetString("UserID", user.ToString());
-            return RedirectToAction("Dashboard", "Admin");
+            // Redireciona para o Dashboard do administrador
+            return RedirectToAction("Dashboard");
         }
 
-
-        // GET: Admin Dashboard (área protegida)
+        // GET: Exibe o Dashboard do administrador (área protegida)
+        [HttpGet("Dashboard")]
         public IActionResult Dashboard()
         {
-            var UserID = HttpContext.Session.GetString("AdminUserId");
-
-            // Verifica se o administrador está logado
-            if (string.IsNullOrEmpty(UserID))
+            // Verifica se o administrador está autenticado
+            var userId = HttpContext.Session.GetString("UserId");
+            if (string.IsNullOrEmpty(userId))
             {
-                return RedirectToAction("Admin", "Admin"); // Redireciona para login
+                return RedirectToAction("Admin"); // Redireciona para a página de login
             }
 
-            return View(); // Retorna a página do dashboard
+            // Carrega o dashboard do administrador
+            return View();
         }
 
-        // GET: Logout
+        // GET: Faz o logout do administrador
+        [HttpGet("Logout")]
         public IActionResult Logout()
         {
-            // Limpa a sessão
+            // Limpa os dados de sessão
             HttpContext.Session.Clear();
-            return RedirectToAction("Admin", "Admin"); // Redireciona para o login
+
+            // Redireciona para a página de login
+            return RedirectToAction("Admin");
         }
     }
-
 }
