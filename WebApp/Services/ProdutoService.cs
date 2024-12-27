@@ -16,7 +16,7 @@ namespace WebApp.Services
 
         // Método para criar um novo produto
         public async Task<Produto> CriarProdutoAsync(Produto produto)
-        {   
+        {
             //Verifica se o objeto é nulo
             ArgumentNullException.ThrowIfNull(produto, nameof(produto));
 
@@ -36,11 +36,6 @@ namespace WebApp.Services
                 Console.WriteLine($"Erro ao adicionar produto: {ex.Message}");
                 throw new Exception("Ocorreu um erro ao adicionar o produto.", ex);
             }
-        }
-
-        internal object SearchProduto(string query, string category)
-        {
-            throw new NotImplementedException();
         }
     }
 }

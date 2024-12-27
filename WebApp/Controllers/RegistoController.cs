@@ -33,7 +33,7 @@ namespace WebApp.Controllers
             await _registoService.SalvarRegistoAsync(model);
 
             // Redirecionar após sucesso
-            return RedirectToAction("Login", "Login");
+            return RedirectToAction("Index", "Login");
         }
     }
 }

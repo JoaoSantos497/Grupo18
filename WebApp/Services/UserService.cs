@@ -13,52 +13,34 @@ namespace WebApp.Services
             _context = context;
         }
 
-        // Método síncrono para autenticação
-        public async Task<User?> AuthenticateAdmin(string username, string password)
+        // Método assíncrono para autenticação de administrador
+        public async Task<User?> AuthenticateAdminAsync(string username, string password)
         {
-            // Busca um usuário com username e senha correspondentes e Role = 1
+            var hashedPassword = HashPassword(password); // Gera o hash da senha fornecida
+
+            // Procura um administrador válido  
             return await _context.Users
                 .FirstOrDefaultAsync(u =>
                     u.Username == username &&
-                    u.PasswordHash == password &&
-                    u.Role == 1); // Filtra apenas administradores
+                    u.PasswordHash == hashedPassword &&
+                    u.RoleID == 1); // RoleID = 1 indica que é administrador
         }
 
-        // Método assíncrono para autenticação
-        public async Task<User> AuthenticateAdminAsync(string username, string password)
-        {
-            var user = await _context.Users
-                .FirstOrDefaultAsync(u =>
-                    u.Username == username &&
-                    u.PasswordHash == password &&
-                    u.Role == 1);
-
-            if (user == null)
-            {
-                throw new InvalidOperationException("Utilizador não encontrado ou não é administrador.");
-            }
-
-            return user;
-        }
-
-        // Método para criar um utilizador (síncrono)
-        public User Create(User user)
-        {
-            _context.Users.Add(user);
-            _context.SaveChanges();
-            return user;
-        }
-
-        // Método para criar um utilizador (assíncrono)
+        // Método para criar um utilizador
         public async Task CreateUserAsync(User user)
         {
+            user.PasswordHash = HashPassword(user.PasswordHash); // Gera o hash da senha
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
         }
 
-        User IUserService.AuthenticateAdmin(string username, string password)
+        // Método para gerar hash de senha
+        private string HashPassword(string password)
         {
-            throw new NotImplementedException();
+            using var sha256 = System.Security.Cryptography.SHA256.Create();
+            var bytes = System.Text.Encoding.UTF8.GetBytes(password);
+            var hash = sha256.ComputeHash(bytes);
+            return Convert.ToBase64String(hash);
         }
     }
 }

@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebApp.Services;
-using System.Threading.Tasks;
 
 namespace WebApp.Controllers
 {
+    [Authorize(Roles = "1")]
     [Route("Admin")]
     public class AdminController : Controller
     {
@@ -16,32 +16,46 @@ namespace WebApp.Controllers
         }
 
         // GET: Exibe a página de login para administradores
-        [HttpGet("")]
-        public IActionResult Admin()
+        [HttpGet]
+        public IActionResult Index()
         {
-            return View("Index"); // Renderiza a view Index.cshtml
+            return View(); // Renderiza a view Index.cshtml em /Views/Admin/Index.cshtml
         }
 
         // POST: Processa o login do administrador
-        [HttpPost("")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Admin(string username, string password)
         {
-            // Autentica o administrador usando o serviço
-            var admin = await _userService.AuthenticateAdminAsync(username, password);
-
-            // Caso a autenticação falhe
-            if (admin == null)
+            try
             {
-                ModelState.AddModelError(string.Empty, "Utilizador ou senha inválidos.");
-                return View("Index"); // Retorna para a página de login com mensagem de erro
+                // Tenta autenticar o administrador usando o serviço
+                var admin = await _userService.AuthenticateAdminAsync(username, password);
+
+                // Caso a autenticação falhe
+                if (admin == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Utilizador ou senha inválidos.");
+                    return View("Index");
+                }
+
+                // Adiciona o UserId do administrador na sessão
+                HttpContext.Session.SetString("UserID", admin.UserID.ToString());
+
+                // Redireciona para a página Index do DashboardController
+                return RedirectToAction("Index", "Dashboard");
             }
-
-            // Adiciona o UserId do administrador na sessão
-            HttpContext.Session.SetString("UserId", admin.UserID.ToString());
-
-            // Redireciona para o Dashboard do administrador
-            return RedirectToAction("Dashboard");
+            catch (InvalidOperationException ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View("Index");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, "Ocorreu um erro inesperado. Por favor, tente novamente mais tarde.");
+                Console.WriteLine($"Erro inesperado: {ex.Message}");
+                return View("Index");
+            }
         }
 
         // GET: Exibe o Dashboard do administrador (área protegida)
@@ -49,15 +63,16 @@ namespace WebApp.Controllers
         public IActionResult Dashboard()
         {
             // Verifica se o administrador está autenticado
-            var userId = HttpContext.Session.GetString("UserId");
+            var userId = HttpContext.Session.GetString("UserID");
             if (string.IsNullOrEmpty(userId))
             {
-                return RedirectToAction("Admin"); // Redireciona para a página de login
+                return RedirectToAction("Index, Admin"); // Redireciona para a página de login
             }
 
             // Carrega o dashboard do administrador
             return View();
         }
+
 
         // GET: Faz o logout do administrador
         [HttpGet("Logout")]
@@ -67,7 +82,7 @@ namespace WebApp.Controllers
             HttpContext.Session.Clear();
 
             // Redireciona para a página de login
-            return RedirectToAction("Admin");
+            return RedirectToAction("Index, Admin");
         }
     }
 }

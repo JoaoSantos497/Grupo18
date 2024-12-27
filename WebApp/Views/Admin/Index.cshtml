@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Admin | ";
 }
-@model List<User>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,25 +27,71 @@
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/style.css" />
 
+    <style>
+        .login-form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f9f9f9;
+        }
+
+        .login-form {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+            .login-form h2 {
+                margin-bottom: 20px;
+                font-weight: 700;
+                color: #333;
+                text-align: center;
+            }
+
+        .btn-primary {
+            width: 100%;
+            background-color: #007bff;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+            }
+
+        .alert-danger {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
 
 </head>
 <body>
     @if (ViewBag.Error != null)
     {
-        <div class="alert alert-danger">@ViewBag.Error</div>
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
     }
 
     <div class="container login-form-container">
         <div class="login-form">
             <h2>Admin Login</h2>
-            <form action="/Account/Admin" method="post">
+            <form action="/Admin" method="post">
+                @Html.AntiForgeryToken()
                 <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" required>
+                    <label for="username">Nome de Utilizador</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Insira o nome de utilizador" required>
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
+                    <label for="password">Senha</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Insira a senha" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Entrar</button>
             </form>

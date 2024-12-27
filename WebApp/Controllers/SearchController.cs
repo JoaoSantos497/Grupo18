@@ -13,11 +13,6 @@ namespace WebApp.Controllers
             _productService = produtoService;
         }
 
-        [HttpGet]
-        public IActionResult Search(string query, string category)
-        {
-            var products = _productService.SearchProduto(query, category);
-            return View();
-        }
+        
     }
 }

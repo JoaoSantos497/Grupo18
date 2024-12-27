@@ -1,20 +1,14 @@
 ﻿using WebApp.Models;
+using System.Threading.Tasks;
 
 namespace WebApp.Services
 {
     public interface IUserService
     {
-        User Create(User user);
+        // Cria um novo utilizador
         Task CreateUserAsync(User user);
 
-        //Task DeleteUserAsync(User user);
-        //Task UpdateUserAsync(User user);
-
-        User AuthenticateAdmin(string username, string password);
-
-        Task<User> AuthenticateAdminAsync(string username, string password);
+        // Autentica um administrador (assíncrono)
+        Task<User?> AuthenticateAdminAsync(string username, string password);
     }
-
-   
-        
 }

@@ -25,7 +25,8 @@ namespace WebApp.Services
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(registo.Password), // Criptografar a password
                 DataNascimento = registo.DataNascimento,
                 Genero = registo.Genero,
-                DataRegisto = DateTime.UtcNow
+                DataRegisto = DateTime.UtcNow,
+                RoleID = 2
             };
 
             _dbContext.Users.Add(user);

@@ -47,7 +47,7 @@ namespace WebApp.Models
         //Role do utilizador
         //[Required(ErrorMessage = "Role é obrigatória.")]
         //[StringLength(50, ErrorMessage = "A Role não foi definida")]
-        public int Role { get; set; }  // Para definir cargos de utilizador (Admin, user, etc.)
+        public int RoleID { get; set; }  // Para definir cargos de utilizador (Admin, user, etc.)
 
         // Data de registo
         public DateTime DataRegisto { get; set; } = DateTime.UtcNow;

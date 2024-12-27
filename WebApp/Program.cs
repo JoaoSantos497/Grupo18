@@ -1,10 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using WebApp.Data;
 using WebApp.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 class Program
 {
@@ -19,6 +18,16 @@ class Program
         builder.Services.AddScoped<RegistoService>();
         builder.Services.AddScoped<LoginService>();
         builder.Services.AddScoped<IRegistoService, RegistoService>();
+
+
+        // Configuração de sessões
+        builder.Services.AddDistributedMemoryCache();
+        builder.Services.AddSession(options =>
+        {
+            options.IdleTimeout = TimeSpan.FromMinutes(30); // Tempo de expiração da sessão
+            options.Cookie.HttpOnly = true; // Segurança do cookie
+            options.Cookie.IsEssential = true; // Necessário para funcionar em todos os ambientes
+        });
 
         // Configuração de Autenticação
         builder.Services.AddAuthentication(options =>
@@ -66,21 +75,20 @@ class Program
         app.UseHttpsRedirection();
         app.UseStaticFiles();
 
+        app.UseAuthorization();
+
         app.UseRouting();
 
-        // Configura a autenticação e autorização
-        app.UseAuthentication();
-        app.UseAuthorization();
+        // Middleware de sessões
+        app.UseSession();
 
         // Configuração de rotas
         app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");
 
-        
-        app.Run();
+        app.Run(); 
     }
-
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddControllersWithViews();

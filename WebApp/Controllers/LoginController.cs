@@ -25,7 +25,7 @@ namespace WebApp.Controllers
         }
 
         // POST: Login
-        [HttpPost]
+        [HttpPost("")]
         [ValidateAntiForgeryToken]
         public IActionResult Index(User user)
         {

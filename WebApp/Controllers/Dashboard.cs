@@ -10,8 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace WebApp.Controllers
 {
     [Authorize(Roles = "1")]
-    //[Route("Dashboard[action]")]
-    [Route("Dashboard")]
+    [Route("Admin/Dashboard")]
     public class Dashboard : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,14 +20,26 @@ namespace WebApp.Controllers
             _context = context;
         }
 
-
-        // GET: Dashboard
         [HttpGet("")]
         public ActionResult Index()
         {
+            // Lógica do dashboard
             return View();
         }
 
+        // GET: Dashboard
+        /*[HttpGet("")]
+        public ActionResult Index()
+        {
+            // Verificar se o utilizador está autenticado
+            if (User?.Identity == null || !User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
+            // Lógica do dashboard
+            return View();
+        }*/
 
         // GET: Dashboard/GerirProdutos
         [HttpGet("GerirProdutos")]
