@@ -16,14 +16,16 @@ namespace WebApp.Services
         // Método assíncrono para autenticação de administrador
         public async Task<User?> AuthenticateAdminAsync(string username, string password)
         {
-            var hashedPassword = HashPassword(password); // Gera o hash da senha fornecida
+            // Busca o usuário pelo nome de utilizador
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username && u.RoleID == 1);
 
-            // Procura um administrador válido  
-            return await _context.Users
-                .FirstOrDefaultAsync(u =>
-                    u.Username == username &&
-                    u.PasswordHash == hashedPassword &&
-                    u.RoleID == 1); // RoleID = 1 indica que é administrador
+            // Verifica se o usuário existe e a senha está correta
+            if (user != null && VerifyPassword(password, user.PasswordHash))
+            {
+                return user;
+            }
+
+            return null; // Retorna null caso a autenticação falhe
         }
 
         // Método para criar um utilizador
@@ -34,13 +36,36 @@ namespace WebApp.Services
             await _context.SaveChangesAsync();
         }
 
-        // Método para gerar hash de senha
+        public Task<User?> GetUserByUsernameAsync(string username)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> IsAdminAsync(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<User?> ResetPasswordAsync(string username, string newPassword)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<User?> UpdateLastLoginAsync(string Username)
+        {
+            throw new NotImplementedException();
+        }
+
+        // Método para gerar hash de senha seguro (BCrypt)
         private string HashPassword(string password)
         {
-            using var sha256 = System.Security.Cryptography.SHA256.Create();
-            var bytes = System.Text.Encoding.UTF8.GetBytes(password);
-            var hash = sha256.ComputeHash(bytes);
-            return Convert.ToBase64String(hash);
+            return BCrypt.Net.BCrypt.HashPassword(password);
+        }
+
+        // Método para verificar a senha (BCrypt)
+        private bool VerifyPassword(string password, string hashedPassword)
+        {
+            return BCrypt.Net.BCrypt.Verify(password, hashedPassword);
         }
     }
 }

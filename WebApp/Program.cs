@@ -75,9 +75,14 @@ class Program
         app.UseHttpsRedirection();
         app.UseStaticFiles();
 
-        app.UseAuthorization();
-
         app.UseRouting();
+
+        app.UseAuthentication(); // Necessário para autenticação JWT e cookies
+        app.UseAuthorization(); // Configuração de autorização após o roteamento
+
+
+
+
 
         // Middleware de sessões
         app.UseSession();

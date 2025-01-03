@@ -4,7 +4,8 @@ using WebApp.Services;
 
 namespace WebApp.Controllers
 {
-    [Authorize(Roles = "1")]
+    //[Authorize(Roles = "1")]
+    [AllowAnonymous]
     [Route("Admin")]
     public class AdminController : Controller
     {
@@ -14,6 +15,8 @@ namespace WebApp.Controllers
         {
             _userService = userService;
         }
+
+
 
         // GET: Exibe a página de login para administradores
         [HttpGet]
@@ -29,31 +32,27 @@ namespace WebApp.Controllers
         {
             try
             {
-                // Tenta autenticar o administrador usando o serviço
+                // Chamada ao serviço de autenticação
                 var admin = await _userService.AuthenticateAdminAsync(username, password);
 
-                // Caso a autenticação falhe
+                // Se o administrador não for autenticado, exibe mensagem de erro
                 if (admin == null)
                 {
                     ModelState.AddModelError(string.Empty, "Utilizador ou senha inválidos.");
                     return View("Index");
                 }
 
-                // Adiciona o UserId do administrador na sessão
+                // Adiciona o ID do administrador à sessão
                 HttpContext.Session.SetString("UserID", admin.UserID.ToString());
 
-                // Redireciona para a página Index do DashboardController
-                return RedirectToAction("Index", "Dashboard");
-            }
-            catch (InvalidOperationException ex)
-            {
-                ModelState.AddModelError(string.Empty, ex.Message);
-                return View("Index");
+                // Redireciona para o dashboard
+                return RedirectToAction("Dashboard");
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, "Ocorreu um erro inesperado. Por favor, tente novamente mais tarde.");
+                // Trata exceções inesperadas
                 Console.WriteLine($"Erro inesperado: {ex.Message}");
+                ModelState.AddModelError(string.Empty, "Ocorreu um erro inesperado. Por favor, tente novamente mais tarde.");
                 return View("Index");
             }
         }
@@ -66,7 +65,7 @@ namespace WebApp.Controllers
             var userId = HttpContext.Session.GetString("UserID");
             if (string.IsNullOrEmpty(userId))
             {
-                return RedirectToAction("Index, Admin"); // Redireciona para a página de login
+                return RedirectToAction("Index", "Admin"); // Redireciona para a página de login
             }
 
             // Carrega o dashboard do administrador
@@ -82,7 +81,7 @@ namespace WebApp.Controllers
             HttpContext.Session.Clear();
 
             // Redireciona para a página de login
-            return RedirectToAction("Index, Admin");
+            return RedirectToAction("Index", "Admin");
         }
     }
 }

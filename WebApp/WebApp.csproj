@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+	<PackageReference Include="BCrypt.Net" Version="0.1.0" />
 	<PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
 	<PackageReference Include="Microsoft.Exchange.WebServices" Version="2.2.0" />
 	<PackageReference Include="Microsoft.Extensions.Identity.Core" Verson="8.0.0" Version="9.0.0" />
