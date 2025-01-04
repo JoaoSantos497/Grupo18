@@ -28,7 +28,7 @@ namespace WebApp.Services
 
             if (!string.IsNullOrEmpty(categoriaid))
             {
-                query = query.Where(p => p.CategoriaID == categoriaid);
+                //query = query.Where(p => p.CategoriaID == categoriaid);
             }
 
             return query.ToList();

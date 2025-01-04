@@ -13,9 +13,9 @@ public interface IAuthService
 public class AuthService : IAuthService
 {
     private readonly ApplicationDbContext _context;
-    private readonly IPasswordHashingService _hashingService;
+    private readonly IPasswordHasherService _hashingService;
 
-    public AuthService(ApplicationDbContext context, IPasswordHashingService hashingService)
+    public AuthService(ApplicationDbContext context, IPasswordHasherService hashingService)
     {
         _context = context;
         _hashingService = hashingService;

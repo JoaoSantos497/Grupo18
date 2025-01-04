@@ -3,50 +3,71 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
 using WebApp.Services;
+using WebApp.Data;
 
 namespace WebApp.Controllers
 {
     [Route("Login")]
     public class LoginController : Controller
     {
-        private readonly LoginService _loginService;
+        private readonly ILoginService _loginService;
+        private readonly ApplicationDbContext _context;
+        private readonly IPasswordHasherService _passwordHasherService;
 
-        // Injeção de dependência do LoginService
-        public LoginController(LoginService loginService)
+        public LoginController(ILoginService loginService, IPasswordHasherService passwordHasherService, ApplicationDbContext context)
         {
             _loginService = loginService;
-        }
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _passwordHasherService = passwordHasherService ?? throw new ArgumentNullException(nameof(passwordHasherService));
+        }   
 
-        // GET: Login
         [HttpGet("")]
         public IActionResult Index()
         {
             return View();
         }
 
-        // POST: Login
-        [HttpPost("")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Index(User user)
+        public IActionResult Index(string email, string username, string password)
         {
-            if (!ModelState.IsValid)
+            if ((string.IsNullOrWhiteSpace(email) && string.IsNullOrWhiteSpace(username)) || string.IsNullOrWhiteSpace(password))
             {
-                return View(user); // Retorna com mensagens de erro de validação
+                ViewBag.Error = "Por favor, preencha todos os campos.";
+                if (username != null) return RedirectToAction("Index", "Admin");
+                return View();
             }
 
-            if (_loginService.ValidarCredenciais(user.Email, user.PasswordHash))
+            // Lógica para verificar se é um Admin (username) ou Cliente (email)
+            var user = _context.Users
+                .FirstOrDefault(u =>
+                    (u.Username == username && u.RoleID == 1) || // Admin: procura pelo username
+                    (u.Email == email && u.RoleID == 2) // Cliente: procura pelo email
+                );
+
+            // Verifica se o usuário foi encontrado e se a senha é válida
+            if (user == null || !_passwordHasherService.VerifyPassword(user.PasswordHash, password))
             {
-                // User autenticado com sucesso, redireciona para o perfil
-                return RedirectToAction("Perfil");
+                ViewBag.Error = "Credenciais inválidas!";
+                if (username != null) return RedirectToAction("Index", "Admin");
+                return View();
             }
-            else
+
+            // Redirecionamento com base na role
+            return user.RoleID switch
             {
-                TempData["Erro"] = "Email ou password inválidos.";
-                return RedirectToAction("Login"); // Mantém na página de login
-            }
+                1 => RedirectToAction("Index", "Dashboard"),   // Admin
+                2 => RedirectToAction("Index", "Perfil"), // Cliente
+                _ => HandleInvalidRole()
+            };
         }
 
-        // POST: Logout
+        private IActionResult HandleInvalidRole()
+        {
+            ViewBag.Error = "Role inválida! Entre em contato com o suporte.";
+            return View("Login");
+        }
+
         [HttpPost("Logout")]
         public async Task<IActionResult> Logout()
         {
@@ -55,5 +76,3 @@ namespace WebApp.Controllers
         }
     }
 }
-
-

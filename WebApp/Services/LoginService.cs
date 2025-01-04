@@ -1,25 +1,29 @@
 ﻿using WebApp.Data;
 
-
 namespace WebApp.Services
 {
-    public class LoginService
+    public class LoginService : ILoginService
     {
         private readonly ApplicationDbContext _dbContext;
 
         // Construtor com injeção de dependência do DbContext
         public LoginService(ApplicationDbContext dbContext)
         {
-            _dbContext = dbContext;
+            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
-        // Valida credenciais do utilizador
+        /// <inheritdoc />
         public bool ValidarCredenciais(string email, string password)
         {
-            // Busca apenas o Email e PasswordHash do utilizador
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+            {
+                return false; // Email ou senha inválidos
+            }
+
+            // Busca o utilizador pelo email e seleciona apenas o Email e PasswordHash
             var user = _dbContext.Users
                 .Where(u => u.Email == email)
-                .Select(u => new { u.Email, u.PasswordHash }) // Busca apenas os campos necessários
+                .Select(u => new { u.Email, u.PasswordHash }) // Evita carregar campos desnecessários
                 .SingleOrDefault();
 
             if (user == null)
@@ -28,10 +32,7 @@ namespace WebApp.Services
             }
 
             // Verifica a senha usando a biblioteca BCrypt
-            bool isPasswordValid = BCrypt.Net.BCrypt.Verify(password, user.PasswordHash); // Método correto na versão Next
-
-            return isPasswordValid; // Retorna true se a senha for válida, caso contrário false
+            return BCrypt.Net.BCrypt.Verify(password, user.PasswordHash); // Retorna true se válido
         }
     }
 }
-

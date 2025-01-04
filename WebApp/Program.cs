@@ -13,12 +13,16 @@ class Program
 
         // Adiciona serviços ao contêiner
         builder.Services.AddControllersWithViews(); // Suporte para controladores e views
+
+        // Injeção de dependências
         builder.Services.AddScoped<IUserService, UserService>();
         builder.Services.AddScoped<IAuthService, AuthService>();
         builder.Services.AddScoped<IRegistoService, RegistoService>();
-        builder.Services.AddScoped<RegistoService>();
+        builder.Services.AddScoped<IPasswordHasherService, PasswordHasherService>();
         builder.Services.AddScoped<LoginService>();
-        builder.Services.AddScoped<IPasswordHashingService, PasswordHashingService>();
+        builder.Services.AddScoped<ILoginService, LoginService>();
+
+
 
 
         // Configuração de sessões
@@ -77,14 +81,14 @@ class Program
 
         app.UseRouting();
 
+        // Middleware de sessões
+        app.UseSession();
+
         // Middleware de autenticação e autorização
         app.UseAuthentication();
         app.UseAuthorization();
 
-        // Middleware de sessões
-        app.UseSession();
-
-        // Top-Level Route Registrations
+        // Configuração de rotas
         app.MapControllerRoute(
             name: "admin",
             pattern: "Admin/{action=Index}/{id?}",
