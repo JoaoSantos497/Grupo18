@@ -56,8 +56,14 @@ class Program
         .AddCookie("CookieAuth", options =>
         {
             options.Cookie.Name = "UserAuthCookie";
-            options.LoginPath = "/Auth/Login"; // Caminho da página de login
-        });
+            options.LoginPath = "/Login"; // Caminho da página de Aogin
+        })
+
+        .AddCookie("CookieAuth", options =>
+         {
+             options.Cookie.Name = "UserAuthCookie";
+             options.LoginPath = "/Admin"; // Caminho da página de Admin
+         });
 
         // Configuração do banco de dados
         builder.Services.AddDbContext<ApplicationDbContext>(options =>

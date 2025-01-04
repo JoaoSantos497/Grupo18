@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
 using WebApp.Services;
 using WebApp.Data;
+using System.Security.Claims;
 
 namespace WebApp.Controllers
 {
@@ -29,7 +30,7 @@ namespace WebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Index(string email, string username, string password)
+        public async Task<IActionResult> Index(string email, string username, string password)
         {
             if ((string.IsNullOrWhiteSpace(email) && string.IsNullOrWhiteSpace(username)) || string.IsNullOrWhiteSpace(password))
             {
@@ -52,6 +53,26 @@ namespace WebApp.Controllers
                 if (username != null) return RedirectToAction("Index", "Admin");
                 return View();
             }
+            
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user.Nome),
+                new Claim(ClaimTypes.Role, user.RoleID.ToString())
+            };
+
+            // Create claims identity
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            // Create authentication properties
+            var authProperties = new AuthenticationProperties
+            {
+                IsPersistent = true, // Persistent cookie
+                ExpiresUtc = DateTime.UtcNow.AddMinutes(30) // Expiry time
+            };
+
+            // Sign in the user
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity), authProperties);
 
             // Redirecionamento com base na role
             return user.RoleID switch
