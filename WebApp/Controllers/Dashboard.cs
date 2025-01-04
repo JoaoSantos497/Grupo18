@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace WebApp.Controllers
 {
     [Authorize(Roles = "1")]
-    [Route("Admin/Dashboard")]
+    [Route("/Admin/Dashboard")]
     public class Dashboard : Controller
     {
         private readonly ApplicationDbContext _context;

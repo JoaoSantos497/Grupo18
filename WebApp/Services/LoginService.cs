@@ -1,31 +1,37 @@
 ﻿using WebApp.Data;
 
-public class LoginService
+
+namespace WebApp.Services
 {
-    private readonly ApplicationDbContext _dbContext;
-
-    // Construtor com injeção de dependência do DbContext
-    public LoginService(ApplicationDbContext dbContext)
+    public class LoginService
     {
-        _dbContext = dbContext;
-    }
+        private readonly ApplicationDbContext _dbContext;
 
-    // Valida credenciais do utilizador
-    public bool ValidarCredenciais(string email, string password)
-    {
-        // Get apenas o Email e PasswordHash do utilizador
-        var user = _dbContext.Users
-            .Where(u => u.Email == email)
-            .Select(u => new { u.Email, u.PasswordHash }) // Faz get apenas do email e password
-            .SingleOrDefault();
-
-        if (user == null)
+        // Construtor com injeção de dependência do DbContext
+        public LoginService(ApplicationDbContext dbContext)
         {
-            return false; // Utilizador não encontrado
+            _dbContext = dbContext;
         }
 
-        // Verifica a PasswordHash (usar BCrypt ou outra biblioteca segura)
-        return BCrypt.Net.BCrypt.Verify(password, user.PasswordHash);
+        // Valida credenciais do utilizador
+        public bool ValidarCredenciais(string email, string password)
+        {
+            // Busca apenas o Email e PasswordHash do utilizador
+            var user = _dbContext.Users
+                .Where(u => u.Email == email)
+                .Select(u => new { u.Email, u.PasswordHash }) // Busca apenas os campos necessários
+                .SingleOrDefault();
+
+            if (user == null)
+            {
+                return false; // Utilizador não encontrado
+            }
+
+            // Verifica a senha usando a biblioteca BCrypt
+            bool isPasswordValid = BCrypt.Net.BCrypt.Verify(password, user.PasswordHash); // Método correto na versão Next
+
+            return isPasswordValid; // Retorna true se a senha for válida, caso contrário false
+        }
     }
 }
 

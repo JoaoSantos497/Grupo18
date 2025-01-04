@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 class Program
 {
-    private static void Main(string[] args)
+    public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
@@ -15,9 +15,10 @@ class Program
         builder.Services.AddControllersWithViews(); // Suporte para controladores e views
         builder.Services.AddScoped<IUserService, UserService>();
         builder.Services.AddScoped<IAuthService, AuthService>();
+        builder.Services.AddScoped<IRegistoService, RegistoService>();
         builder.Services.AddScoped<RegistoService>();
         builder.Services.AddScoped<LoginService>();
-        builder.Services.AddScoped<IRegistoService, RegistoService>();
+        builder.Services.AddScoped<IPasswordHashingService, PasswordHashingService>();
 
 
         // Configuração de sessões
@@ -29,13 +30,12 @@ class Program
             options.Cookie.IsEssential = true; // Necessário para funcionar em todos os ambientes
         });
 
-        // Configuração de Autenticação
+        // Configuração de autenticação
         builder.Services.AddAuthentication(options =>
         {
             options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         })
-
         .AddJwtBearer(options =>
         {
             options.TokenValidationParameters = new TokenValidationParameters
@@ -52,10 +52,10 @@ class Program
         .AddCookie("CookieAuth", options =>
         {
             options.Cookie.Name = "UserAuthCookie";
-            options.LoginPath = "/Login";
+            options.LoginPath = "/Auth/Login"; // Caminho da página de login
         });
 
-        // Adiciona o ApplicationDbContext
+        // Configuração do banco de dados
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -77,33 +77,23 @@ class Program
 
         app.UseRouting();
 
-        app.UseAuthentication(); // Necessário para autenticação JWT e cookies
-        app.UseAuthorization(); // Configuração de autorização após o roteamento
-
-
-
-
+        // Middleware de autenticação e autorização
+        app.UseAuthentication();
+        app.UseAuthorization();
 
         // Middleware de sessões
         app.UseSession();
 
-        // Configuração de rotas
+        // Top-Level Route Registrations
+        app.MapControllerRoute(
+            name: "admin",
+            pattern: "Admin/{action=Index}/{id?}",
+            defaults: new { controller = "Admin" });
+
         app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");
 
-        app.Run(); 
-    }
-    public void ConfigureServices(IServiceCollection services)
-    {
-        services.AddControllersWithViews();
-        services.AddSession(); // Ativa sessões
-    }
-
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-    {
-        app.UseSession(); // Middleware de sessão
-        app.UseRouting();
-        app.UseEndpoints(endpoints => { endpoints.MapDefaultControllerRoute(); });
+        app.Run();
     }
 }

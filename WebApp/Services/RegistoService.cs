@@ -1,6 +1,7 @@
 ﻿using WebApp.Data;
 using WebApp.Models;
 
+
 namespace WebApp.Services
 {
     public class RegistoService : IRegistoService
