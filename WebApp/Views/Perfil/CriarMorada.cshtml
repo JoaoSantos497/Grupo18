@@ -28,80 +28,13 @@
     <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/style.css" />
 
     <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-        }
-
-        .form-container {
-            max-width: 700px;
-            margin: 30px auto;
-            background: #fff;
-            padding: 20px 30px;
-            border-radius: 6px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-
-        .breadcrumb {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-
-        label {
-            font-weight: 600;
-            margin-top: 10px;
-        }
-
-        .form-control {
-            margin-bottom: 15px;
-            border-radius: 6px;
-            height: 38px;
-        }
-
-        .btn-save {
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .btn-secondary {
-            margin-right: 10px;
-        }
-
-        .footer-buttons {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-            .footer-buttons button {
-                margin: 0 10px;
-            }
+ 
     </style>
 </head>
 
 <body>
-    <div class="form-container">
-        <h1>Nova morada</h1>
-
-        <div class="breadcrumb">
-            <a href="/Perfil">A tua conta</a> / <a href="/Moradas">Endereços</a> / Nova morada
-        </div>
-
-        <form method="post" asp-action="GuardarMorada" asp-controller="Enderecos">
+    <div class="container-criarmorada">
+        <form method="post" asp-action="CriarMorada" asp-controller="Perfil">
             <div class="form-group">
                 <label for="nomesAlternativos">Nomes alternativos</label>
                 <input type="text" id="nomesAlternativos" class="form-control" placeholder="Opcional" />
@@ -119,12 +52,13 @@
 
             <div class="form-group">
                 <label for="nif">NIF</label>
-                <input type="text" id="nif" asp-for="NIF" class="form-control" placeholder="Opcional" />
+            <input type="number" id="nif" asp-for="NIF" min="100000000" max="999999999" form-control" placeholder="Opcional" />
             </div>
 
             <div class="form-group">
                 <label for="codigoPostal">Código postal</label>
-                <input type="text" id="codigoPostal" asp-for="CodigoPostal" class="form-control" />
+                <input type="text" id="codigoPostal" asp-for="CodigoPostal" class="form-control"
+                placeholder="0000-000" pattern="\d{4}-\d{3}" title="Digite no formato 0000-000" />
             </div>
 
             <div class="form-group">
@@ -134,7 +68,7 @@
 
             <div class="form-group">
                 <label for="numero">Número</label>
-                <input type="text" id="numero" asp-for="Numero" class="form-control" />
+                <input type="number" id="numero" asp-for="Numero" class="form-control" />
             </div>
 
             <div class="form-group">
@@ -148,7 +82,7 @@
                     <option value="">Por favor, escolha</option>
                     <option value="Lisboa">Lisboa</option>
                     <option value="Porto">Porto</option>
-                    <option value="Setúbal">Setúbal</option>
+                    <option value="Santarém">Santarém</option>
                     <option value="Faro">Faro</option>
                 </select>
             </div>
@@ -160,10 +94,20 @@
 
             <div class="form-group">
                 <label for="telemovel">Telemóvel</label>
-                <input type="text" id="telemovel" asp-for="Telemovel" class="form-control" />
+                <input type="number" id="telemovel" asp-for="Telemovel" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="tipo">Tipo</label>
+                <select id="tipo" asp-for="Tipo" class="form-control">
+                    <option value="">Selecione o tipo</option>
+                    <option value="Entrega">Morada de Entrega</option>
+                    <option value="Faturacao">Morada de Faturação</option>
+                </select>
             </div>
 
             <button type="submit" class="btn btn-save">Guardar</button>
+
         </form>
 
         <div class="footer-buttons">
@@ -171,4 +115,13 @@
             <button onclick="location.href='/'" class="btn btn-secondary">Home</button>
         </div>
     </div>
+
+    <script>
+        document.getElementById('nif').addEventListener('input', function (e) {
+            const maxDigits = 9;
+            if (this.value.length > maxDigits) {
+                this.value = this.value.slice(0, maxDigits); // Limita a entrada a 9 dígitos
+            }
+        });
+    </script>
 </body>

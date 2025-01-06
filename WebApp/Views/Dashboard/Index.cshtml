@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title><link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/style.css" />
     <link rel="script" href="site.js">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- icon conta -->
 
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -31,147 +31,6 @@
 
 </head>
 
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f9;
-        color: #333;
-    }
-
-    /* Header */
-    .header {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 20px;
-        background-color: #1d1d1d;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 1000;
-    }
-
-    .header-left {
-        color: #e63946;
-        font-size: 22px;
-        font-weight: bold;
-    }
-
-    .header-right {
-        display: flex;
-        align-items: center;
-    }
-
-    .account-dropdown {
-        position: relative;
-        display: inline-block;
-    }
-
-    .account-icon {
-        color: #ffffff;
-        text-decoration: none;
-        font-size: 16px;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-    }
-
-        .account-icon i {
-            color: #e63946; /* Cor do ícone de usuário */
-            margin-right: 10px;
-        }
-
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background-color: #1d1d1d;
-        min-width: 100px;
-        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-        z-index: 1;
-        border-radius: 10px;
-    }
-
-        .dropdown-content a {
-            color: #ffffff;
-            padding: 10px;
-            text-decoration: none;
-            display: block;
-            font-size: 14px;
-            border-radius: 10px;
-        }
-
-            .dropdown-content a:hover {
-                background-color: #e63946; /* Cor de fundo ao passar o mouse */
-            }
-
-    /* Mostrar o dropdown ao passar o mouse sobre o .account-dropdown */
-    .account-dropdown:hover .dropdown-content {
-        display: block;
-    }
-
-    /* Sidebar (barra lateral) */
-    .dashboard-container {
-        display: flex;
-        padding-top: 70px; /* Para dar espaço para o header fixo */
-        height: 100vh;
-    }
-
-    .sidebar {
-        width: 250px;
-        background-color: #1d1d1d;
-        padding: 20px 0;
-        color: #ffffff;
-        position: fixed;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        overflow-y: auto;
-    }
-
-        .sidebar nav {
-            padding-top: 50px; /* Adiciona espaço extra acima dos botões */
-        }
-
-            .sidebar nav ul {
-                list-style-type: none;
-                padding: 0;
-            }
-
-                .sidebar nav ul li {
-                    margin: 10px 0;
-                    padding-left: 20px;
-                }
-
-                    .sidebar nav ul li a {
-                        color: #ffffff;
-                        text-decoration: none;
-                        font-size: 16px;
-                        display: block;
-                        padding: 10px;
-                        border-radius: 4px;
-                        transition: background-color 0.3s ease;
-                    }
-
-                        .sidebar nav ul li a:hover {
-                            background-color: #333333; /* Cor de fundo ao passar o mouse */
-                        }
-
-    /* Conteúdo principal */
-    .main-content {
-        flex-grow: 1;
-        margin-left: 250px; /* Espaço para a sidebar fixa */
-        padding-top: 50px; /* Para não sobrepor o header */
-    }
-</style>
 
     <body>
         <header class="header">
@@ -182,7 +41,7 @@
                         <i class="fas fa-user"></i> Conta
                     </a>
                     <div class="dropdown-content">
-                        <a href="/logout">Logout</a>
+                        <a href="/Admin/Logout">Logout</a>
                     </div>
                 </div>
             </div>

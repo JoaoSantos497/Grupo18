@@ -4,12 +4,13 @@ using WebApp.Data;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
 
 
 
 namespace WebApp.Controllers
 {
-    //[Authorize(Roles = "1")]
+    [Authorize(AuthenticationSchemes = "AdminCookie", Policy = "Role1Policy")]
     [Route("/Admin/Dashboard")]
     public class Dashboard : Controller
     {
@@ -35,14 +36,6 @@ namespace WebApp.Controllers
             return View(Produtos);
         }
 
-        // GET: Dashboard/GerirUsers
-        [HttpGet("GerirUsers")]
-        public async Task<IActionResult> GerirUsers()
-        {
-            var Users = await _context.Users.ToListAsync();
-            return View(Users);
-        }
-
         // GET: Dashboard/GerirProdutos/CreateProduto
         [HttpGet("GerirProdutos/CreateProduto")]
         public IActionResult CreateProduto()
@@ -57,14 +50,47 @@ namespace WebApp.Controllers
         public async Task<IActionResult> CreateProduto(Produto Produto)
         {
             if (ModelState.IsValid)
-            {   
-                
+            {
+
                 _context.Produtos.Add(Produto);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("GerirProdutos");
             }
             return View(Produto);
         }
+
+        // GET: Dashboard/GerirUsers
+        [HttpGet("GerirUsers")]
+        public async Task<IActionResult> GerirUsers()
+        {
+            var Users = await _context.Users.ToListAsync();
+            return View(Users);
+        }
+
+        [HttpPost]
+        [Route("/GerirUsers/DeleteUser/{id}")]
+        [ValidateAntiForgeryToken] // Protege contra CSRF
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            var user = await _context.Users.FindAsync(id);
+
+            if (user == null)
+            {
+                return NotFound(new { message = "Utilizador não encontrado." });
+            }
+
+            try
+            {
+                _context.Users.Remove(user);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("GerirUsers");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Erro ao remover o utilizador.", details = ex.Message });
+            }
+        }
+
 
         // GET: Dashboard/GerirUsers/CreateUser
         [HttpGet("GerirUsers/CreateUser")]
@@ -95,14 +121,5 @@ namespace WebApp.Controllers
             // Lógica para exibir e gerir configurações
             return View();
         }
-
-        // POST: Dashboard/Logout
-        [HttpPost("Logout")]
-        public IActionResult Logout()
-        {
-            // Lógica de logout
-            return RedirectToAction("Login", "Registo"); // Redireciona para a página de login
-        }
-
     }
 }

@@ -4,13 +4,16 @@ using WebApp.Services;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using WebApp.Controllers;
+using Microsoft.Exchange.WebServices.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 class Program
 {
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-
+        
         // Adiciona serviços ao contêiner
         builder.Services.AddControllersWithViews(); // Suporte para controladores e views
 
@@ -22,9 +25,6 @@ class Program
         builder.Services.AddScoped<LoginService>();
         builder.Services.AddScoped<ILoginService, LoginService>();
 
-
-
-
         // Configuração de sessões
         builder.Services.AddDistributedMemoryCache();
         builder.Services.AddSession(options =>
@@ -35,41 +35,37 @@ class Program
         });
 
         // Configuração de autenticação
-        builder.Services.AddAuthentication(options =>
+        builder.Services.AddAuthorization(options =>
         {
-            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        })
-        .AddJwtBearer(options =>
-        {
-            options.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-                ValidIssuer = "localhost",
-                ValidAudience = "localhost",
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("gettech"))
-            };
-        })
-        .AddCookie("CookieAuth", options =>
-        {
-            options.Cookie.Name = "UserAuthCookie";
-            options.LoginPath = "/Login"; // Caminho da página de Aogin
-        })
+            options.AddPolicy("Role1Policy", policy => policy.RequireRole("1"));
+            options.AddPolicy("Role2Policy", policy => policy.RequireRole("2"));
 
-        .AddCookie("CookieAuth", options =>
-         {
-             options.Cookie.Name = "UserAuthCookie";
-             options.LoginPath = "/Admin"; // Caminho da página de Admin
-         });
+        });
+
+        builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+       
+        .AddCookie("UserCookie", options =>
+        {
+            options.Cookie.Name = "UserCookie"; // Nome do cookie para usuário comum
+            options.LoginPath = "/Login"; // Caminho da página de login normal
+            options.AccessDeniedPath = "/Login"; // Caminho em caso de acesso negado
+            options.LogoutPath = "/Login/Logout";
+        })
+        .AddCookie("AdminCookie", options =>
+        {
+        options.Cookie.Name = "AdminCookie"; // Nome do cookie para admin
+        options.LoginPath = "/Admin"; // Caminho da página de login admin
+        options.AccessDeniedPath = "/Admin"; // Caminho em caso de acesso negado
+        options.LogoutPath = "/Admin/Logout";
+        });
 
         // Configuração do banco de dados
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
         var app = builder.Build();
+
+        app.UseMiddleware<UnauthorizedRedirectMiddleware>();
 
         // Configuração do pipeline de middleware
         if (app.Environment.IsDevelopment())
@@ -89,10 +85,11 @@ class Program
 
         // Middleware de sessões
         app.UseSession();
-
+        
         // Middleware de autenticação e autorização
         app.UseAuthentication();
         app.UseAuthorization();
+        
 
         // Configuração de rotas
         app.MapControllerRoute(

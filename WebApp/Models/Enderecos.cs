@@ -1,64 +1,61 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using WebApp.Models;
-using Xunit;
-using Xunit.Sdk;
-
 
 namespace WebApp.Models
 {
-    //[Table("Produtos")]
     public class Enderecos
     {
+        [Key]
+        public required int EnderecoID { get; set; }
 
-        
-        //[StringLength(100, ErrorMessage = "O nome não pode ter mais que 100 caracteres.")]
-        public string EnderecoID { get; set; } = string.Empty;
+        public required int UserID { get; set; }
 
         // Nome
         [StringLength(50, ErrorMessage = "O Nome não pode ter mais do que 50 caracteres.")]
-        public string Nome { get; set; } = string.Empty;
+        public required string Nome { get; set; }
 
         // Endereço 1
-        [StringLength(100, ErrorMessage = "O endereçco não pode ter mais do que 100 caracteres.")]
-        public string EnderecoLinha1 { get; set; } = string.Empty;
+        [StringLength(100, ErrorMessage = "O endereço não pode ter mais do que 100 caracteres.")]
+        public required string EnderecoLinha1 { get; set; }
 
         // Endereço 2
-        [StringLength(100,ErrorMessage = "O endereçco não pode ter mais do que 100 caracteres.")]
+        [StringLength(100, ErrorMessage = "O endereço não pode ter mais do que 100 caracteres.")]
         public string EnderecoLinha2 { get; set; } = string.Empty;
 
-        // Numero
-        public string Numero { get; set; } = string.Empty;
-        // Codigo Postal
-        [StringLength(7, ErrorMessage = "Campo tem de ser preenchido.")]
-        public string CodigoPostal { get; set; } = string.Empty;
+        // Número (manter como int)
+        [Range(1, int.MaxValue, ErrorMessage = "O número deve ser válido.")]
+        public required int Numero { get; set; }
+
+        // Código Postal (manter como int)
+        [StringLength(8, ErrorMessage = "O código postal não pode ter mais do que 9 caracteres.")]
+        public required string CodigoPostal { get; set; }
 
         // Nome de empresa (opcional)
-        [StringLength(50, ErrorMessage = "Campo tem de ser preenchido.")]
-        public string Empresa { get; set; } = string.Empty;
+        [StringLength(50, ErrorMessage = "O nome da empresa não pode ter mais do que 50 caracteres.")]
+        public required string Empresa { get; set; } = string.Empty;
 
         // Cidade
-        [StringLength(25, ErrorMessage = "Campo tem de ser preenchido.")]
-        public string Cidade { get; set; } = string.Empty;
+        [StringLength(25, ErrorMessage = "A cidade não pode ter mais do que 25 caracteres.")]
+        public required string Cidade { get; set; }
 
         // Distrito
-        [StringLength(25, ErrorMessage = "Campo tem de ser preenchido.")]
-        public string Distrito { get; set; } = string.Empty;
+        [StringLength(25, ErrorMessage = "O distrito não pode ter mais do que 25 caracteres.")]
+        public required string Distrito { get; set; }
 
-        // Pais
-        [StringLength(50, ErrorMessage = "Campo tem de ser preenchido.")]
-        public string Pais {  get; set; } = string.Empty;
+        // País
+        [StringLength(50, ErrorMessage = "O país não pode ter mais do que 50 caracteres.")]
+        public required string Pais { get; set; }
 
-        // NIF
-        [StringLength(9, ErrorMessage = "Campo tem de ser preenchido.")]
-        public string NIF { get; set; } = string.Empty;
+        // NIF (manter como int)
+        [Range(100000000, 999999999, ErrorMessage = "O NIF deve ter exatamente 9 dígitos.")]
+        public required int NIF { get; set; }
 
-        //Telemovel
-        public string Telemovel { get; set; } = string.Empty;
+        // Telemóvel (manter como int)
+        [Range(100000000, 999999999, ErrorMessage = "O Telemóvel deve ter exatamente 9 dígitos.")]
+        public required int Telemovel { get; set; }
 
-        // Tipo (Morada de entrega ou Faturação
-        public string Tipo { get; set; } = string.Empty;
-
+        // Tipo (Morada de entrega ou Faturação)
+        [StringLength(50, ErrorMessage = "O tipo não pode ter mais do que 50 caracteres.")]
+        public required string Tipo { get; set; }
     }
 }

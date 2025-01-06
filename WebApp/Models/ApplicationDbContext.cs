@@ -3,7 +3,6 @@ using WebApp.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-
 namespace WebApp.Data
 {
     public class ApplicationDbContext : DbContext
@@ -17,6 +16,15 @@ namespace WebApp.Data
         // DbSets que representam tabelas na base de dados
         public required DbSet<Produto> Produtos { get; set; } // Entidade Produto
         public required DbSet<User> Users { get; set; } // Entidade User 
+        public DbSet<Enderecos> Enderecos { get; set; } // Entidade Enderecos
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Configurações específicas, caso necessário
+            modelBuilder.Entity<Enderecos>().HasKey(e => e.EnderecoID);
+        }
 
         //public required DbSet<Encomenda> Encomenda { get; set; }
 

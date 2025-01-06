@@ -4,10 +4,13 @@
 }
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configurações</title>
+    <title>Settings</title>
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/style.css" />
     <link rel="script" href="site.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -28,14 +31,38 @@
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/style.css" />
 
-   <style>
-        
-   </style>
 </head>
 
 <body>
-    
-    <h2>Configurações</h2>
+    <header class="header">
+        <div class="header-left">Dashboard</div>
+        <div class="header-right">
+            <div class="account-dropdown">
+                <a href="#" class="account-icon">
+                    <i class="fas fa-user"></i> Conta
+                </a>
+                <div class="dropdown-content">
+                    <a href="/Admin/Logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
 
-    
-</body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a asp-action="GerirProdutos">Gerir Produtos</a></li>
+                    <li><a asp-action="GerirUsers">Gerir Utilizadores</a></li>
+                    <li><a asp-action="Settings">Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="main-content">
+            
+        </div>
+    </div>
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+</body>>
