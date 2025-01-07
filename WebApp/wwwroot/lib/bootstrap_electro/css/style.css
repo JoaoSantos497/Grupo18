@@ -2377,7 +2377,7 @@ body {
 }
 
     .account-icon i {
-        color: #e63946; /* Cor do ícone de usuário */
+        color: #e63946; 
         margin-right: 10px;
     }
 
@@ -2403,7 +2403,7 @@ body {
     }
 
         .dropdown-content a:hover {
-            background-color: #e63946; /* Cor de fundo ao passar o mouse */
+            background-color: #e63946; 
         }
 
 /* Mostrar o dropdown ao passar o mouse sobre o .account-dropdown */

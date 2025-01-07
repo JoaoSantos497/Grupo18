@@ -46,7 +46,7 @@ class Program
        
         .AddCookie("UserCookie", options =>
         {
-            options.Cookie.Name = "UserCookie"; // Nome do cookie para usuário comum
+            options.Cookie.Name = "UserCookie"; // Nome do cookie para utilizador comum
             options.LoginPath = "/Login"; // Caminho da página de login normal
             options.AccessDeniedPath = "/Login"; // Caminho em caso de acesso negado
             options.LogoutPath = "/Login/Logout";

@@ -5,14 +5,13 @@ using WebApp.Models;
 
 namespace WebApp.Models
 {
-        public class RegistoForm
+        public class CreateUserForm
         {
             public required string Username { get; set; }
             public required string Nome { get; set; }
             public required string Email { get; set; }
             public required string Password { get; set; }
-            public required DateTime DataNascimento { get; set; }
-            public required string Genero { get; set; }
+            public required int RoleID { get; set; }
         }
     
 }

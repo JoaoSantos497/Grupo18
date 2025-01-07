@@ -90,7 +90,7 @@ namespace WebApp.Controllers
                 ExpiresUtc = DateTime.UtcNow.AddMinutes(30) // Define o tempo de expiração
             };
 
-            // Fazendo o login do usuário e criando o cookie
+            // Fazendo o login do utilizador e criando o cookie
             if (user.RoleID == 1) // Admin
             {
                 var claimsIdentity = new ClaimsIdentity(claims, "AdminCookie");

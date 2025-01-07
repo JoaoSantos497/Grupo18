@@ -16,7 +16,7 @@ namespace WebApp.Data
         // DbSets que representam tabelas na base de dados
         public required DbSet<Produto> Produtos { get; set; } // Entidade Produto
         public required DbSet<User> Users { get; set; } // Entidade User 
-        public DbSet<Enderecos> Enderecos { get; set; } // Entidade Enderecos
+        public required DbSet<Enderecos> Enderecos { get; set; } // Entidade Enderecos
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

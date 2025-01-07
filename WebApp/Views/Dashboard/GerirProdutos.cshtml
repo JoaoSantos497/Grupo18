@@ -78,7 +78,7 @@
                         <th>Descricao</th>
                         <th>Preco</th>
                         <th>Stock</th>
-
+                        <th>Imagem</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -92,7 +92,15 @@
                             <td>@produto.Descricao</td>
                             <td>@produto.Preco€ </td>
                             <td>@produto.Stock</td>
-
+                            <td>
+                              <img src="@produto.ImagemProduto" alt="Imagem do Produto" style="width: 100px; height: auto;" />
+                            </td>
+                            <td>
+                                <!-- Form para Remover -->
+                                <form asp-action="DeleteProduto" asp-route-id="@produto.ProdutoID" method="post">
+                                    <button type="submit" class="btn btn-danger btn-sm-produto">Remover</button>
+                                </form>
+                            </td>
                         </tr>
                     }
                 </tbody>

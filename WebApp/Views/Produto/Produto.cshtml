@@ -1,0 +1,46 @@
+﻿@{
+	ViewData["Title"] = "Produto | ";
+}
+@model Produto
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/bootstrap.min.css" />
+
+	<!-- Slick -->
+	<link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/slick.css" />
+	<link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/slick-theme.css" />
+
+	<!-- nouislider -->
+	<link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/nouislider.min.css" />
+
+	<!-- Font Awesome Icon -->
+	<link rel="stylesheet" href="/lib/bootstrap_electro/css/font-awesome.min.css">
+
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/style.css" />
+
+</head>
+
+<body>
+    <div class="address-card">
+        <h3>Produto</h3>
+        <p>Nome: @Model.Nome</p>
+        <p>Marca: @Model.Marca</p>
+		<p>Modelo: @Model.Modelo</p>
+		<p>Descrição: @Model.Descricao</p>
+		<p>Preço: @Model.Preco</p>
+		<p>Stock: @Model.Stock</p>
+		<p>
+			<img src="@Model.ImagemProduto" alt="Imagem do Produto" style="width: 150px; height: auto;" />
+		</p>
+    </div>
+</body>

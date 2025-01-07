@@ -33,6 +33,12 @@
 </head>
 
 <body>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
     <div class="container-criarmorada">
         <form method="post" asp-action="CriarMorada" asp-controller="Perfil">
             <div class="form-group">
@@ -94,7 +100,7 @@
 
             <div class="form-group">
                 <label for="telemovel">Telemóvel</label>
-                <input type="number" id="telemovel" asp-for="Telemovel" class="form-control" />
+                <input type="number" id="telemovel" asp-for="Telemovel" min="100000000" max="999999999" class="form-control" />
             </div>
 
             <div class="form-group">

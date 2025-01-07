@@ -45,11 +45,14 @@ namespace WebApp.Controllers
 			return View(produto);
 		}
 
-
-        [Route("[controller]/{id?}")]
-        public IActionResult Produtos(int id)
-        {
-            return View();
+        // POST: Produto/Create
+        [Route("/Produto/{id}")]
+        public async Task<IActionResult> Produto(int id)
+        {	
+		
+            var produtos = await _context.Produtos.FindAsync(id);
+			
+            return View(produtos);
         }
     }
 }

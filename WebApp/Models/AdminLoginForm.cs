@@ -8,11 +8,11 @@ namespace WebApp.Models
     public class AdminLoginModel
     {
         // Username do Administrador
-        [Required(ErrorMessage = "O nome de usuário é obrigatório")]
+        [Required(ErrorMessage = "O username de utilizador é obrigatório")]
         public required string Username { get; set; }
 
         // Password do Administrador
-        [Required(ErrorMessage = "A senha é obrigatória")]
+        [Required(ErrorMessage = "A password é obrigatória")]
         [DataType(DataType.Password)]
         public required string PasswordHash { get; set; }
 

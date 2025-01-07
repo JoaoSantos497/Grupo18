@@ -2,11 +2,9 @@
 using System.Security.Claims;
 using WebApp.Data;
 using WebApp.Models;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
-
+using Microsoft.Exchange.WebServices.Data;
 
 namespace WebApp.Controllers
 {
@@ -26,40 +24,70 @@ namespace WebApp.Controllers
         public ActionResult Index()
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier); // Acessando o UserID dos claims
-            // Agora você pode usar o `userId` para buscar o usuário no banco de dados ou exibir informações personalizadas
+            // Agora você pode usar o `userId` para buscar o utilizador no banco de dados ou exibir informações personalizadas
             return View();
         }
 
 
         // GET: Perfil/Dados Pessoais
         [HttpGet("DadosPessoais")]
-        public ActionResult DadosPessoais()
+        public async Task<IActionResult> DadosPessoais()
         {
-            //var users = await _context.Users.ToListAsync();
-            return View();
+            // Obtendo o UserID das Claims de forma segura
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            // Verificando se o ID da claim corresponde ao ID passado
+            if (userIdClaim == null)
+            {
+                return Unauthorized(new { message = "Utilizador não autorizado." });
+            }
+
+            // Encontrando o utilizador pelo ID
+            var user = await _context.Users.FindAsync(int.Parse(userIdClaim));
+
+            return View(user);
         }
 
 
-        //POST: A tua Conta/Dados Pessoais
-        [HttpPost("DadosPessoais")]
+        // POST: A tua Conta/Dados Pessoais
+        [Route("/DadosPessoais/UpdateDados/{id}")]
         [ValidateAntiForgeryToken]
-        public IActionResult UpdateDadosPessoais(string Nome, string Email, string Password)
+        public async Task<IActionResult> UpdateDados(int id, string Email, string Username, string Nome)
         {
-            // Lógica para salvar os dados no banco de dados
-            var user = _context.Users.FirstOrDefault(u => u.Email == Email);
-            if (user != null)
+            // Obtendo o UserID das Claims de forma segura
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            // Verificando se o ID da claim corresponde ao ID passado
+            if (userIdClaim == null || int.Parse(userIdClaim) != id)
             {
+                return Unauthorized(new { message = "Utilizador não autorizado." });
+            }
+
+            // Encontrando o Utilizador pelo ID
+            var user = await _context.Users.FindAsync(id);
+
+            if (user == null)
+            {
+                return NotFound(new { message = "Utilizador não encontrado." });
+            }
+
+            try
+            {
+                // Atualiza os campos permitidos com os valores fornecidos
                 user.Nome = Nome;
                 user.Email = Email;
-                user.PasswordHash = Password; // Considere hashear a senha antes de salvar
-                _context.SaveChanges();
+                user.Username = Username;
 
-                TempData["Mensagem"] = "Dados atualizados com sucesso!";
-                return RedirectToAction("DadosPessoais"); // Adicione um retorno explícito aqui
-            }
-            else
-            {
+                // Atualiza o Utilizador no banco de dados
+                _context.Users.Update(user);
+                await _context.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = "Dados Atualizados";
                 return RedirectToAction("DadosPessoais");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Erro ao atualizar os dados pessoais.", details = ex.Message });
             }
         }
 
@@ -94,6 +122,7 @@ namespace WebApp.Controllers
             {
                 _context.Enderecos.Remove(enderecos);
                 await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Endereco removido!";
                 return RedirectToAction("Moradas");
             }
             catch (Exception ex)
@@ -124,13 +153,12 @@ namespace WebApp.Controllers
 
             try
             {
-                // Defina o UserID com o ID do usuário autenticado
-                // Supondo que você tenha uma sessão com o usuário logado
+                // Defina o UserID com o ID do utilizador autenticado
+                // Supondo que você tenha uma sessão com o utilizador autenticado
                 var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier); // Usando Claims para pegar o UserID
                 var userId = userIdClaim?.Value;
 
                 endereco.UserID = int.Parse(userId);
-                     // Ajuste para o tipo correto (supondo que seja int)
 
                 // Adiciona o endereço na base de dados
                 _context.Enderecos.Add(endereco);

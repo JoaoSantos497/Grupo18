@@ -16,10 +16,10 @@ namespace WebApp.Services
         // Método assíncrono para autenticação de administrador
         public async Task<User?> AuthenticateAdminAsync(string username, string password)
         {
-            // Busca o usuário pelo nome de utilizador
+            // Busca o utilizador pelo nome de utilizador
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username && u.RoleID == 1);
 
-            // Verifica se o usuário existe e a senha está correta
+            // Verifica se o utilizador existe e a senha está correta
             if (user != null && VerifyPassword(password, user.PasswordHash))
             {
                 return user;

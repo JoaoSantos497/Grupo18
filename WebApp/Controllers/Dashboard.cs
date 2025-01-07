@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
+using WebApp.Services;
 
 
 
@@ -15,12 +16,13 @@ namespace WebApp.Controllers
     public class Dashboard : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public Dashboard(ApplicationDbContext context)
+        private readonly IRegistoService _registoService;
+        public Dashboard(ApplicationDbContext context, IRegistoService registoService)
         {
             _context = context;
+            _registoService = registoService;
         }
-        
+
         [HttpGet("")]
         public ActionResult Index()
         {
@@ -34,6 +36,31 @@ namespace WebApp.Controllers
         {
             var Produtos = await _context.Produtos.ToListAsync();
             return View(Produtos);
+        }
+        // Post: Dashboard/GerirProd
+        // utos/DeleteProduto/ID
+        [HttpPost]
+        [Route("/GerirProdutos/DeleteProduto/{id}")]
+        [ValidateAntiForgeryToken] // Protege contra CSRF
+        public async Task<IActionResult> DeleteProduto(int id)
+        {
+            var produto = await _context.Produtos.FindAsync(id);
+
+            if (produto == null)
+            {
+                return NotFound(new { message = "Produto não encontrado." });
+            }
+
+            try
+            {
+                _context.Produtos.Remove(produto);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("GerirProdutos");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Erro ao remover o produto.", details = ex.Message });
+            }
         }
 
         // GET: Dashboard/GerirProdutos/CreateProduto
@@ -67,6 +94,7 @@ namespace WebApp.Controllers
             return View(Users);
         }
 
+        // POST: GerirUsers/DeleteUser/ID
         [HttpPost]
         [Route("/GerirUsers/DeleteUser/{id}")]
         [ValidateAntiForgeryToken] // Protege contra CSRF
@@ -103,12 +131,11 @@ namespace WebApp.Controllers
         // POST: Dashboard/GerirUsers/CreateUser
         [HttpPost("GerirUsers/CreateUser")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateUser(User User)
+        public async Task<IActionResult> CreateUser(CreateUserForm User)
         {
             if (ModelState.IsValid)
             {
-                _context.Users.Add(User);
-                await _context.SaveChangesAsync();
+                await _registoService.SalvarCreateUserAsync(User);
                 return RedirectToAction("GerirUsers");
             }
             return View(User);

@@ -1,7 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Dados Pessoais | ";
 }
-@model List<User>
+@model User
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -156,52 +157,44 @@
 </head>
 
 <body>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
         <br />
         <div class="title">As tuas informações pessoais</div>
         <div class="breadcrumb"> <a href="/Perfil">A tua conta</a> / Dados Pessoais</div>
-        
-        <form>
-            <div class="form-group">
-                <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome" value="">
-            </div>
-           
-            <div class="form-group optional">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" value="">
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="jpsantosrm@gmail.com">
-            </div>
-            <div class="form-group">
-                <label for="password">Palavra-passe</label>
-                <div class="password-toggle">
-                    <input type="password" id="password" name="password" value="********">
-                    <button type="button" onclick="togglePassword('password')">MOSTRAR</button>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="new-password">Nova password</label>
-                <div class="password-toggle">
-                    <input type="password" id="new-password" name="new-password">
-                    <button type="button" onclick="togglePassword('new-password')">MOSTRAR</button>
-                </div>
-            </div>
-            <div class="checkbox-group">
-                <input type="checkbox" id="terms" name="terms">
-                <label for="terms">Aceito as <a href="#">condições gerais</a> e a <a href="#">política de confidencialidade</a></label>
-            </div>
-            <div class="checkbox-group">
-                <input type="checkbox" id="newsletter" name="newsletter">
-                <label for="newsletter">Subscrevo a newsletter GetTech para receber campanhas e descontos exclusivos</label>
-            </div>
-            <button type="submit">Guardar</button>
-        </form>
-        <br />
+
+    <!-- Formulário para atualizar os dados -->
+    <form asp-action="UpdateDados" asp-route-id="@Model.UserID" method="post">
+        @Html.AntiForgeryToken() <!-- Proteção contra CSRF -->
+        <!-- Campo para Email -->
+        <div class="form-group">
+            <label for="Email">Email:</label>
+            <input type="email" id="Email" name="Email" class="form-control" value="@Model.Email" required />
+        </div>
+
+        <!-- Campo para Username -->
+        <div class="form-group">
+            <label for="Username">Username:</label>
+            <input type="text" id="Username" name="Username" class="form-control" value="@Model.Username" required />
+        </div>
+
+        <!-- Campo para Nome -->
+        <div class="form-group">
+            <label for="Nome">Nome:</label>
+            <input type="text" id="Nome" name="Nome" class="form-control" value="@Model.Nome" required />
+        </div>
+
+        <!-- Botão de submissão -->
+        <button type="submit" class="btn btn-primary btn-sm-updatedados">Atualizar</button>
+    </form>
+    <br />
 
     <script>
-        // Mostrar a senha
+        // Função para alternar visibilidade da senha
         function togglePassword(fieldId) {
             const field = document.getElementById(fieldId);
             if (field.type === "password") {
@@ -211,7 +204,6 @@
             }
         }
     </script>
-
 </body>
     
 

@@ -36,21 +36,6 @@ namespace WebApp.Controllers
             return View();
         }
 
-        // POST: UserController/Create
-        /*[HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                _iUserService.create(new User());
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }*/
 
         // GET: UserController/Edit/5
         public ActionResult Edit(int id)

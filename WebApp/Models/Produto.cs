@@ -1,8 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using WebApp.Models;
-
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace WebApp.Models
 {
@@ -40,19 +36,19 @@ namespace WebApp.Models
         //[Column("preco")]
         [Required(ErrorMessage = "O preço do produto é obrigatório.")]
         [Range(0.01, double.MaxValue, ErrorMessage = "O preço deve ser maior que zero.")]
-        public decimal Preco { get; set; }
+        public required decimal Preco { get; set; }
 
         // Quantidade em stock
         //[Column("stock")]
         [Required(ErrorMessage = "A quantidade em stock é obrigatória.")]
         [Range(0, int.MaxValue, ErrorMessage = "A quantidade não pode ser negativa.")]
-        public int Stock { get; set; }
+        public required int Stock { get; set; }
 
         //public string CategoriaID { get; set; }
 
         // URL da imagem do produto
         //[Url(ErrorMessage = "A URL da imagem do produto não é válida.")]
-        //public  string ImagemProduto { get; set; }
+        public string? ImagemProduto { get; set; }
 
 
 
