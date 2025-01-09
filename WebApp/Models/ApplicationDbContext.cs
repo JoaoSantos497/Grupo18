@@ -2,6 +2,7 @@
 using WebApp.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 
 namespace WebApp.Data
 {
@@ -18,22 +19,20 @@ namespace WebApp.Data
         public required DbSet<User> Users { get; set; } // Entidade User 
         public required DbSet<Enderecos> Enderecos { get; set; } // Entidade Enderecos
 
+        public required DbSet<Carrinho> CarrinhoCompras { get; set; } // Entidade Carrinho
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             // Configurações específicas, caso necessário
             modelBuilder.Entity<Enderecos>().HasKey(e => e.EnderecoID);
+
+            modelBuilder.Entity<Carrinho>()
+                .HasOne(c => c.Produto)
+                .WithMany()
+                .HasForeignKey(c => c.ProdutoID);
         }
 
-        //public required DbSet<Encomenda> Encomenda { get; set; }
-
-        //public required DbSet<Orders> Orders { get; set; } // Adicionar a entidade Order
-
-
-        //public required DbSet<Search> Produtos { get; set; }
-
-        // Outras tabelas podem ser adicionadas aqui
-        // public DbSet<OutraEntidade> OutraEntidades { get; set; }
     }
 }

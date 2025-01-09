@@ -1,11 +1,31 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>@ViewData["Title"] GetTech</title>
-    <link rel="stylesheet" href="~/lib/bootstrap_electro/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/lib/bootstrap_electro/css/style.css" asp-append-version="true" />
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/bootstrap.min.css" />
+
+	<!-- Slick -->
+	<link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/slick.css" />
+	<link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/slick-theme.css" />
+
+	<!-- nouislider -->
+	<link type="text/css" rel="stylesheet" href="/lib/bootstrap_electro/css/nouislider.min.css" />
+
+	<!-- Font Awesome Icon -->
+	<link rel="stylesheet" href="/lib/bootstrap_electro/css/font-awesome.min.css">
+
+	<!-- Custom stlylesheet -->
+	<link rel="stylesheet" href="~/lib/bootstrap_electro/css/style.css" asp-append-version="true" />
+
 </head>
 <body>
   
@@ -68,16 +88,16 @@
 								<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 									<i class="fa fa-shopping-cart"></i>
 									<span>Carrinho</span>
-									<div class="qty">3</div>
+									<div class="qty"></div>
 								</a>
 								<div class="cart-dropdown">
 									
 									<div class="cart-summary">
-										<small>3 Item(s) selected</small>
-										<h5>SUBTOTAL: 2940,00€</h5>
+										<small></small>
+										<h5>SUBTOTAL: 00,00€</h5>
 									</div>
 									<div class="cart-btns">
-										<a href="Carrinho">Carrinho</a>
+										<a href="/Carrinho">Carrinho</a>
 										<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
@@ -223,9 +243,16 @@
 		<!-- /bottom footer -->
 	</footer>
 
+	<!-- jQuery Plugins -->
+	<script src="~/js/jquery.min.js"></script>
+	<script src="~/js/bootstrap.min.js"></script>
+	<script src="~/js/slick.min.js"></script>
+	<script src="~/js/nouislider.min.js"></script>
+	<script src="~/js/jquery.zoom.min.js"></script>
+	<script src="~/js/main.js"></script>
 	<script src="~/lib/bootstrap_electro/js/jquery.min.js"></script>
-    <script src="~/lib/bootstrap_electro/js/main.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+	<script src="~/lib/bootstrap_electro/js/main.js" asp-append-version="true"></script>
+	@await RenderSectionAsync("Scripts", required: false)
 
 </body>
 </html>

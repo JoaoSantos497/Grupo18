@@ -62,7 +62,10 @@
 
         <div class="form-group">
             <label asp-for="RoleID" class="control-label">RoleID</label>
-            <textarea asp-for="RoleID" class="form-control"></textarea>
+            <select asp-for="RoleID" class="form-control">
+                <option value="1">1</option>
+                <option value="2">2</option>
+            </select>
             <span asp-validation-for="RoleID" class="text-danger"></span>
         </div>
 
